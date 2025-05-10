@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <title>Weakness Analysis Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { color: #333366; }
+        h2 { color: #336699; margin-top: 30px; border-bottom: 1px solid #ccc; }
+        table { border-collapse: collapse; margin: 15px 0; width: 100%; }
+        th { background-color: #f2f2f2; text-align: left; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        .footer { margin-top: 30px; font-size: 0.8em; color: #666; border-top: 1px solid #ccc; padding-top: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Weakness Analysis Report</h1>
+    <p>Generated on: 2025-04-22 16:13:31</p>
+    <p>Threshold: 3</p>
+<h2>Processing: gemma-3-4b-it</h2>
+<h3>Nodes with significantly <span style='color: green;'>better</span> ranking than root:</h3>
+<table border='1' cellpadding='5' cellspacing='0'>
+<tr><th>Path</th><th>Ranking</th><th>Difference</th></tr>
+<tr><td>root.reasoning.Reasoning Methods.Emotional Reasoning</td><td>2</td><td style='color: green;'>-7</td></tr>
+<tr><td>root.roleplay.Task Types.Interactive.Multiplayer</td><td>2</td><td style='color: green;'>-7</td></tr>
+<tr><td>root.roleplay.Theme Types.Fantasy.Mythology</td><td>2</td><td style='color: green;'>-7</td></tr>
+<tr><td>root.roleplay.Theme Types.Horror.Psychological Thriller</td><td>2</td><td style='color: green;'>-7</td></tr>
+<tr><td>root.knowledge.Disciplinary Fields.Arts and Culture.Performing Arts</td><td>3</td><td style='color: green;'>-6</td></tr>
+<tr><td>root.reasoning.Application Domains.Legal Reasoning</td><td>3</td><td style='color: green;'>-6</td></tr>
+<tr><td>root.reasoning.Application Domains.Psychological Reasoning</td><td>3</td><td style='color: green;'>-6</td></tr>
+<tr><td>root.roleplay.Style Types.Dark Style.Gothic</td><td>3</td><td style='color: green;'>-6</td></tr>
+<tr><td>root.roleplay.Task Types.Interactive.Interactive Text Game</td><td>3</td><td style='color: green;'>-6</td></tr>
+<tr><td>root.roleplay.Theme Types.Action-Adventure.Crime</td><td>3</td><td style='color: green;'>-6</td></tr>
+<tr><td>root.roleplay.Theme Types.Fantasy.Gothic</td><td>3</td><td style='color: green;'>-6</td></tr>
+<tr><td>root.roleplay.Theme Types.Horror.Crime</td><td>3</td><td style='color: green;'>-6</td></tr>
+<tr><td>root.roleplay.Theme Types.Realistic.Cooking</td><td>3</td><td style='color: green;'>-6</td></tr>
+<tr><td>root.writing.Writing Domains.Literary Writing.Fiction.Adventure Writing</td><td>3</td><td style='color: green;'>-6</td></tr>
+<tr><td>root.reasoning.Reasoning Methods.Logical Reasoning.Inductive Reasoning</td><td>4</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.roleplay.Style Types.Relaxed</td><td>4</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.roleplay.Task Types.Analytical.Interpretation and Symbolic Analysis</td><td>4</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.roleplay.Task Types.Interactive.Emotional Interaction</td><td>4</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.roleplay.Theme Types.Action-Adventure.Spy</td><td>4</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.roleplay.Theme Types.Action-Adventure.Survival</td><td>4</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.roleplay.Theme Types.Action-Adventure.Travel</td><td>4</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.roleplay.Theme Types.Comedy.Humorous Comedy</td><td>4</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.roleplay.Theme Types.Realistic.Maritime</td><td>4</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.writing.Styles.Romanticism</td><td>4</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.writing.Writing Domains.Creative Writing.Symbolic Story Creation</td><td>4</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.writing.Writing Domains.Everyday Writing.Society</td><td>4</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.writing.Writing Domains.Literary Writing.Fiction.Erotic Fiction</td><td>4</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.writing.Writing Domains.Literary Writing.Proverbial Expressions</td><td>4</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.knowledge.Disciplinary Fields.Applied Sciences.Social Services</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.knowledge.Disciplinary Fields.Applied Sciences.Transportation and Travel</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.knowledge.Disciplinary Fields.Arts and Culture.Crafts</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.knowledge.Disciplinary Fields.Arts and Culture.Culinary Arts</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.knowledge.Disciplinary Fields.Arts and Culture.Design</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.knowledge.Disciplinary Fields.Arts and Culture.Fine Arts</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.knowledge.Disciplinary Fields.Humanities and Social Sciences.Culture</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.knowledge.Disciplinary Fields.Natural Sciences.Biology.Ecology</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.knowledge.Disciplinary Fields.Natural Sciences.Biology.Microbiology</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.knowledge.Disciplinary Fields.Technical Engineering.Bioengineering</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.knowledge.Disciplinary Fields.Technical Engineering.Computer Science.Human-Computer Interaction</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.knowledge.Disciplinary Fields.Technical Engineering.Computer Science.Robotics</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.knowledge.Disciplinary Fields.Technical Engineering.Electrical Engineering.Electronics</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.reasoning.Application Domains.Ethical Reasoning</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.reasoning.Reasoning Methods.Logical Reasoning.Symbolic Reasoning</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.reasoning.Task Types.Conceptual Understanding</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.reasoning.Thinking Modes.Creative.Abstract Reasoning</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Style Types.Dark Style.Psychological Oppression</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Style Types.Experimental Style.Freeform</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Style Types.Healing Style</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Style Types.Serious Style.Thriller</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Task Types.Analytical.Political Conspiracy</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Task Types.Educational.Ethical Discussion</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Task Types.Interactive.Character Interaction</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Task Types.Interactive.Dialogue Type</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Task Types.Interactive.Q&A</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Task Types.Interactive.Realistic Interaction</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Task Types.Simulation.Behavioral Simulation</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Task Types.Simulation.Gameplay</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Task Types.Simulation.Psychological Simulation</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Theme Types.Fantasy.Horror</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Theme Types.Fantasy.Isekai</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Theme Types.Horror</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Theme Types.Realistic.Legal</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Theme Types.Realistic.Sports</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Theme Types.Thought.Philosophy</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.writing.Creative Stages.Conceptualization Stage.Literature Review</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.writing.Creative Stages.Post-processing Stage.Text Interpretation</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.writing.Styles.Modernism</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.writing.Writing Domains.Everyday Writing.Emotions</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.writing.Writing Domains.Everyday Writing.Entertainment.Jokes</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.writing.Writing Domains.Literary Writing.Fiction.Historical Fiction</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.writing.Writing Domains.Literary Writing.Literary Analysis</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.writing.Writing Domains.Literary Writing.Quotation Creation</td><td>5</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.writing.Writing Domains.Professional Writing.Natural Sciences</td><td>5</td><td style='color: green;'>-4</td></tr>
+</table>
+<h3>Nodes with significantly <span style='color: red;'>worse</span> ranking than root:</h3>
+<table border='1' cellpadding='5' cellspacing='0'>
+<tr><th>Path</th><th>Ranking</th><th>Difference</th></tr>
+<tr><td>root.coding.Programming Languages.Data Languages</td><td>13</td><td style='color: red;'>4</td></tr>
+<tr><td>root.coding.Programming Languages.Data Languages.R</td><td>13</td><td style='color: red;'>4</td></tr>
+<tr><td>root.coding.Programming Languages.Domain-specific Languages.Excel (Spreadsheets)</td><td>13</td><td style='color: red;'>4</td></tr>
+<tr><td>root.coding.Programming Languages.Domain-specific Languages.MQL (Finance)</td><td>13</td><td style='color: red;'>4</td></tr>
+<tr><td>root.coding.Programming Languages.General-purpose Languages.C#</td><td>13</td><td style='color: red;'>4</td></tr>
+<tr><td>root.coding.Programming Languages.General-purpose Languages.Java</td><td>13</td><td style='color: red;'>4</td></tr>
+<tr><td>root.coding.Programming Languages.Markup Languages.YAML</td><td>13</td><td style='color: red;'>4</td></tr>
+<tr><td>root.coding.Programming Languages.Scripting Languages.VB</td><td>13</td><td style='color: red;'>4</td></tr>
+<tr><td>root.coding.Task Types.Data Processing</td><td>13</td><td style='color: red;'>4</td></tr>
+<tr><td>root.coding.Task Types.Data Processing.Data Visualization</td><td>13</td><td style='color: red;'>4</td></tr>
+<tr><td>root.coding.Task Types.Debugging and Optimization.Error Handling</td><td>13</td><td style='color: red;'>4</td></tr>
+<tr><td>root.coding.Task Types.Tool Usage.Automated Workflow</td><td>13</td><td style='color: red;'>4</td></tr>
+<tr><td>root.coding.Task Types.Tool Usage.Automation</td><td>13</td><td style='color: red;'>4</td></tr>
+<tr><td>root.coding.Technical Domains.Artificial Intelligence.Natural Language Processing</td><td>13</td><td style='color: red;'>4</td></tr>
+<tr><td>root.coding.Technical Domains.Back-end Development</td><td>13</td><td style='color: red;'>4</td></tr>
+<tr><td>root.coding.Technical Domains.Back-end Development.Database Integration</td><td>13</td><td style='color: red;'>4</td></tr>
+<tr><td>root.coding.Technical Domains.Data Science.Data Visualization Tools</td><td>13</td><td style='color: red;'>4</td></tr>
+<tr><td>root.coding.Technical Domains.Front-end Development.Animation</td><td>13</td><td style='color: red;'>4</td></tr>
+<tr><td>root.coding.Technical Domains.Front-end Development.DOM Manipulation</td><td>13</td><td style='color: red;'>4</td></tr>
+<tr><td>root.coding.Technical Domains.Game Development.Player Mechanics</td><td>13</td><td style='color: red;'>4</td></tr>
+<tr><td>root.coding.Technical Domains.Systems Programming</td><td>13</td><td style='color: red;'>4</td></tr>
+<tr><td>root.knowledge.Cognitive Levels.Basic Cognition.Fact Recall</td><td>13</td><td style='color: red;'>4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Analysis.Mathematical Analysis</td><td>13</td><td style='color: red;'>4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Applied Mathematics</td><td>13</td><td style='color: red;'>4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Applied Mathematics.Games</td><td>13</td><td style='color: red;'>4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Applied Mathematics.Operations Research</td><td>13</td><td style='color: red;'>4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Applied Mathematics.Physics</td><td>13</td><td style='color: red;'>4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Geometry.Crystallography</td><td>13</td><td style='color: red;'>4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Information Theory</td><td>13</td><td style='color: red;'>4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Mathematical Foundations</td><td>13</td><td style='color: red;'>4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Mathematical Foundations.Number Systems</td><td>13</td><td style='color: red;'>4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Probability and Statistics</td><td>13</td><td style='color: red;'>4</td></tr>
+<tr><td>root.mathematics.Task Types.Problem Solving.Modeling</td><td>13</td><td style='color: red;'>4</td></tr>
+<tr><td>root.mathematics.Task Types.Problem Solving.Practical Application</td><td>13</td><td style='color: red;'>4</td></tr>
+<tr><td>root.mathematics.Task Types.Problem Solving.Word Problems</td><td>13</td><td style='color: red;'>4</td></tr>
+<tr><td>root.reasoning.Task Types.Puzzle Solving</td><td>13</td><td style='color: red;'>4</td></tr>
+<tr><td>root.reasoning.Thinking Modes.Analytical.Text Analysis</td><td>13</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Official Document Writing.Contract/Agreement Drafting</td><td>13</td><td style='color: red;'>4</td></tr>
+<tr><td>root.coding.Programming Languages.General-purpose Languages.Swift</td><td>14</td><td style='color: red;'>5</td></tr>
+<tr><td>root.coding.Programming Languages.General-purpose Languages.TypeScript</td><td>14</td><td style='color: red;'>5</td></tr>
+<tr><td>root.coding.Task Types.Auxiliary Functions.String Manipulation</td><td>14</td><td style='color: red;'>5</td></tr>
+<tr><td>root.coding.Task Types.Data Processing.Data Analysis</td><td>14</td><td style='color: red;'>5</td></tr>
+<tr><td>root.coding.Task Types.Data Processing.Data Manipulation</td><td>14</td><td style='color: red;'>5</td></tr>
+<tr><td>root.coding.Task Types.Debugging and Optimization.Testing</td><td>14</td><td style='color: red;'>5</td></tr>
+<tr><td>root.coding.Task Types.Development and Maintenance</td><td>14</td><td style='color: red;'>5</td></tr>
+<tr><td>root.coding.Task Types.Development and Maintenance.Code Analysis</td><td>14</td><td style='color: red;'>5</td></tr>
+<tr><td>root.coding.Task Types.Development and Maintenance.Code Generation</td><td>14</td><td style='color: red;'>5</td></tr>
+<tr><td>root.coding.Task Types.Tool Usage.Test Development</td><td>14</td><td style='color: red;'>5</td></tr>
+<tr><td>root.coding.Technical Domains.Back-end Development.Concurrent Programming</td><td>14</td><td style='color: red;'>5</td></tr>
+<tr><td>root.coding.Technical Domains.Data Science</td><td>14</td><td style='color: red;'>5</td></tr>
+<tr><td>root.coding.Technical Domains.Data Science.Data Analysis Methods</td><td>14</td><td style='color: red;'>5</td></tr>
+<tr><td>root.coding.Technical Domains.Data Structures and Algorithms</td><td>14</td><td style='color: red;'>5</td></tr>
+<tr><td>root.coding.Technical Domains.Embedded Development.Sensors</td><td>14</td><td style='color: red;'>5</td></tr>
+<tr><td>root.coding.Technical Domains.Systems Programming.Cryptographic Programming</td><td>14</td><td style='color: red;'>5</td></tr>
+<tr><td>root.mathematics</td><td>14</td><td style='color: red;'>5</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields</td><td>14</td><td style='color: red;'>5</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Analysis.Complex Analysis</td><td>14</td><td style='color: red;'>5</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Analysis.Fourier Analysis</td><td>14</td><td style='color: red;'>5</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Analysis.Real Analysis</td><td>14</td><td style='color: red;'>5</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Discrete Mathematics.Combinatorics</td><td>14</td><td style='color: red;'>5</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Geometry.Topology</td><td>14</td><td style='color: red;'>5</td></tr>
+<tr><td>root.mathematics.Task Types</td><td>14</td><td style='color: red;'>5</td></tr>
+<tr><td>root.mathematics.Task Types.Computation</td><td>14</td><td style='color: red;'>5</td></tr>
+<tr><td>root.mathematics.Task Types.Conceptual Understanding</td><td>14</td><td style='color: red;'>5</td></tr>
+<tr><td>root.mathematics.Task Types.Fact Recall</td><td>14</td><td style='color: red;'>5</td></tr>
+<tr><td>root.mathematics.Task Types.Logical Reasoning</td><td>14</td><td style='color: red;'>5</td></tr>
+<tr><td>root.mathematics.Task Types.Logical Reasoning.Logical Deduction</td><td>14</td><td style='color: red;'>5</td></tr>
+<tr><td>root.mathematics.Task Types.Logical Reasoning.Theoretical Derivation</td><td>14</td><td style='color: red;'>5</td></tr>
+<tr><td>root.mathematics.Task Types.Problem Solving</td><td>14</td><td style='color: red;'>5</td></tr>
+<tr><td>root.mathematics.Task Types.Problem Solving.Scenario Analysis</td><td>14</td><td style='color: red;'>5</td></tr>
+<tr><td>root.reasoning.Reasoning Methods.Logical Reasoning.Basic Counting Reasoning</td><td>14</td><td style='color: red;'>5</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Resume Writing</td><td>14</td><td style='color: red;'>5</td></tr>
+<tr><td>root.coding.Programming Languages.Data Languages.MATLAB</td><td>15</td><td style='color: red;'>6</td></tr>
+<tr><td>root.coding.Programming Languages.Domain-specific Languages.Solidity (Blockchain)</td><td>15</td><td style='color: red;'>6</td></tr>
+<tr><td>root.coding.Programming Languages.Scripting Languages</td><td>15</td><td style='color: red;'>6</td></tr>
+<tr><td>root.coding.Programming Languages.Scripting Languages.Batch</td><td>15</td><td style='color: red;'>6</td></tr>
+<tr><td>root.coding.Programming Languages.Scripting Languages.Lua</td><td>15</td><td style='color: red;'>6</td></tr>
+<tr><td>root.coding.Programming Languages.Scripting Languages.Perl</td><td>15</td><td style='color: red;'>6</td></tr>
+<tr><td>root.coding.Programming Languages.Scripting Languages.Ruby</td><td>15</td><td style='color: red;'>6</td></tr>
+<tr><td>root.coding.Programming Languages.Scripting Languages.Script</td><td>15</td><td style='color: red;'>6</td></tr>
+<tr><td>root.coding.Task Types.Auxiliary Functions.Regular Expression Parsing</td><td>15</td><td style='color: red;'>6</td></tr>
+<tr><td>root.coding.Task Types.Debugging and Optimization.Logic Verification</td><td>15</td><td style='color: red;'>6</td></tr>
+<tr><td>root.coding.Task Types.Development and Maintenance.Code Conversion</td><td>15</td><td style='color: red;'>6</td></tr>
+<tr><td>root.coding.Task Types.Development and Maintenance.Code Editing</td><td>15</td><td style='color: red;'>6</td></tr>
+<tr><td>root.coding.Task Types.Development and Maintenance.Comment Generation</td><td>15</td><td style='color: red;'>6</td></tr>
+<tr><td>root.coding.Technical Domains.Data Science.Model Creation</td><td>15</td><td style='color: red;'>6</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Algebra.Abstract Algebra</td><td>15</td><td style='color: red;'>6</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Algebra.Algebraic Geometry</td><td>15</td><td style='color: red;'>6</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Analysis</td><td>15</td><td style='color: red;'>6</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Analysis.Algebra</td><td>15</td><td style='color: red;'>6</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Analysis.Calculus</td><td>15</td><td style='color: red;'>6</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Applied Mathematics.Economics</td><td>15</td><td style='color: red;'>6</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Computational Mathematics</td><td>15</td><td style='color: red;'>6</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Discrete Mathematics</td><td>15</td><td style='color: red;'>6</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Discrete Mathematics.Automata Theory</td><td>15</td><td style='color: red;'>6</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Discrete Mathematics.Game Theory</td><td>15</td><td style='color: red;'>6</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Geometry</td><td>15</td><td style='color: red;'>6</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Geometry.Coordinate Geometry</td><td>15</td><td style='color: red;'>6</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Mathematical Foundations.Category Theory</td><td>15</td><td style='color: red;'>6</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Mathematical Foundations.Set Theory</td><td>15</td><td style='color: red;'>6</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Number Theory</td><td>15</td><td style='color: red;'>6</td></tr>
+<tr><td>root.mathematics.Task Types.Logical Reasoning.Critical Review</td><td>15</td><td style='color: red;'>6</td></tr>
+<tr><td>root.mathematics.Task Types.Problem Solving.Creative Problem Solving</td><td>15</td><td style='color: red;'>6</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Official Document Writing.Professional Application Writing.Scholarship</td><td>15</td><td style='color: red;'>6</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Algebra</td><td>16</td><td style='color: red;'>7</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Algebra.Boolean Algebra</td><td>16</td><td style='color: red;'>7</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Algebra.Group Theory</td><td>16</td><td style='color: red;'>7</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Algebra.Linear Algebra</td><td>16</td><td style='color: red;'>7</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Analysis.Functional Analysis</td><td>16</td><td style='color: red;'>7</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Analysis.Limits</td><td>16</td><td style='color: red;'>7</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Applied Mathematics.Signals</td><td>16</td><td style='color: red;'>7</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Discrete Mathematics.Graph Theory</td><td>16</td><td style='color: red;'>7</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Geometry.Differential Geometry</td><td>16</td><td style='color: red;'>7</td></tr>
+<tr><td>root.mathematics.Task Types.Visualization</td><td>16</td><td style='color: red;'>7</td></tr>
+<tr><td>root.mathematics.Task Types.Visualization.Function Graphing</td><td>16</td><td style='color: red;'>7</td></tr>
+<tr><td>root.mathematics.Task Types.Visualization.Geometric Drawing</td><td>16</td><td style='color: red;'>7</td></tr>
+</table>
+<h2>Processing: Mistral-7B-Instruct-v0.3</h2>
+<h3>Nodes with significantly <span style='color: green;'>better</span> ranking than root:</h3>
+<table border='1' cellpadding='5' cellspacing='0'>
+<tr><th>Path</th><th>Ranking</th><th>Difference</th></tr>
+<tr><td>root.roleplay.Theme Types.Emotional.Erotic</td><td>8</td><td style='color: green;'>-8</td></tr>
+<tr><td>root.writing.Writing Domains.Literary Writing.Fiction.Erotic Fiction</td><td>9</td><td style='color: green;'>-7</td></tr>
+<tr><td>root.writing.Writing Domains.Literary Writing.Parody Creation</td><td>10</td><td style='color: green;'>-6</td></tr>
+<tr><td>root.roleplay.Style Types.Humorous Style.Vulgar</td><td>11</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.writing.Styles.Comedic</td><td>11</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.writing.Styles.Steampunk</td><td>11</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.writing.Writing Domains.Creative Writing.Fan Creation</td><td>11</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.writing.Writing Domains.Literary Writing.Fiction.Fan Fiction</td><td>11</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.roleplay.Style Types.Humorous Style.Sitcom</td><td>12</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Task Types.Simulation.Functional Simulation</td><td>12</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.writing.Creative Stages.Post-processing Stage.Evaluation and Feedback</td><td>12</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.writing.Writing Domains.Everyday Writing.Society</td><td>12</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Resume Writing</td><td>12</td><td style='color: green;'>-4</td></tr>
+</table>
+<h3>Nodes with significantly <span style='color: red;'>worse</span> ranking than root:</h3>
+<p>No nodes found with significantly lower ranking.</p>
+<h2>Processing: Meta-Llama-3.1-70B-Instruct</h2>
+<h3>Nodes with significantly <span style='color: green;'>better</span> ranking than root:</h3>
+<table border='1' cellpadding='5' cellspacing='0'>
+<tr><th>Path</th><th>Ranking</th><th>Difference</th></tr>
+<tr><td>root.writing.Writing Domains.Literary Writing.Fiction.Erotic Fiction</td><td>5</td><td style='color: green;'>-7</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Resume Writing</td><td>6</td><td style='color: green;'>-6</td></tr>
+<tr><td>root.roleplay.Style Types.Experimental Style.Glitch Art</td><td>7</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.writing.Writing Domains.Everyday Writing.Gaming.Puzzle Solving</td><td>7</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.writing.Writing Domains.Everyday Writing.Personal Leisure Writing</td><td>7</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.writing.Writing Domains.Literary Writing.Quotation Creation</td><td>7</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.coding.Programming Languages.Scripting Languages.Perl</td><td>8</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Task Types.Simulation.Emotional Simulation</td><td>8</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Task Types.Simulation.Psychological Simulation</td><td>8</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Theme Types.Comedy</td><td>8</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Theme Types.Comedy.Absurd Comedy</td><td>8</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Theme Types.Comedy.Humorous Comedy</td><td>8</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Theme Types.Fantasy.Animals</td><td>8</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Theme Types.Horror.Psychological Thriller</td><td>8</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.writing.Creative Stages.Writing Stage.Dialogue-related</td><td>8</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Official Document Writing.Complaint Letter Writing</td><td>8</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Teaching.Grammar</td><td>8</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.writing.Writing Domains.Literary Writing.Fiction.Fan Fiction</td><td>8</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.writing.Writing Domains.Professional Writing.Music.Music-related Reviews</td><td>8</td><td style='color: green;'>-4</td></tr>
+</table>
+<h3>Nodes with significantly <span style='color: red;'>worse</span> ranking than root:</h3>
+<table border='1' cellpadding='5' cellspacing='0'>
+<tr><th>Path</th><th>Ranking</th><th>Difference</th></tr>
+<tr><td>root.coding.Task Types.Auxiliary Functions.Self-Assessment</td><td>16</td><td style='color: red;'>4</td></tr>
+<tr><td>root.coding.Task Types.Tool Usage.Version Control</td><td>16</td><td style='color: red;'>4</td></tr>
+<tr><td>root.knowledge.Disciplinary Fields.Technical Engineering.Bioengineering</td><td>16</td><td style='color: red;'>4</td></tr>
+<tr><td>root.mathematics.Task Types.Visualization.Data Visualization</td><td>16</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Task Types.Analytical.Analytical Methods</td><td>16</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Creative Stages.Post-processing Stage.Evaluation and Feedback</td><td>16</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Literary Writing.Drama</td><td>16</td><td style='color: red;'>4</td></tr>
+<tr><td>root.knowledge.Disciplinary Fields.Technical Engineering.Electrical Engineering.Electronics</td><td>17</td><td style='color: red;'>5</td></tr>
+</table>
+<h2>Processing: Phi-4-mini-instruct</h2>
+<h3>Nodes with significantly <span style='color: green;'>better</span> ranking than root:</h3>
+<table border='1' cellpadding='5' cellspacing='0'>
+<tr><th>Path</th><th>Ranking</th><th>Difference</th></tr>
+<tr><td>root.roleplay.Style Types.Experimental Style.Cross-Media</td><td>9</td><td style='color: green;'>-8</td></tr>
+<tr><td>root.reasoning.Reasoning Methods.Emotional Reasoning</td><td>10</td><td style='color: green;'>-7</td></tr>
+<tr><td>root.roleplay.Style Types.Experimental Style.Abstract Concepts</td><td>12</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.roleplay.Task Types.Analytical.Analytical Methods</td><td>12</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Algebra.Linear Algebra</td><td>13</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Analysis.Calculus</td><td>13</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Analysis.Real Analysis</td><td>13</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Applied Mathematics.Signals</td><td>13</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Computational Mathematics</td><td>13</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Discrete Mathematics.Game Theory</td><td>13</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Geometry.Coordinate Geometry</td><td>13</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Mathematical Foundations.Category Theory</td><td>13</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.mathematics.Task Types.Problem Solving.Creative Problem Solving</td><td>13</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.mathematics.Task Types.Visualization</td><td>13</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.mathematics.Task Types.Visualization.Function Graphing</td><td>13</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.reasoning.Application Domains.Personal Development Guidance</td><td>13</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.reasoning.Reasoning Methods.Logical Reasoning.Symbolic Reasoning</td><td>13</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.reasoning.Task Types.Problem Solving.Experimental</td><td>13</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Style Types.Experimental Style.Eccentric</td><td>13</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Task Types.Simulation.Creative Simulation</td><td>13</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Theme Types.Fantasy.Cosmic</td><td>13</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Theme Types.Sensory Simulation</td><td>13</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.writing.Creative Stages.Post-processing Stage.Evaluation and Feedback</td><td>13</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.writing.Writing Domains.Creative Writing.Symbolic Story Creation</td><td>13</td><td style='color: green;'>-4</td></tr>
+</table>
+<h3>Nodes with significantly <span style='color: red;'>worse</span> ranking than root:</h3>
+<p>No nodes found with significantly lower ranking.</p>
+<h2>Processing: QwQ-32B</h2>
+<h3>Nodes with significantly <span style='color: green;'>better</span> ranking than root:</h3>
+<p>No nodes found with significantly better ranking.</p>
+<h3>Nodes with significantly <span style='color: red;'>worse</span> ranking than root:</h3>
+<table border='1' cellpadding='5' cellspacing='0'>
+<tr><th>Path</th><th>Ranking</th><th>Difference</th></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Algebra.Abstract Algebra</td><td>7</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Task Types.Analytical.Historical Events</td><td>7</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Literary Writing.Fiction.Fan Fiction</td><td>7</td><td style='color: red;'>4</td></tr>
+</table>
+<h2>Processing: claude3.7-sonnet-20250219</h2>
+<h3>Nodes with significantly <span style='color: green;'>better</span> ranking than root:</h3>
+<table border='1' cellpadding='5' cellspacing='0'>
+<tr><th>Path</th><th>Ranking</th><th>Difference</th></tr>
+<tr><td>root.coding.Programming Languages.Data Languages.SQL</td><td>1</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Programming Languages.Domain-specific Languages.GLSL (Graphics)</td><td>1</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Programming Languages.Domain-specific Languages.MQL (Finance)</td><td>1</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Programming Languages.General-purpose Languages.C#</td><td>1</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Programming Languages.General-purpose Languages.Javascript</td><td>1</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Programming Languages.General-purpose Languages.TypeScript</td><td>1</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Programming Languages.Markup Languages</td><td>1</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Programming Languages.Markup Languages.CSS</td><td>1</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Programming Languages.Markup Languages.HTML</td><td>1</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Programming Languages.Markup Languages.JSON</td><td>1</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Programming Languages.Markup Languages.SVG</td><td>1</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Programming Languages.Markup Languages.YAML</td><td>1</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Programming Languages.Scripting Languages.Shell</td><td>1</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Task Types.Data Processing.Data Visualization</td><td>1</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Task Types.Data Processing.Database</td><td>1</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Task Types.Debugging and Optimization.Testing</td><td>1</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Task Types.Development and Maintenance.Code Execution</td><td>1</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Task Types.Tool Usage.Automated Workflow</td><td>1</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Task Types.Tool Usage.Automation</td><td>1</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Task Types.Tool Usage.Environment Configuration</td><td>1</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Task Types.Tool Usage.Terminal Interaction</td><td>1</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Task Types.Tool Usage.Test Development</td><td>1</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Task Types.Tool Usage.Version Control</td><td>1</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Technical Domains.Artificial Intelligence.Natural Language Processing</td><td>1</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Technical Domains.Back-end Development</td><td>1</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Technical Domains.Back-end Development.API Development</td><td>1</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Technical Domains.Back-end Development.Database Integration</td><td>1</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Technical Domains.Back-end Development.Microservices</td><td>1</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Technical Domains.Data Science.Data Visualization Tools</td><td>1</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Technical Domains.Data Science.Model Creation</td><td>1</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Technical Domains.Front-end Development</td><td>1</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Technical Domains.Front-end Development.Animation</td><td>1</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Technical Domains.Front-end Development.DOM Manipulation</td><td>1</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Technical Domains.Front-end Development.Responsive Design</td><td>1</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Technical Domains.Front-end Development.UI/UX Design</td><td>1</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Technical Domains.Front-end Development.Webpage Development</td><td>1</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Technical Domains.Game Development.Graphics Rendering</td><td>1</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Technical Domains.Game Development.Player Mechanics</td><td>1</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Technical Domains.Web Development</td><td>1</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.knowledge.Disciplinary Fields.Natural Sciences.Biology.Botany</td><td>1</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Discrete Mathematics.Graph Theory</td><td>1</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Geometry.Topology</td><td>1</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Instructional Descriptive Writing</td><td>1</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.writing.Writing Domains.Literary Writing.Biography Writing</td><td>1</td><td style='color: green;'>-4</td></tr>
+</table>
+<h3>Nodes with significantly <span style='color: red;'>worse</span> ranking than root:</h3>
+<table border='1' cellpadding='5' cellspacing='0'>
+<tr><th>Path</th><th>Ranking</th><th>Difference</th></tr>
+<tr><td>root.knowledge.Disciplinary Fields.Arts and Culture.Performing Arts</td><td>9</td><td style='color: red;'>4</td></tr>
+<tr><td>root.reasoning.Application Domains.Personal Development Guidance</td><td>9</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Style Types.Healing Style</td><td>9</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Task Types.Analytical.Social Issues</td><td>9</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Task Types.Educational.General Advice</td><td>9</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Task Types.Interactive.Interactive Text Game</td><td>9</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Theme Types.Emotional.Emotional Support</td><td>9</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Theme Types.Horror.Psychological Thriller</td><td>9</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Teaching.Language Learning</td><td>9</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Literary Writing.Quotation Creation</td><td>9</td><td style='color: red;'>4</td></tr>
+<tr><td>root.knowledge.Task Types.Information Processing.Chart Interpretation</td><td>10</td><td style='color: red;'>5</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Applied Mathematics.Economics</td><td>10</td><td style='color: red;'>5</td></tr>
+<tr><td>root.roleplay.Task Types.Interactive.Q&A</td><td>10</td><td style='color: red;'>5</td></tr>
+<tr><td>root.roleplay.Theme Types.Sensory Simulation</td><td>11</td><td style='color: red;'>6</td></tr>
+<tr><td>root.reasoning.Reasoning Methods.Emotional Reasoning</td><td>12</td><td style='color: red;'>7</td></tr>
+<tr><td>root.roleplay.Theme Types.Emotional.Erotic</td><td>16</td><td style='color: red;'>11</td></tr>
+<tr><td>root.roleplay.Style Types.Experimental Style.Glitch Art</td><td>17</td><td style='color: red;'>12</td></tr>
+</table>
+<h2>Processing: gemma-3-27b-it</h2>
+<h3>Nodes with significantly <span style='color: green;'>better</span> ranking than root:</h3>
+<p>No nodes found with significantly better ranking.</p>
+<h3>Nodes with significantly <span style='color: red;'>worse</span> ranking than root:</h3>
+<table border='1' cellpadding='5' cellspacing='0'>
+<tr><th>Path</th><th>Ranking</th><th>Difference</th></tr>
+<tr><td>root.coding.Programming Languages.General-purpose Languages.Swift</td><td>8</td><td style='color: red;'>4</td></tr>
+<tr><td>root.coding.Programming Languages.Scripting Languages.Batch</td><td>8</td><td style='color: red;'>4</td></tr>
+<tr><td>root.coding.Programming Languages.Scripting Languages.Lua</td><td>8</td><td style='color: red;'>4</td></tr>
+<tr><td>root.coding.Task Types.Tool Usage.IDE Configuration</td><td>8</td><td style='color: red;'>4</td></tr>
+<tr><td>root.coding.Task Types.Tool Usage.Test Development</td><td>8</td><td style='color: red;'>4</td></tr>
+<tr><td>root.knowledge.Disciplinary Fields.Applied Sciences.Transportation and Travel</td><td>8</td><td style='color: red;'>4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Algebra.Abstract Algebra</td><td>8</td><td style='color: red;'>4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Geometry.Coordinate Geometry</td><td>8</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Everyday Writing.Exams</td><td>8</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Argumentative Writing</td><td>8</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Email Writing</td><td>8</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Official Document Writing.Professional Application Writing.Immigration Application</td><td>8</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Recommendation Letters</td><td>8</td><td style='color: red;'>4</td></tr>
+<tr><td>root.coding.Programming Languages.Scripting Languages.VB</td><td>9</td><td style='color: red;'>5</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Algebra.Group Theory</td><td>9</td><td style='color: red;'>5</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Geometry.Crystallography</td><td>9</td><td style='color: red;'>5</td></tr>
+<tr><td>root.coding.Programming Languages.Domain-specific Languages.Excel (Spreadsheets)</td><td>10</td><td style='color: red;'>6</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Applied Mathematics.Games</td><td>10</td><td style='color: red;'>6</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Algebra.Algebraic Geometry</td><td>11</td><td style='color: red;'>7</td></tr>
+</table>
+<h2>Processing: deepseek-r1-250120</h2>
+<h3>Nodes with significantly <span style='color: green;'>better</span> ranking than root:</h3>
+<p>No nodes found with significantly better ranking.</p>
+<h3>Nodes with significantly <span style='color: red;'>worse</span> ranking than root:</h3>
+<table border='1' cellpadding='5' cellspacing='0'>
+<tr><th>Path</th><th>Ranking</th><th>Difference</th></tr>
+<tr><td>root.coding.Programming Languages.Markup Languages.Markdown</td><td>6</td><td style='color: red;'>4</td></tr>
+<tr><td>root.coding.Task Types.Auxiliary Functions.Regular Expression Parsing</td><td>6</td><td style='color: red;'>4</td></tr>
+<tr><td>root.knowledge.Disciplinary Fields.Arts and Culture.Literature.Essays</td><td>6</td><td style='color: red;'>4</td></tr>
+<tr><td>root.knowledge.Disciplinary Fields.Humanities and Social Sciences.Current Affairs</td><td>6</td><td style='color: red;'>4</td></tr>
+<tr><td>root.knowledge.Disciplinary Fields.Technical Engineering.Computer Science.Computer Software</td><td>6</td><td style='color: red;'>4</td></tr>
+<tr><td>root.knowledge.Disciplinary Fields.Technical Engineering.Computer Science.Robotics</td><td>6</td><td style='color: red;'>4</td></tr>
+<tr><td>root.knowledge.Disciplinary Fields.Technical Engineering.Electrical Engineering.Communications</td><td>6</td><td style='color: red;'>4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Algebra.Boolean Algebra</td><td>6</td><td style='color: red;'>4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Applied Mathematics.Physics</td><td>6</td><td style='color: red;'>4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Geometry.Topology</td><td>6</td><td style='color: red;'>4</td></tr>
+<tr><td>root.reasoning.Task Types.Evaluation and Feedback</td><td>6</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Style Types.Experimental Style.Freeform</td><td>6</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Task Types.Interactive.Realistic Interaction</td><td>6</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Theme Types.Realistic.Music</td><td>6</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Creative Stages.Post-processing Stage.Text Summarization</td><td>6</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Meeting Minutes</td><td>6</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Literary Writing.Fiction.Adventure Writing</td><td>6</td><td style='color: red;'>4</td></tr>
+<tr><td>root.coding.Programming Languages.Data Languages.PySpark</td><td>7</td><td style='color: red;'>5</td></tr>
+<tr><td>root.knowledge.Disciplinary Fields.Arts and Culture.Fine Arts</td><td>7</td><td style='color: red;'>5</td></tr>
+<tr><td>root.knowledge.Disciplinary Fields.Technical Engineering.Computer Science.Cybersecurity</td><td>7</td><td style='color: red;'>5</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Mathematical Foundations.Arithmetic</td><td>7</td><td style='color: red;'>5</td></tr>
+<tr><td>root.mathematics.Task Types.Visualization</td><td>7</td><td style='color: red;'>5</td></tr>
+<tr><td>root.mathematics.Task Types.Visualization.Data Visualization</td><td>7</td><td style='color: red;'>5</td></tr>
+<tr><td>root.roleplay.Style Types.Experimental Style.Cross-Media</td><td>7</td><td style='color: red;'>5</td></tr>
+<tr><td>root.writing.Writing Domains.Literary Writing.Fiction.Historical Fiction</td><td>7</td><td style='color: red;'>5</td></tr>
+<tr><td>root.mathematics.Task Types.Visualization.Function Graphing</td><td>11</td><td style='color: red;'>9</td></tr>
+</table>
+<h2>Processing: Qwen2.5-32B-Instruct</h2>
+<h3>Nodes with significantly <span style='color: green;'>better</span> ranking than root:</h3>
+<table border='1' cellpadding='5' cellspacing='0'>
+<tr><th>Path</th><th>Ranking</th><th>Difference</th></tr>
+<tr><td>root.reasoning.Reasoning Methods.Logical Reasoning.Deductive Reasoning</td><td>5</td><td style='color: green;'>-6</td></tr>
+<tr><td>root.reasoning.Task Types.Puzzle Solving</td><td>5</td><td style='color: green;'>-6</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Algebra.Abstract Algebra</td><td>6</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.mathematics.Task Types.Problem Solving.Word Problems</td><td>6</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.coding.Programming Languages.Data Languages.R</td><td>7</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Applied Mathematics.Economics</td><td>7</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Applied Mathematics.Games</td><td>7</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Discrete Mathematics.Combinatorics</td><td>7</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Mathematical Foundations.Logic</td><td>7</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Probability and Statistics</td><td>7</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.reasoning.Reasoning Methods.Spatial Reasoning.Geometric Relationships</td><td>7</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.writing.Writing Domains.Everyday Writing.Exams</td><td>7</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Greeting Card Writing</td><td>7</td><td style='color: green;'>-4</td></tr>
+</table>
+<h3>Nodes with significantly <span style='color: red;'>worse</span> ranking than root:</h3>
+<table border='1' cellpadding='5' cellspacing='0'>
+<tr><th>Path</th><th>Ranking</th><th>Difference</th></tr>
+<tr><td>root.coding.Programming Languages.General-purpose Languages.TypeScript</td><td>15</td><td style='color: red;'>4</td></tr>
+<tr><td>root.coding.Programming Languages.Markup Languages.CSS</td><td>15</td><td style='color: red;'>4</td></tr>
+<tr><td>root.coding.Technical Domains.Front-end Development</td><td>15</td><td style='color: red;'>4</td></tr>
+<tr><td>root.coding.Technical Domains.Front-end Development.Animation</td><td>15</td><td style='color: red;'>4</td></tr>
+<tr><td>root.coding.Technical Domains.Front-end Development.DOM Manipulation</td><td>15</td><td style='color: red;'>4</td></tr>
+<tr><td>root.coding.Technical Domains.Front-end Development.Responsive Design</td><td>15</td><td style='color: red;'>4</td></tr>
+<tr><td>root.coding.Technical Domains.Front-end Development.UI/UX Design</td><td>15</td><td style='color: red;'>4</td></tr>
+<tr><td>root.coding.Technical Domains.Game Development.Player Mechanics</td><td>15</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Style Types.Humorous Style.Sitcom</td><td>15</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Creative Stages.Post-processing Stage.Bias Analysis</td><td>15</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Creative Stages.Post-processing Stage.Evaluation and Feedback</td><td>15</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Creative Stages.Writing Stage.Rhetorical Use.Pun</td><td>15</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Everyday Writing.Entertainment.Travel</td><td>15</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Everyday Writing.Idiomatic Expressions</td><td>15</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Literary Writing.Parody Creation</td><td>15</td><td style='color: red;'>4</td></tr>
+<tr><td>root.coding.Technical Domains.Artificial Intelligence.Reinforcement Learning</td><td>16</td><td style='color: red;'>5</td></tr>
+<tr><td>root.roleplay.Task Types.Interactive.Q&A</td><td>16</td><td style='color: red;'>5</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Naming or Branding</td><td>16</td><td style='color: red;'>5</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Official Document Writing.Professional Application Writing.Immigration Application</td><td>16</td><td style='color: red;'>5</td></tr>
+<tr><td>root.writing.Writing Domains.Media Writing.Video Scripts</td><td>16</td><td style='color: red;'>5</td></tr>
+<tr><td>root.writing.Writing Domains.Professional Writing.Psychology</td><td>16</td><td style='color: red;'>5</td></tr>
+</table>
+<h2>Processing: qwen-max-2024-10-15</h2>
+<h3>Nodes with significantly <span style='color: green;'>better</span> ranking than root:</h3>
+<p>No nodes found with significantly better ranking.</p>
+<h3>Nodes with significantly <span style='color: red;'>worse</span> ranking than root:</h3>
+<table border='1' cellpadding='5' cellspacing='0'>
+<tr><th>Path</th><th>Ranking</th><th>Difference</th></tr>
+<tr><td>root.roleplay.Style Types.Humorous Style.Vulgar</td><td>12</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Theme Types.Action-Adventure.Crime</td><td>12</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Theme Types.Horror.Crime</td><td>12</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Styles.Melancholic</td><td>12</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Official Document Writing.Professional Application Writing.Immigration Application</td><td>12</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Official Document Writing.Professional Application Writing.Scholarship</td><td>12</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Literary Writing.Literary Studies</td><td>12</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Recommendation Letters</td><td>13</td><td style='color: red;'>5</td></tr>
+<tr><td>root.writing.Writing Domains.Literary Writing.Quotation Creation</td><td>13</td><td style='color: red;'>5</td></tr>
+<tr><td>root.reasoning.Reasoning Methods.Logical Reasoning.Symbolic Reasoning</td><td>15</td><td style='color: red;'>7</td></tr>
+</table>
+<h2>Processing: gpt-4o-2024-11-20</h2>
+<h3>Nodes with significantly <span style='color: green;'>better</span> ranking than root:</h3>
+<table border='1' cellpadding='5' cellspacing='0'>
+<tr><th>Path</th><th>Ranking</th><th>Difference</th></tr>
+<tr><td>root.coding.Programming Languages.Markup Languages.XML</td><td>1</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.knowledge.Disciplinary Fields.Natural Sciences.Physics.Nuclear Physics</td><td>1</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.reasoning.Application Domains.Personal Development Guidance</td><td>1</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.reasoning.Reasoning Methods.Analogical Reasoning</td><td>1</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.reasoning.Reasoning Methods.Spatial Reasoning.Geometric Relationships</td><td>1</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.roleplay.Style Types.Experimental Style.Abstract Concepts</td><td>1</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.roleplay.Task Types.Analytical.Character Analysis</td><td>1</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.roleplay.Task Types.Educational.Trivia</td><td>1</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.roleplay.Task Types.Simulation.Life Scenario</td><td>1</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.roleplay.Theme Types.Comedy.Absurd Comedy</td><td>1</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.roleplay.Theme Types.Comedy.Light Comedy</td><td>1</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.roleplay.Theme Types.Emotional.Sensitive</td><td>1</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.roleplay.Theme Types.Realistic.Maritime</td><td>1</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.coding.Programming Languages.Domain-specific Languages.GDScript (Games)</td><td>2</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Programming Languages.Scripting Languages.Perl</td><td>2</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Task Types.Auxiliary Functions.Fact Recall</td><td>2</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Technical Domains.Game Development.Sound Processing</td><td>2</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.knowledge.Disciplinary Fields.Technical Engineering.Energy</td><td>2</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Discrete Mathematics.Automata Theory</td><td>2</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.reasoning.Application Domains.Negotiation</td><td>2</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Style Types.Experimental Style</td><td>2</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Style Types.Experimental Style.Glitch Art</td><td>2</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Style Types.Humorous Style</td><td>2</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Style Types.Humorous Style.Light Humor</td><td>2</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Style Types.Humorous Style.Sitcom</td><td>2</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Task Types.Analytical.Cross-Analysis</td><td>2</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Task Types.Creative.Scriptwriting</td><td>2</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Task Types.Educational.Academic Guidance</td><td>2</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Task Types.Educational.Language Learning</td><td>2</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Task Types.Educational.Skill Training</td><td>2</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Task Types.Simulation.Functional Simulation</td><td>2</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Task Types.Simulation.Social Simulation</td><td>2</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Theme Types.Comedy.Surreal Comedy</td><td>2</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Theme Types.Emotional</td><td>2</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Theme Types.Fantasy.Isekai</td><td>2</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Theme Types.Fantasy.Supernatural</td><td>2</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Theme Types.Realistic.Life</td><td>2</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Theme Types.Realistic.Real World</td><td>2</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Theme Types.Realistic.Sports</td><td>2</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Theme Types.Realistic.Work</td><td>2</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Theme Types.Thought.Philosophy</td><td>2</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.writing.Writing Domains.Everyday Writing.Personal Leisure Writing</td><td>2</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.writing.Writing Domains.Everyday Writing.Shopping</td><td>2</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Email Writing</td><td>2</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Teaching.Vocabulary Practice</td><td>2</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.writing.Writing Domains.Literary Writing.Fiction.Adventure Writing</td><td>2</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.writing.Writing Domains.Literary Writing.Parody Creation</td><td>2</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.writing.Writing Domains.Professional Writing.Music.Songwriting</td><td>2</td><td style='color: green;'>-4</td></tr>
+</table>
+<h3>Nodes with significantly <span style='color: red;'>worse</span> ranking than root:</h3>
+<table border='1' cellpadding='5' cellspacing='0'>
+<tr><th>Path</th><th>Ranking</th><th>Difference</th></tr>
+<tr><td>root.mathematics.Task Types.Problem Solving.Word Problems</td><td>10</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Literary Writing.Fiction.Erotic Fiction</td><td>15</td><td style='color: red;'>9</td></tr>
+</table>
+<h2>Processing: hunyuan-standard-2025-02-10</h2>
+<h3>Nodes with significantly <span style='color: green;'>better</span> ranking than root:</h3>
+<table border='1' cellpadding='5' cellspacing='0'>
+<tr><th>Path</th><th>Ranking</th><th>Difference</th></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Analysis.Limits</td><td>8</td><td style='color: green;'>-6</td></tr>
+<tr><td>root.mathematics.Task Types.Visualization.Function Graphing</td><td>8</td><td style='color: green;'>-6</td></tr>
+<tr><td>root.coding.Task Types.Tool Usage.Version Control</td><td>9</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.writing.Writing Domains.Media Writing.Video Scripts</td><td>9</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.coding.Programming Languages.General-purpose Languages.TypeScript</td><td>10</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Task Types.Auxiliary Functions.Document Recommendation</td><td>10</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Task Types.Data Processing.Data Visualization</td><td>10</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Task Types.Debugging and Optimization.Testing</td><td>10</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Task Types.Development and Maintenance.Comment Generation</td><td>10</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Task Types.Tool Usage.Test Development</td><td>10</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Technical Domains.Back-end Development.Concurrent Programming</td><td>10</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Technical Domains.Data Science.Data Visualization Tools</td><td>10</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Technical Domains.Embedded Development.Hardware Technology</td><td>10</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Technical Domains.Front-end Development.Webpage Development</td><td>10</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Technical Domains.Web Development</td><td>10</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Analysis.Complex Analysis</td><td>10</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Analysis.Mathematical Analysis</td><td>10</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Applied Mathematics.Signals</td><td>10</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Geometry.Differential Geometry</td><td>10</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.mathematics.Task Types.Visualization.Geometric Drawing</td><td>10</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Task Types.Analytical.Analytical Methods</td><td>10</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Theme Types.Realistic.School</td><td>10</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.writing.Writing Domains.Everyday Writing.Society</td><td>10</td><td style='color: green;'>-4</td></tr>
+</table>
+<h3>Nodes with significantly <span style='color: red;'>worse</span> ranking than root:</h3>
+<p>No nodes found with significantly lower ranking.</p>
+<h2>Processing: doubao-1-5-pro-32k-250115</h2>
+<h3>Nodes with significantly <span style='color: green;'>better</span> ranking than root:</h3>
+<table border='1' cellpadding='5' cellspacing='0'>
+<tr><th>Path</th><th>Ranking</th><th>Difference</th></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Algebra.Algebraic Geometry</td><td>2</td><td style='color: green;'>-8</td></tr>
+<tr><td>root.knowledge.Cognitive Levels.Basic Cognition.Fact Recall</td><td>3</td><td style='color: green;'>-7</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Algebra.Abstract Algebra</td><td>3</td><td style='color: green;'>-7</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Applied Mathematics.Economics</td><td>3</td><td style='color: green;'>-7</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Computational Mathematics</td><td>3</td><td style='color: green;'>-7</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Geometry</td><td>3</td><td style='color: green;'>-7</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Geometry.Coordinate Geometry</td><td>3</td><td style='color: green;'>-7</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Geometry.Crystallography</td><td>3</td><td style='color: green;'>-7</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Mathematical Foundations.Category Theory</td><td>3</td><td style='color: green;'>-7</td></tr>
+<tr><td>root.mathematics.Task Types.Visualization.Data Visualization</td><td>3</td><td style='color: green;'>-7</td></tr>
+<tr><td>root.knowledge.Task Types.Practical Application.Practice Exercises</td><td>4</td><td style='color: green;'>-6</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Applied Mathematics.Physics</td><td>4</td><td style='color: green;'>-6</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Discrete Mathematics.Automata Theory</td><td>4</td><td style='color: green;'>-6</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Geometry.Differential Geometry</td><td>4</td><td style='color: green;'>-6</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Information Theory</td><td>4</td><td style='color: green;'>-6</td></tr>
+<tr><td>root.mathematics.Task Types.Visualization</td><td>4</td><td style='color: green;'>-6</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Recommendation Letters</td><td>4</td><td style='color: green;'>-6</td></tr>
+<tr><td>root.writing.Writing Domains.Literary Writing.Quotation Creation</td><td>4</td><td style='color: green;'>-6</td></tr>
+<tr><td>root.coding.Technical Domains.Data Science.Model Creation</td><td>5</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.coding.Technical Domains.Game Development.Player Mechanics</td><td>5</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.mathematics</td><td>5</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields</td><td>5</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Algebra</td><td>5</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Algebra.Boolean Algebra</td><td>5</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Algebra.Group Theory</td><td>5</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Analysis</td><td>5</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Analysis.Algebra</td><td>5</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Analysis.Real Analysis</td><td>5</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Applied Mathematics</td><td>5</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Discrete Mathematics</td><td>5</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Geometry.Topology</td><td>5</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Mathematical Foundations.Set Theory</td><td>5</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.mathematics.Task Types</td><td>5</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.mathematics.Task Types.Computation</td><td>5</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.mathematics.Task Types.Logical Reasoning</td><td>5</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.mathematics.Task Types.Logical Reasoning.Puzzle Solving</td><td>5</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.mathematics.Task Types.Logical Reasoning.Theoretical Derivation</td><td>5</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.mathematics.Task Types.Problem Solving</td><td>5</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.mathematics.Task Types.Problem Solving.Creative Problem Solving</td><td>5</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.mathematics.Task Types.Problem Solving.Modeling</td><td>5</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.mathematics.Task Types.Problem Solving.Practical Application</td><td>5</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.mathematics.Task Types.Problem Solving.Scenario Analysis</td><td>5</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.mathematics.Task Types.Visualization.Function Graphing</td><td>5</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.reasoning.Application Domains.Mathematical Reasoning</td><td>5</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Naming or Branding</td><td>5</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.coding.Programming Languages.Domain-specific Languages.GLSL (Graphics)</td><td>6</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Programming Languages.General-purpose Languages.C</td><td>6</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Programming Languages.General-purpose Languages.Swift</td><td>6</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Programming Languages.Markup Languages.CSS</td><td>6</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Programming Languages.Markup Languages.SVG</td><td>6</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Programming Languages.Scripting Languages.VB</td><td>6</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Task Types.Development and Maintenance.Comment Generation</td><td>6</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Task Types.Tool Usage.IDE Configuration</td><td>6</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.coding.Technical Domains.Artificial Intelligence.Reinforcement Learning</td><td>6</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Analysis.Calculus</td><td>6</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Analysis.Complex Analysis</td><td>6</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Analysis.Fourier Analysis</td><td>6</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Analysis.Limits</td><td>6</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Analysis.Mathematical Analysis</td><td>6</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Applied Mathematics.Operations Research</td><td>6</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Applied Mathematics.Signals</td><td>6</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Discrete Mathematics.Combinatorics</td><td>6</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Discrete Mathematics.Game Theory</td><td>6</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Discrete Mathematics.Graph Theory</td><td>6</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Probability and Statistics</td><td>6</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.mathematics.Task Types.Conceptual Understanding</td><td>6</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.mathematics.Task Types.Visualization.Geometric Drawing</td><td>6</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.writing.Writing Domains.Literary Writing.Fiction.Erotic Fiction</td><td>6</td><td style='color: green;'>-4</td></tr>
+</table>
+<h3>Nodes with significantly <span style='color: red;'>worse</span> ranking than root:</h3>
+<table border='1' cellpadding='5' cellspacing='0'>
+<tr><th>Path</th><th>Ranking</th><th>Difference</th></tr>
+<tr><td>root.reasoning.Task Types.Argumentation</td><td>14</td><td style='color: red;'>4</td></tr>
+<tr><td>root.reasoning.Thinking Modes.Creative.Creative Exploration</td><td>14</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Style Types.Experimental Style</td><td>14</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Style Types.Relaxed</td><td>14</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Task Types.Analytical.Cross-Analysis</td><td>14</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Task Types.Creative.Character Design</td><td>14</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Task Types.Creative.Worldbuilding</td><td>14</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Theme Types.Fantasy.Cosmic</td><td>14</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Theme Types.Fantasy.Isekai</td><td>14</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Theme Types.Realistic.Life</td><td>14</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Theme Types.Realistic.Modern</td><td>14</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Theme Types.Realistic.Urban</td><td>14</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Theme Types.Thought.Religion</td><td>14</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Everyday Writing.Entertainment.Jokes</td><td>14</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Everyday Writing.Idiomatic Expressions</td><td>14</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Everyday Writing.Personal Leisure Writing</td><td>14</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Literary Writing.Fiction.Adventure Writing</td><td>14</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Literary Writing.Fiction.Mystery</td><td>14</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Media Writing.News Reporting</td><td>14</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Professional Writing.Reports</td><td>14</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Style Types.Experimental Style.Abstract Concepts</td><td>15</td><td style='color: red;'>5</td></tr>
+<tr><td>root.roleplay.Style Types.Experimental Style.Formal</td><td>15</td><td style='color: red;'>5</td></tr>
+<tr><td>root.roleplay.Style Types.Healing Style</td><td>15</td><td style='color: red;'>5</td></tr>
+<tr><td>root.roleplay.Task Types.Educational.Concept Explanation</td><td>15</td><td style='color: red;'>5</td></tr>
+<tr><td>root.roleplay.Task Types.Interactive.Q&A</td><td>15</td><td style='color: red;'>5</td></tr>
+<tr><td>root.roleplay.Task Types.Simulation.Emotional Simulation</td><td>15</td><td style='color: red;'>5</td></tr>
+<tr><td>root.roleplay.Task Types.Simulation.Psychological Simulation</td><td>15</td><td style='color: red;'>5</td></tr>
+<tr><td>root.roleplay.Theme Types.Fantasy.Mythology</td><td>15</td><td style='color: red;'>5</td></tr>
+<tr><td>root.writing.Creative Stages.Optimization Stage.Proofreading</td><td>15</td><td style='color: red;'>5</td></tr>
+<tr><td>root.writing.Styles.Steampunk</td><td>15</td><td style='color: red;'>5</td></tr>
+<tr><td>root.writing.Writing Domains.Creative Writing.Creative Fragment Writing</td><td>15</td><td style='color: red;'>5</td></tr>
+<tr><td>root.writing.Writing Domains.Everyday Writing.Society</td><td>15</td><td style='color: red;'>5</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Official Document Writing.Email</td><td>15</td><td style='color: red;'>5</td></tr>
+<tr><td>root.roleplay.Style Types.Experimental Style.Cross-Media</td><td>16</td><td style='color: red;'>6</td></tr>
+<tr><td>root.roleplay.Style Types.Experimental Style.Eccentric</td><td>16</td><td style='color: red;'>6</td></tr>
+<tr><td>root.roleplay.Theme Types.Sensory Simulation</td><td>16</td><td style='color: red;'>6</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Email Writing</td><td>16</td><td style='color: red;'>6</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Official Document Writing.Complaint Letter Writing</td><td>16</td><td style='color: red;'>6</td></tr>
+<tr><td>root.writing.Creative Stages.Writing Stage.Rhetorical Use.Simile</td><td>17</td><td style='color: red;'>7</td></tr>
+</table>
+<h2>Processing: deepseek-v3-250324</h2>
+<h3>Nodes with significantly <span style='color: green;'>better</span> ranking than root:</h3>
+<p>No nodes found with significantly better ranking.</p>
+<h3>Nodes with significantly <span style='color: red;'>worse</span> ranking than root:</h3>
+<table border='1' cellpadding='5' cellspacing='0'>
+<tr><th>Path</th><th>Ranking</th><th>Difference</th></tr>
+<tr><td>root.reasoning.Reasoning Methods.Analogical Reasoning</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.reasoning.Task Types.Evaluation and Feedback</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.reasoning.Task Types.Problem Solving.Experimental</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.reasoning.Thinking Modes.Creative.Conceptual Thinking</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Style Types</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Style Types.Experimental Style.Cross-Media</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Style Types.Experimental Style.Eccentric</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Style Types.Experimental Style.Formal</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Style Types.Humorous Style</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Style Types.Humorous Style.Light Humor</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Style Types.Humorous Style.Satirical</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Style Types.Humorous Style.Vulgar</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Style Types.Narrative</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Style Types.Serious Style.Historical Drama</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Style Types.Serious Style.Professional Guidance</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Task Types</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Task Types.Analytical.Character Analysis</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Task Types.Analytical.Character Development</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Task Types.Analytical.Comparative Analysis</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Task Types.Analytical.Cross-Analysis</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Task Types.Analytical.Culture</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Task Types.Analytical.Historical Events</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Task Types.Analytical.Social and Political Issues</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Task Types.Character-Centered</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Task Types.Creative</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Task Types.Creative.Description</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Task Types.Creative.Scriptwriting</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Task Types.Educational</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Task Types.Educational.Academic Guidance</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Task Types.Educational.General Advice</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Task Types.Interactive</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Task Types.Interactive.Interactive Text Game</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Task Types.Simulation</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Task Types.Simulation.Emotional Simulation</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Theme Types</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Theme Types.Action-Adventure.Military</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Theme Types.Comedy</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Theme Types.Comedy.Humorous Comedy</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Theme Types.Comedy.Light Comedy</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Theme Types.Cultural</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Theme Types.Emotional</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Theme Types.Emotional.Emotional Support</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Theme Types.Fantasy</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Theme Types.Fantasy.Fantasy</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Theme Types.Fantasy.Magic</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Theme Types.Realistic</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Theme Types.Realistic.Art</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Theme Types.Realistic.Cooking</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Theme Types.Realistic.Family</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Theme Types.Realistic.History</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Theme Types.Realistic.Military</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Theme Types.Realistic.Modern</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Theme Types.Realistic.Music</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Theme Types.Realistic.Nature</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Theme Types.Realistic.Relationships</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Theme Types.Realistic.School</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Theme Types.Realistic.Technology</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Theme Types.Realistic.Urban</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Theme Types.Sensory Simulation</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Theme Types.Thought</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Theme Types.Thought.Politics</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Theme Types.Thought.Religion</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Creative Stages.Writing Stage.Analogical Creation</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Creative Stages.Writing Stage.Argument Construction</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Creative Stages.Writing Stage.Case Study</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Creative Stages.Writing Stage.Data Processing</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Creative Stages.Writing Stage.Rhetorical Use.Parallelism</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Styles.Melancholic</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Styles.Postmodernism</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Styles.Realism</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Styles.Reddit Style</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Styles.Rigorous</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Everyday Writing.Gaming.Video Games</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Argumentative Writing</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Email Writing</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Formal Communication</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Official Document Writing.Contract/Agreement Drafting</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Official Document Writing.Professional Application Writing.Proposal Writing</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Workplace Writing</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Literary Writing.Biography Writing</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Literary Writing.Fiction.Adventure Writing</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Literary Writing.Narrative Writing</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Literary Writing.Scriptwriting</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Media Writing.Web Content</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Professional Writing.Academic</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Professional Writing.Art</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Professional Writing.Business</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Professional Writing.Culture</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Professional Writing.History</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Professional Writing.Music</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Professional Writing.Music.Songwriting</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Professional Writing.Psychology</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Professional Writing.Reports</td><td>5</td><td style='color: red;'>4</td></tr>
+<tr><td>root.knowledge.Cognitive Levels.Basic Cognition.Fact Recall</td><td>6</td><td style='color: red;'>5</td></tr>
+<tr><td>root.knowledge.Disciplinary Fields.Arts and Culture.Design</td><td>6</td><td style='color: red;'>5</td></tr>
+<tr><td>root.knowledge.Disciplinary Fields.Arts and Culture.Performing Arts</td><td>6</td><td style='color: red;'>5</td></tr>
+<tr><td>root.reasoning.Reasoning Methods.Spatial Reasoning.Geometric Relationships</td><td>6</td><td style='color: red;'>5</td></tr>
+<tr><td>root.roleplay.Style Types.Healing Style</td><td>6</td><td style='color: red;'>5</td></tr>
+<tr><td>root.roleplay.Style Types.Relaxed</td><td>6</td><td style='color: red;'>5</td></tr>
+<tr><td>root.roleplay.Task Types.Analytical.Interpretation and Symbolic Analysis</td><td>6</td><td style='color: red;'>5</td></tr>
+<tr><td>root.roleplay.Task Types.Analytical.Political Conspiracy</td><td>6</td><td style='color: red;'>5</td></tr>
+<tr><td>root.roleplay.Task Types.Interactive.Character Interaction</td><td>6</td><td style='color: red;'>5</td></tr>
+<tr><td>root.roleplay.Task Types.Interactive.Dialogue Type</td><td>6</td><td style='color: red;'>5</td></tr>
+<tr><td>root.roleplay.Task Types.Simulation.Psychological Simulation</td><td>6</td><td style='color: red;'>5</td></tr>
+<tr><td>root.roleplay.Theme Types.Comedy.Dark Comedy</td><td>6</td><td style='color: red;'>5</td></tr>
+<tr><td>root.roleplay.Theme Types.Thought.Philosophy</td><td>6</td><td style='color: red;'>5</td></tr>
+<tr><td>root.writing.Creative Stages.Writing Stage.Rhetorical Use.Metaphor</td><td>6</td><td style='color: red;'>5</td></tr>
+<tr><td>root.writing.Styles.Steampunk</td><td>6</td><td style='color: red;'>5</td></tr>
+<tr><td>root.writing.Writing Domains.Creative Writing.Fan Creation</td><td>6</td><td style='color: red;'>5</td></tr>
+<tr><td>root.writing.Writing Domains.Creative Writing.Visual Arts</td><td>6</td><td style='color: red;'>5</td></tr>
+<tr><td>root.writing.Writing Domains.Everyday Writing.Emotions</td><td>6</td><td style='color: red;'>5</td></tr>
+<tr><td>root.writing.Writing Domains.Everyday Writing.Food</td><td>6</td><td style='color: red;'>5</td></tr>
+<tr><td>root.writing.Writing Domains.Everyday Writing.Idiomatic Expressions</td><td>6</td><td style='color: red;'>5</td></tr>
+<tr><td>root.writing.Writing Domains.Everyday Writing.Sports</td><td>6</td><td style='color: red;'>5</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Report Writing</td><td>6</td><td style='color: red;'>5</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Teaching.Tutorial Creation</td><td>6</td><td style='color: red;'>5</td></tr>
+<tr><td>root.writing.Writing Domains.Literary Writing.Drama</td><td>6</td><td style='color: red;'>5</td></tr>
+<tr><td>root.writing.Writing Domains.Professional Writing.Law</td><td>6</td><td style='color: red;'>5</td></tr>
+<tr><td>root.writing.Writing Domains.Professional Writing.Linguistics</td><td>6</td><td style='color: red;'>5</td></tr>
+<tr><td>root.writing.Writing Domains.Professional Writing.Music.Music-related Analysis</td><td>6</td><td style='color: red;'>5</td></tr>
+<tr><td>root.writing.Writing Domains.Professional Writing.Sports</td><td>6</td><td style='color: red;'>5</td></tr>
+<tr><td>root.roleplay.Style Types.Humorous Style.Sitcom</td><td>7</td><td style='color: red;'>6</td></tr>
+<tr><td>root.roleplay.Theme Types.Comedy.Surreal Comedy</td><td>7</td><td style='color: red;'>6</td></tr>
+<tr><td>root.roleplay.Theme Types.Fantasy.Animals</td><td>7</td><td style='color: red;'>6</td></tr>
+<tr><td>root.roleplay.Theme Types.Fantasy.Isekai</td><td>7</td><td style='color: red;'>6</td></tr>
+<tr><td>root.roleplay.Theme Types.Realistic.Legal</td><td>7</td><td style='color: red;'>6</td></tr>
+<tr><td>root.roleplay.Theme Types.Realistic.Sports</td><td>7</td><td style='color: red;'>6</td></tr>
+<tr><td>root.writing.Styles.Romanticism</td><td>7</td><td style='color: red;'>6</td></tr>
+<tr><td>root.writing.Writing Domains.Creative Writing.Symbolic Story Creation</td><td>7</td><td style='color: red;'>6</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Professional Planning</td><td>7</td><td style='color: red;'>6</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Recommendation Letters</td><td>7</td><td style='color: red;'>6</td></tr>
+<tr><td>root.writing.Writing Domains.Literary Writing.Descriptive Writing</td><td>7</td><td style='color: red;'>6</td></tr>
+<tr><td>root.writing.Writing Domains.Literary Writing.Literary Analysis</td><td>7</td><td style='color: red;'>6</td></tr>
+</table>
+<h2>Processing: Qwen2.5-72B-Instruct</h2>
+<h3>Nodes with significantly <span style='color: green;'>better</span> ranking than root:</h3>
+<p>No nodes found with significantly better ranking.</p>
+<h3>Nodes with significantly <span style='color: red;'>worse</span> ranking than root:</h3>
+<table border='1' cellpadding='5' cellspacing='0'>
+<tr><th>Path</th><th>Ranking</th><th>Difference</th></tr>
+<tr><td>root.knowledge.Disciplinary Fields.Technical Engineering.Electrical Engineering.Computer Hardware</td><td>11</td><td style='color: red;'>4</td></tr>
+<tr><td>root.knowledge.Task Types.Auxiliary Support.Citation Support</td><td>11</td><td style='color: red;'>4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Discrete Mathematics</td><td>11</td><td style='color: red;'>4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Discrete Mathematics.Automata Theory</td><td>11</td><td style='color: red;'>4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Information Theory</td><td>11</td><td style='color: red;'>4</td></tr>
+<tr><td>root.reasoning.Task Types.Theory</td><td>11</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Task Types.Simulation.Behavioral Simulation</td><td>11</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Theme Types.Emotional.Erotic</td><td>11</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Theme Types.Fantasy.Animals</td><td>11</td><td style='color: red;'>4</td></tr>
+<tr><td>root.roleplay.Theme Types.Fantasy.Isekai</td><td>11</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Creative Stages.Conceptualization Stage.Brainstorming</td><td>11</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Creative Stages.Writing Stage.Rhetorical Use.Pun</td><td>11</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Styles.Exaggerated</td><td>11</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Styles.Melancholic</td><td>11</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Everyday Writing.Entertainment.Tongue Twisters</td><td>11</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Everyday Writing.Entertainment.Travel</td><td>11</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Everyday Writing.Gaming.Puzzle Solving</td><td>11</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Everyday Writing.Personal Leisure Writing</td><td>11</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Teaching.Lesson Planning</td><td>11</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Literary Writing.Descriptive Writing</td><td>11</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Media Writing.Video Scripts</td><td>11</td><td style='color: red;'>4</td></tr>
+<tr><td>root.knowledge.Disciplinary Fields.Natural Sciences.Mathematics</td><td>12</td><td style='color: red;'>5</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Discrete Mathematics.Game Theory</td><td>12</td><td style='color: red;'>5</td></tr>
+<tr><td>root.reasoning.Reasoning Methods.Logical Reasoning.Symbolic Reasoning</td><td>12</td><td style='color: red;'>5</td></tr>
+<tr><td>root.roleplay.Task Types.Analytical.Political Conspiracy</td><td>12</td><td style='color: red;'>5</td></tr>
+<tr><td>root.roleplay.Theme Types.Comedy.Humorous Comedy</td><td>12</td><td style='color: red;'>5</td></tr>
+<tr><td>root.roleplay.Theme Types.Realistic.Legal</td><td>12</td><td style='color: red;'>5</td></tr>
+<tr><td>root.writing.Writing Domains.Everyday Writing.Emotions</td><td>12</td><td style='color: red;'>5</td></tr>
+<tr><td>root.writing.Writing Domains.Everyday Writing.Gaming.Game Design</td><td>12</td><td style='color: red;'>5</td></tr>
+<tr><td>root.writing.Writing Domains.Everyday Writing.Personal Reflection</td><td>12</td><td style='color: red;'>5</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Meeting Minutes</td><td>12</td><td style='color: red;'>5</td></tr>
+<tr><td>root.writing.Writing Domains.Literary Writing.Fiction.Mystery</td><td>12</td><td style='color: red;'>5</td></tr>
+<tr><td>root.writing.Writing Domains.Literary Writing.Inspirational</td><td>12</td><td style='color: red;'>5</td></tr>
+<tr><td>root.reasoning.Task Types.Argumentation</td><td>13</td><td style='color: red;'>6</td></tr>
+<tr><td>root.roleplay.Task Types.Simulation.Emotional Simulation</td><td>13</td><td style='color: red;'>6</td></tr>
+<tr><td>root.roleplay.Task Types.Simulation.Psychological Simulation</td><td>13</td><td style='color: red;'>6</td></tr>
+<tr><td>root.writing.Writing Domains.Literary Writing.Narrative Writing</td><td>13</td><td style='color: red;'>6</td></tr>
+<tr><td>root.writing.Writing Domains.Literary Writing.Prose</td><td>13</td><td style='color: red;'>6</td></tr>
+<tr><td>root.roleplay.Theme Types.Realistic.School</td><td>14</td><td style='color: red;'>7</td></tr>
+<tr><td>root.roleplay.Style Types.Humorous Style.Vulgar</td><td>15</td><td style='color: red;'>8</td></tr>
+<tr><td>root.writing.Writing Domains.Literary Writing.Fiction.Erotic Fiction</td><td>16</td><td style='color: red;'>9</td></tr>
+</table>
+<h2>Processing: Qwen2.5-7B-Instruct</h2>
+<h3>Nodes with significantly <span style='color: green;'>better</span> ranking than root:</h3>
+<table border='1' cellpadding='5' cellspacing='0'>
+<tr><th>Path</th><th>Ranking</th><th>Difference</th></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Official Document Writing.Professional Application Writing.Immigration Application</td><td>4</td><td style='color: green;'>-9</td></tr>
+<tr><td>root.knowledge.Task Types.Information Processing.Data Visualization</td><td>8</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.roleplay.Style Types.Experimental Style.Abstract Concepts</td><td>8</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Meeting Minutes</td><td>8</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Official Document Writing.Professional Application Writing</td><td>8</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Applied Mathematics.Economics</td><td>9</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Discrete Mathematics.Automata Theory</td><td>9</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Discrete Mathematics.Graph Theory</td><td>9</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.mathematics.Mathematical Subfields.Information Theory</td><td>9</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Task Types.Analytical.Character Analysis</td><td>9</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Task Types.Interactive.Q&A</td><td>9</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Theme Types.Emotional.Erotic</td><td>9</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Theme Types.Fantasy.Isekai</td><td>9</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.writing.Creative Stages.Post-processing Stage.Content Classification</td><td>9</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.writing.Creative Stages.Post-processing Stage.Text Summarization</td><td>9</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.writing.Writing Domains.Literary Writing.Prose</td><td>9</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.writing.Writing Domains.Professional Writing.History</td><td>9</td><td style='color: green;'>-4</td></tr>
+</table>
+<h3>Nodes with significantly <span style='color: red;'>worse</span> ranking than root:</h3>
+<table border='1' cellpadding='5' cellspacing='0'>
+<tr><th>Path</th><th>Ranking</th><th>Difference</th></tr>
+<tr><td>root.writing.Styles.Modernism</td><td>17</td><td style='color: red;'>4</td></tr>
+<tr><td>root.writing.Writing Domains.Creative Writing.Visual Arts</td><td>17</td><td style='color: red;'>4</td></tr>
+</table>
+<h2>Processing: Meta-Llama-3.1-8B-Instruct</h2>
+<h3>Nodes with significantly <span style='color: green;'>better</span> ranking than root:</h3>
+<table border='1' cellpadding='5' cellspacing='0'>
+<tr><th>Path</th><th>Ranking</th><th>Difference</th></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Resume Writing</td><td>7</td><td style='color: green;'>-8</td></tr>
+<tr><td>root.writing.Creative Stages.Optimization Stage.Content Rewriting</td><td>9</td><td style='color: green;'>-6</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Email Writing</td><td>9</td><td style='color: green;'>-6</td></tr>
+<tr><td>root.roleplay.Style Types.Humorous Style.Vulgar</td><td>10</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.roleplay.Task Types.Simulation.Business Decision</td><td>10</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.roleplay.Theme Types.Fantasy.Animals</td><td>10</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.writing.Writing Domains.Everyday Writing.Entertainment.Travel</td><td>10</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Workplace Writing</td><td>10</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.writing.Writing Domains.Literary Writing.Fiction.Erotic Fiction</td><td>10</td><td style='color: green;'>-5</td></tr>
+<tr><td>root.coding.Technical Domains.Game Development.Player Mechanics</td><td>11</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.reasoning.Reasoning Methods.Logical Reasoning.Symbolic Reasoning</td><td>11</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Style Types.Healing Style</td><td>11</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Task Types.Character-Centered</td><td>11</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Task Types.Interactive.Dialogue Type</td><td>11</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Task Types.Interactive.Emotional Interaction</td><td>11</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Task Types.Interactive.Q&A</td><td>11</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Task Types.Simulation.Emotional Simulation</td><td>11</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Theme Types.Comedy.Absurd Comedy</td><td>11</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Theme Types.Comedy.Humorous Comedy</td><td>11</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Theme Types.Comedy.Surreal Comedy</td><td>11</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Theme Types.Emotional.Emotional Support</td><td>11</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Theme Types.Fantasy.Mythology</td><td>11</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Theme Types.Realistic.Family</td><td>11</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.roleplay.Theme Types.Realistic.Real World</td><td>11</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.writing.Creative Stages.Optimization Stage.Text Optimization</td><td>11</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.writing.Creative Stages.Writing Stage.Tag Design</td><td>11</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.writing.Writing Domains.Everyday Writing.Society</td><td>11</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Naming or Branding</td><td>11</td><td style='color: green;'>-4</td></tr>
+<tr><td>root.writing.Writing Domains.Functional Writing.Official Document Writing.Financial Documents</td><td>11</td><td style='color: green;'>-4</td></tr>
+</table>
+<h3>Nodes with significantly <span style='color: red;'>worse</span> ranking than root:</h3>
+<p>No nodes found with significantly lower ranking.</p>
+    <div class='footer'>
+        <p>Automated Weakness Analysis Report</p>
+    </div>
+</body>
+</html>

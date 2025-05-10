@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!-- Meta tags for social media banners -->
+    <meta name="description" content="We propose a new method for weight space learning which trains a Deep Linear Probe Generator to analyze neural networks">
+    <meta property="og:title" content="Feedbacker"/>
+    <meta property="og:description" content="We propose a new method for weight space learning which trains a Deep Linear Probe Generator to analyze neural networks"/>
+    <meta property="og:url" content="https://vision.huji.ac.il/probegen/"/>
+    <meta property="og:image" content="static/image/probegen_banner.png"/>
+    <meta property="og:image:width" content="1200"/>
+    <meta property="og:image:height" content="500"/>
+    <meta name="twitter:title" content="Feedbacker">
+    <meta name="twitter:description" content="We propose a new method for weight space learning which trains a Deep Linear Probe Generator to analyze neural networks">
+    <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="keywords" content="weight space learning, ProbeGen, Probing">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Feedbacker</title>
+    <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+    <link rel="stylesheet" href="static/css/bulma.min.css">
+    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="static/css/index.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+    <script defer src="static/js/fontawesome.all.min.js"></script>
+    <script src="static/js/bulma-carousel.min.js"></script>
+    <script src="static/js/bulma-slider.min.js"></script>
+    <script src="static/js/index.js"></script>
+
+    <!-- Updated Styles to Fix Subtitle Truncation -->
+    <style>
+      /* Set consistent height for carousel images */
+      .results-carousel .item img {
+        height: 350px; /* Set a fixed height */
+        width: auto; /* Allow width to adjust based on aspect ratio */
+        margin: 0 auto; /* Center images horizontally */
+        display: block; /* Ensure images are block elements */
+        object-fit: contain; /* Preserve aspect ratio without cropping */
+        margin-bottom: 5px; /* Reduced spacing between image and caption (was 20px) */
+      }
+      /* Make carousel items the same height */
+      .results-carousel .item {
+        min-height: 450px; /* 替换为 min-height 以允许扩展 */
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+      }
+      /* Style for captions */
+      .results-carousel .item .subtitle {
+        margin-top: 5px; /* Reduced spacing (was 10px) */
+        min-height: 80px; /* 替换为 min-height 以适应长文本 */
+        overflow-y: visible; /* 禁用滚动条，防止截断 */
+        padding: 0 15px;
+        word-break: break-word; /* 允许长单词换行 */
+        white-space: normal; /* 防止空格压缩 */
+      }
+      /* Alternating section backgrounds */
+      .section.is-light {
+        background-color: #f5f5f5;
+      }
+      .section.is-white {
+        background-color: #ffffff;
+      }
+      /* Reduced spacing for content */
+      .content p {
+        margin-bottom: 0.75em; /* Reduced from 1.5em */
+      }
+      /* Reduced section padding */
+      .hero-body {
+        padding: 1.5rem 1.5rem; /* Reduced from 3rem */
+      }
+      .section {
+        padding: 1.5rem 1.5rem; /* Reduced section padding */
+      }
+      /* Reduced spacing for section headings */
+      .section .title {
+        margin-bottom: 0.75rem; /* Reduced from 1.5rem */
+      }
+      /* Add border to separate sections visually */
+      .section {
+        border-top: 1px solid #eee;
+      }
+      /* Reduced spacing between elements */
+      .mt-4 {
+        margin-top: 0.5rem !important; /* Reduced from default */
+      }
+      /* Compact columns */
+      .columns {
+        margin-top: -0.25rem;
+        margin-bottom: -0.25rem;
+      }
+      /* More compact figures */
+      figure {
+        margin: 0.5rem 0;
+      }
+      /* Adjust spacing around subtitles */
+      .subtitle {
+        margin-bottom: 0.5rem;
+      }
+
+      /* Responsive adjustments */
+      @media screen and (max-width: 768px) {
+        .results-carousel .item {
+          min-height: auto;
+        }
+        .results-carousel .item img {
+          height: auto;
+        }
+        .results-carousel .item .subtitle {
+          font-size: 0.9rem;
+          min-height: auto;
+        }
+      }
+    </style>
+</head>
+<body>
+<!-- Header/Title Section -->
+<section class="hero">
+    <div class="hero-body">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered">
+                <div class="column has-text-centered">
+                    <h1 class="title is-1 publication-title">Feedbacker</h1>
+                    <div class="is-size-5 publication-authors">
+                        <!-- Paper authors -->
+                        <span class="author-block">
+                            <a href="https://github.com/liudan193" target="_blank">Zongqi Wang</a>,
+                            Tianle Gu,
+                            Chen Gong,
+                            Xin Tian,
+                            Siqi Bao,
+                            <a href="https://sites.google.com/view/iigroup-thu/home" target="_blank">Yujiu Yang</a>
+                        </span>
+                    </div>
+                    <div class="is-size-5 publication-authors">
+                        <span class="author-block">Tsinghua University,</span>
+                        <span class="author-block">Baidu Inc</span>
+                    </div>
+                    <div class="column has-text-centered">
+                        <div class="publication-links">
+                            <!-- Arxiv PDF link -->
+                            <span class="link-block">
+                                <a href="https://arxiv.org/pdf/xxx.pdf" target="_blank"
+                                   class="external-link button is-normal is-rounded is-dark">
+                                    <span class="icon">
+                                      <i class="fas fa-file-pdf"></i>
+                                    </span>
+                                    <span>Paper</span>
+                                </a>
+                            </span>
+                            <!-- Github link -->
+                            <span class="link-block">
+                                <a href="https://github.com/liudan193/Feedbacker" target="_blank"
+                                   class="external-link button is-normal is-rounded is-dark">
+                                    <span class="icon">
+                                      <i class="fab fa-github"></i>
+                                    </span>
+                                    <span>Code</span>
+                                </a>
+                            </span>
+                            <!-- ArXiv abstract Link -->
+                            <span class="link-block">
+                                <a href="https://arxiv.org/abs/xxx" target="_blank"
+                                   class="external-link button is-normal is-rounded is-dark">
+                                    <span class="icon">
+                                        <i class="ai ai-arxiv"></i>
+                                    </span>
+                                    <span>arXiv</span>
+                                </a>
+                            </span>
+                            <!-- Dataset Link -->
+                            <span class="link-block">
+                                <a href="https://huggingface.co/datasets/DanliuDanliu/Feedbacker" target="_blank"
+                                   class="external-link button is-normal is-rounded is-dark">
+                                    <span class="icon">
+                                        <i class="fas fa-database"></i>
+                                    </span>
+                                    <span>Dataset</span>
+                                </a>
+                            </span>
+                            <!-- Vis Link -->
+                            <span class="link-block">
+                                <a href="./visualization_and_analysis/index.html" target="_blank"
+                                   class="external-link button is-normal is-rounded is-dark">
+                                    <span class="icon">
+                                        <i class="fas fa-chart-line"></i>
+                                    </span>
+                                    <span>Visualization & Analysis</span>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Teaser Image Section (White Background) -->
+<section class="section is-white">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered">
+            <div class="column is-full">
+                <figure class="image">
+                    <img src="static/images/main.png" alt="Illustration of Feedbacker" style="max-width: 90%; height: auto; display: block; margin: 0 auto;"/>
+                </figure>
+                <h2 class="subtitle has-text-centered mt-4">
+                    The framework of Feedbacker. Feedbacker consists of four key components: a tree-structured query taxonomy builder, a query synthesis scheme, a pre-comparison-derived criteria pointwise evaluation method, and a set of visualization and analysis toolkits.
+                </h2>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Abstract Section (Light Background) -->
+<section class="section is-light">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered">
+            <div class="column is-four-fifths">
+                <h2 class="title is-3 has-text-centered">Abstract</h2>
+                <div class="content has-text-justified">
+                    <p>
+                        Recently, numerous automatic evaluation benchmarks have been proposed for LLM alignment. However, from the standpoint of LLM developers, the feedback provided by these benchmarks remains insufficient. This is primarily due to they typically offer only an overall score, failing to enable users and developers to identify the fine-grained strengths and weaknesses of the model. To address this issue, we propose Feedbacker, an efficient, comprehensive and fine-grained evaluation framework. It encompasses three key designs: an extensible tree-structured query taxonomy, an automatic query synthesis scheme to further enhance extensibility and prevent data contamination, and a set of visualization and analysis toolkits to assist in result analysis. In addition, for efficient and accurate evaluation, we introduce PC$^{2}$ pointwise evaluation, which uses pre-comparison-derived criteria for evaluation. Finally, we present evaluation results on 17 mainstream LLMs and demonstrate the effectiveness and potential of Feedbacker.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Taxonomy Introduction Section (White Background) -->
+<section class="section is-white">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered">
+            <div class="column is-full">
+                <div class="content has-text-justified">
+                    <p>
+                        <em><b>Taxonomy and Dataset.</b></em> Existing datasets lack a comprehensive taxonomy as a foundation.
+                        To conduct a comprehensive and fine-grained evaluation, we have designed an automatic taxonomy building method (TaxBuilder) and an automatic query synthesis approach (RealMix).
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Taxonomy Carousel Section (White Background) -->
+<section class="section is-white" style="padding-top: 0;">
+    <div class="container">
+        <div id="dataset-carousel" class="carousel results-carousel">
+            <div class="item">
+                <img src="static/images/taxonomy_and_dataset/taxonomy.png" alt="Tree-structured query taxonomy for comprehensive LLM evaluation"/>
+                <h2 class="subtitle has-text-centered">
+                    <em><b>Feedbacker-T-V0.</b></em> This is our provided tree-structured query taxonomy for comprehensive and fine-grained LLM evaluation.
+                    Only a portion is shown here; for the full taxonomy, please refer to the <a href="./visualization_and_analysis/index.html">Visualization & Analysis</a>.
+                    This taxonomy is constructed using TaxBuilder, and you can also use it to create your own customized taxonomy.
+                </h2>
+            </div>
+            <div class="item">
+                <img src="static/images/taxonomy_and_dataset/data_stat.png" alt="Statistical analysis of the evaluation dataset"/>
+                <h2 class="subtitle has-text-centered">
+                    <em><b>Feedbacker-D-V0.</b></em> This is a statistic of our provided evaluation dataset.
+                    The dataset is generated using RealMix, and it can assist in building your own customized taxonomy.
+                </h2>
+            </div>
+            <div class="item">
+                <img src="static/images/taxonomy_and_dataset/win_rate.png" alt="Win rate comparison across different LLM models"/>
+                <h2 class="subtitle has-text-centered">
+                    <em><b>Comparison of Quality and Realism Between Our Dataset and a Real User Queries Set.</b></em>
+                    The results show that the queries generated by RealMix exhibit higher quality and are closer to real user queries.
+                </h2>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Evaluation Method Section (Light Background) -->
+<section class="section is-light">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered">
+            <div class="column is-full">
+                <div class="content has-text-justified">
+                    <p>
+                        <em><b>Evaluation Method.</b></em> Existing evaluation methods are either inaccurate (pointwise evaluation) or inefficient (pairwise evaluation).
+                        Our evaluation method — pre-comparison-derived criteria based pointwise evaluation — leverages pre-comparisons of multiple LLM responses to derive evaluation criteria, enabling the extraction of more effective evaluation metrics.
+                        Subsequently, it conducts pointwise evaluation based on the extracted criteria.
+                        With this approach, our method achieves higher accuracy than pairwise evaluation while maintaining efficiency comparable to pointwise evaluation.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Evaluation Method Carousel (Light Background) -->
+<section class="section is-light" style="padding-top: 0;">
+    <div class="container">
+        <div id="evaluation-carousel" class="carousel results-carousel">
+            <div class="item">
+                <img src="static/images/evaluation_method/main.png" alt="Comparison of evaluation methods"/>
+                <h2 class="subtitle has-text-centered">
+                    <em><b>Comparison of Different Evaluation Methods.</b></em>
+                    We compared four evaluation methods: pairwise evaluation, pointwise Evaluation, naive criteria decomposition pointwise evaluation, and our method, which uses pre-comparison to generate more effective evaluation criteria.
+                    The results demonstrate that our method offers significant advantages over the others.
+                </h2>
+            </div>
+            <div class="item">
+                <img src="static/images/evaluation_method/com_pairwise.png" alt="Comparison with pairwise evaluation"/>
+                <h2 class="subtitle has-text-centered">
+                    <em><b>Token Cost Comparison.</b></em> We compared the time consumption between pairwise evaluation and our proposed method.
+                    The results show that as the number of models to be evaluated increases, our method exhibits a significant advantage in efficiency.
+                    Therefore, we advocate for the community to include evaluation criteria generated by our method when releasing new benchmarks.
+                </h2>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Leaderboard Section (White Background) -->
+<section class="section is-white">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered">
+            <div class="column is-full">
+                <div class="content">
+                    <h2 class="title is-3 has-text-centered">Leaderboard</h2>
+                    <div class="has-text-justified">
+                        <p>
+                            Below is the comprehensive evaluation results of 17 mainstream LLMs using our Feedbacker framework.
+                            Note that this is a first-level division result. Feedbacker provides very fine-grained results.
+                            Please refer to the <a href="./visualization_and_analysis/index.html">Visualization & Analysis</a> for more details.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Main Results Section (White Background) -->
+<section class="section is-white" style="padding-top: 0;">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered">
+            <div class="column is-full">
+                <figure class="image">
+                    <img src="static/images/results/main.png" alt="Main results of Feedbacker" style="max-width: 100%; height: auto; display: block; margin: 0 auto;"/>
+                </figure>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- BibTeX Section (Light Background) -->
+<section class="section is-light" id="BibTeX">
+    <div class="container is-max-desktop content">
+        <h2 class="title is-3 has-text-centered">BibTeX</h2>
+        <pre><code>@misc{123,
+      title={Feedbacker},
+      author={xxx and xxx and xxx and xxx},
+      year={2025},
+      eprint={2025.xx},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2025.xx},
+}</code></pre>
+    </div>
+</section>
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="columns is-centered">
+            <div class="column is-8">
+                <div class="content">
+                    <p>
+                        This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+                        You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+                        Commons Attribution-ShareAlike 4.0 International License</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

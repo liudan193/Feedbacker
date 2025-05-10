@@ -1,0 +1,193 @@
+<!-- Model Selector Module -->
+<div class="model-selector-container">
+    <div class="model-selector-header">
+        <div class="model-selector-title">Select models to compare:</div>
+        <input type="text" class="search-box" id="modelSearch" placeholder="Search models...">
+    </div>
+    <div class="model-grid" id="modelGrid">
+        <!-- Model items will be dynamically generated here -->
+    </div>
+</div>
+
+<div id="loading" class="loading">Loading JSON data...</div>
+<div id="error" class="error hidden"></div>
+<div id="viewer" class="hidden">
+    <div class="trees-container-wrapper">
+        <div id="treesContainer" class="trees-container"></div>
+    </div>
+</div>
+
+<style>
+    /* Model Selector Module */
+    .model-selector-container {
+        width: 80%;
+        margin: 0 auto 30px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        padding: 20px;
+        border: 1px solid #ddd;
+    }
+    .model-selector-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+    .model-selector-title {
+        font-size: 16px;
+        color: #555;
+        margin-right: 15px;
+        white-space: nowrap;
+    }
+    .search-box {
+        flex: 0 1 300px;
+        padding: 8px 12px;
+        border: 1px solid #dfe1e5;
+        border-radius: 6px;
+        font-size: 14px;
+    }
+    .model-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        max-height: 200px;
+        overflow-y: auto;
+        padding-right: 5px;
+        justify-content: center;
+    }
+    .model-item {
+        background-color: #f8f9fa;
+        border: 1px solid #dfe1e5;
+        border-radius: 6px;
+        padding: 10px 15px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-align: center;
+        font-size: 14px;
+        position: relative;
+        white-space: nowrap;
+        user-select: none;
+        display: inline-flex;
+        width: fit-content;
+        justify-content: center;
+        align-items: center;
+    }
+    .model-item:hover {
+        background-color: #f0f4f8;
+        transform: translateY(-2px);
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .model-item.selected {
+        background-color: #4285f4;
+        color: white;
+        border-color: #3367d6;
+    }
+    
+    /* Tree Display */
+    .trees-container-wrapper {
+        width: 90%;
+        margin: 0 auto;
+        overflow-x: auto;
+        padding-bottom: 10px;
+    }
+    .trees-container { 
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 20px;
+        padding: 10px 0;
+        min-width: min-content;
+        justify-content: center;
+    }
+    .tree-wrapper { 
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        min-width: 320px;
+        max-width: 500px;
+        flex: 0 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+    }
+    .tree-header {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+    .tree-wrapper h2 {
+        margin: 0;
+        flex-grow: 1;
+        text-align: center;
+    }
+    .remove-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background-color: #f8f9fa;
+        border: 1px solid #dfe1e5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-weight: bold;
+        transition: all 0.2s ease;
+        z-index: 10;
+    }
+    .remove-btn:hover {
+        background-color: #f44336;
+        color: white;
+        border-color: #d32f2f;
+    }
+    .tree-container { 
+        overflow: auto;
+        max-height: 600px;
+        width: 100%;
+        scrollbar-width: thin;
+    }
+    .tree-container::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+    .tree-container::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 4px;
+    }
+    .tree-container::-webkit-scrollbar-thumb {
+        background: #c1c1c1;
+        border-radius: 4px;
+    }
+    .tree-container::-webkit-scrollbar-thumb:hover {
+        background: #a8a8a8;
+    }
+    .block-tree { position: relative; }
+    .node { position: relative; margin: 15px 0; text-align: center; }
+    .node-block { display: flex; justify-content: space-between; align-items: center; background-color: #f8f9fa; border: 2px solid #dfe1e5; border-radius: 8px; padding: 12px 20px; cursor: pointer; user-select: none; transition: all 0.2s ease; box-shadow: 0 1px 3px rgba(0,0,0,0.1); text-align: center; }
+    .node-block:hover { background-color: #f0f4f8; box-shadow: 0 3px 6px rgba(0,0,0,0.15); transform: translateY(-2px); }
+    .node-children { position: relative; margin-left: 50px; padding-left: 20px; border-left: 2px solid #dfe1e5; display: none; }
+    .node-children:before { content: ""; position: absolute; left: 0; top: 0; width: 20px; height: 2px; background-color: #dfe1e5; }
+    .node-block.expanded + .node-children { display: block; animation: fadeIn 0.3s ease; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .root-node > .node-block { background-color: #4285f4; color: white; border-color: #3367d6; }
+    .root-node > .node-block .toggle-btn { background-color: rgba(255,255,255,0.2); color: white; }
+    .depth-1 > .node-block { background-color: #f8f9fa; border-color: #dfe1e5; color: #333; }
+    .depth-2 > .node-block { background-color: #e8f0fe; border-color: #c6dafc; }
+    .depth-3 > .node-block { background-color: #e6f4ea; border-color: #ceead6; }
+    .depth-4 > .node-block { background-color: #fef7e0; border-color: #feefc3; }
+    .depth-5 > .node-block { background-color: #fce8e6; border-color: #f6d2cf; }
+    .leaf-node > .node-block { border-style: dashed; background-color: #fafafa; }
+    .node-left { flex: 1; text-align: center; }
+    .node-name, .node-size, .node-score { margin: 0; }
+    .node-name { font-weight: bold; }
+    .node-right { display: flex; align-items: center; gap: 8px; text-align: center; }
+    .node-info { display: flex; flex-direction: column; text-align: center; }
+    .node-size, .node-score { font-size: 12px; line-height: 1.2; }
+    .toggle-btn { width: 20px; height: 20px; line-height: 20px; text-align: center; border-radius: 50%; background-color: rgba(0,0,0,0.05); color: inherit; font-weight: bold; cursor: pointer; user-select: none; }
+</style>

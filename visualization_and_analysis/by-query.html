@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Query-Based Model Comparison</title>
+    <!-- Import shared.js first -->
+    <script src="shared.js"></script>
+</head>
+<body>
+    <!-- Query Selector Module -->
+    <div class="query-selection-container">
+        <div class="query-selection-header">
+            <div class="query-selection-title">Select query categories to compare:</div>
+            <input type="text" class="search-box" id="querySearch" placeholder="Search categories...">
+        </div>
+        <div id="queryTreeContainer" class="query-tree-container">
+            <!-- Query tree will be dynamically generated here -->
+            <div class="loading" id="treeLoading">Loading category tree...</div>
+        </div>
+    </div>
+
+    <div id="queryError" class="error hidden"></div>
+    <div id="rankingContainer" class="ranking-container">
+        <!-- Ranking tables will be displayed here -->
+        <div class="placeholder" id="selectionPlaceholder">
+            Select categories from the tree to see model rankings
+        </div>
+    </div>
+
+    <script>
+        let categoryTree = {};
+        let querySelectedCategories = [];
+        // queryModelData is now defined in shared.js
+
+        function initializeQueryView() {
+            loadCategoryTree();
+            setupQuerySearch();
+        }
+
+        function setupQuerySearch() {
+            const searchBox = document.getElementById('querySearch');
+            if (searchBox) {
+                searchBox.addEventListener('input', () => {
+                    const searchTerm = searchBox.value.toLowerCase();
+                    filterCategoryTree(searchTerm);
+                });
+            }
+        }
+
+        async function loadCategoryTree() {
+            try {
+                // Load the category tree
+                const response = await fetch('cata_tree.json');
+                categoryTree = await response.json();
+
+                // Load model data using the function from shared.js
+                await loadAllQueryModelData();
+
+                // Render the tree
+                const treeContainer = document.getElementById('queryTreeContainer');
+                if (treeContainer) {
+                    const loadingElement = document.getElementById('treeLoading');
+                    if (loadingElement) {
+                        treeContainer.removeChild(loadingElement);
+                    }
+                    const tree = renderCategoryTree(categoryTree, treeContainer);
+                    treeContainer.appendChild(tree);
+                }
+            } catch (error) {
+                const errorElement = document.getElementById('queryError');
+                if (errorElement) {
+                    errorElement.classList.remove('hidden');
+                    errorElement.textContent = `Error loading category tree: ${error.message}`;
+                }
+                console.error("Error loading category tree:", error);
+            }
+        }
+
+        function renderCategoryTree(tree, container, path = []) {
+            const ul = document.createElement('ul');
+            ul.className = 'category-tree';
+
+            // Make first level visible
+            if (path.length === 0) {
+                ul.classList.add('expanded');
+            }
+
+            Object.keys(tree).forEach(key => {
+                if (key === 'ques_ids' || key === 'data_size' || key === 'score' || key === 'ranking') {
+                    return; // Skip these keys
+                }
+
+                const li = document.createElement('li');
+                li.className = 'category-item';
+
+                const currentPath = [...path, key];
+                const pathString = currentPath.join('.');
+
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'category-label';
+
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.id = `category-${pathString}`;
+                checkbox.dataset.path = pathString;
+                checkbox.addEventListener('change', (e) => {
+                    if (e.target.checked) {
+                        querySelectedCategories.push({
+                            path: currentPath,
+                            pathString: pathString,
+                            name: key
+                        });
+                    } else {
+                        querySelectedCategories = querySelectedCategories.filter(cat => cat.pathString !== pathString);
+                    }
+                    updateRankingDisplay();
+                });
+
+                const label = document.createElement('label');
+                label.htmlFor = `category-${pathString}`;
+                label.textContent = key;
+
+                // Check if this is a parent node with children
+                const hasChildren = Object.keys(tree[key]).some(k =>
+                    k !== 'ques_ids' && k !== 'data_size' && k !== 'score' && k !== 'ranking'
+                );
+
+                if (hasChildren) {
+                    const toggleBtn = document.createElement('span');
+                    toggleBtn.className = 'toggle-btn';
+                    toggleBtn.textContent = '+';
+                    toggleBtn.addEventListener('click', () => {
+                        const childUl = li.querySelector('ul');
+                        if (childUl) {
+                            const isExpanded = childUl.classList.contains('expanded');
+                            childUl.classList.toggle('expanded');
+                            toggleBtn.textContent = isExpanded ? '+' : '-';
+                        }
+                    });
+
+                    itemDiv.appendChild(toggleBtn);
+                }
+
+                itemDiv.appendChild(checkbox);
+                itemDiv.appendChild(label);
+                li.appendChild(itemDiv);
+
+                // Add children recursively
+                if (hasChildren) {
+                    const childContainer = renderCategoryTree(tree[key], container, currentPath);
+                    li.appendChild(childContainer);
+                }
+
+                ul.appendChild(li);
+            });
+
+            return ul;
+        }
+
+        function updateRankingDisplay() {
+            const container = document.getElementById('rankingContainer');
+            const placeholder = document.getElementById('selectionPlaceholder');
+
+            if (!container) return;
+
+            if (querySelectedCategories.length === 0) {
+                container.innerHTML = '';
+                if (placeholder) {
+                    container.appendChild(placeholder);
+                }
+                return;
+            }
+
+            container.innerHTML = '';
+
+            querySelectedCategories.forEach(category => {
+                const columnDiv = document.createElement('div');
+                columnDiv.className = 'ranking-column';
+
+                const header = document.createElement('div');
+                header.className = 'ranking-header';
+
+                const title = document.createElement('h3');
+                title.textContent = category.pathString;
+
+                const removeBtn = document.createElement('button');
+                removeBtn.className = 'remove-btn';
+                removeBtn.textContent = '×';
+                removeBtn.title = 'Remove this category';
+                removeBtn.addEventListener('click', () => {
+                    // Uncheck the checkbox
+                    const checkbox = document.getElementById(`category-${category.pathString}`);
+                    if (checkbox) checkbox.checked = false;
+
+                    // Remove from selected categories
+                    querySelectedCategories = querySelectedCategories.filter(cat => cat.pathString !== category.pathString);
+                    updateRankingDisplay();
+                });
+
+                header.appendChild(title);
+                header.appendChild(removeBtn);
+                columnDiv.appendChild(header);
+
+                // Get rankings for this category
+                const rankingTable = createRankingTable(category);
+                columnDiv.appendChild(rankingTable);
+
+                container.appendChild(columnDiv);
+            });
+        }
+
+        function createRankingTable(category) {
+            const table = document.createElement('table');
+            table.className = 'ranking-table';
+
+            const thead = document.createElement('thead');
+            const headerRow = document.createElement('tr');
+
+            const rankHeader = document.createElement('th');
+            rankHeader.textContent = 'Rank';
+
+            const modelHeader = document.createElement('th');
+            modelHeader.textContent = 'Model';
+
+            const scoreHeader = document.createElement('th');
+            scoreHeader.textContent = 'Score';
+
+            headerRow.appendChild(rankHeader);
+            headerRow.appendChild(modelHeader);
+            headerRow.appendChild(scoreHeader);
+            thead.appendChild(headerRow);
+            table.appendChild(thead);
+
+            const tbody = document.createElement('tbody');
+
+            // Get all models with their scores and rankings for this category
+            const modelRankings = [];
+
+            Object.keys(queryModelData).forEach(modelName => {
+                let currentNode = queryModelData[modelName];
+                let found = true;
+
+                // Navigate through the path to find the category
+                for (const pathItem of category.path) {
+                    if (currentNode && currentNode[pathItem]) {
+                        currentNode = currentNode[pathItem];
+                    } else {
+                        found = false;
+                        break;
+                    }
+                }
+
+                if (found && currentNode && typeof currentNode.ranking === 'number' && typeof currentNode.score === 'number') {
+                    modelRankings.push({
+                        name: modelName,
+                        ranking: currentNode.ranking,
+                        score: currentNode.score
+                    });
+                }
+            });
+
+            // Sort by ranking
+            modelRankings.sort((a, b) => a.ranking - b.ranking);
+
+            // Create rows
+            modelRankings.forEach((model, index) => {
+                const row = document.createElement('tr');
+
+                const rankCell = document.createElement('td');
+                rankCell.textContent = model.ranking;
+
+                const modelCell = document.createElement('td');
+                modelCell.textContent = model.name;
+
+                const scoreCell = document.createElement('td');
+                scoreCell.textContent = model.score.toFixed(2);
+
+                row.appendChild(rankCell);
+                row.appendChild(modelCell);
+                row.appendChild(scoreCell);
+
+                // Highlight top 3
+                if (index < 3) {
+                    row.classList.add('top-rank');
+                    row.classList.add(`rank-${index + 1}`);
+                }
+
+                tbody.appendChild(row);
+            });
+
+            table.appendChild(tbody);
+            return table;
+        }
+
+        function filterCategoryTree(searchTerm) {
+            const allItems = document.querySelectorAll('.category-item');
+
+            if (!searchTerm) {
+                // Show all items if search term is empty
+                allItems.forEach(item => {
+                    item.style.display = '';
+                });
+                return;
+            }
+
+            allItems.forEach(item => {
+                const label = item.querySelector('label');
+                if (label && label.textContent.toLowerCase().includes(searchTerm)) {
+                    // Show this item and all its parents
+                    item.style.display = '';
+                    let parent = item.parentElement;
+                    while (parent && !parent.classList.contains('query-tree-container')) {
+                        if (parent.classList.contains('category-tree')) {
+                            parent.classList.add('expanded');
+                        }
+                        if (parent.classList.contains('category-item')) {
+                            parent.style.display = '';
+                        }
+                        parent = parent.parentElement;
+                    }
+                } else {
+                    // Check if any children match
+                    const childMatches = Array.from(item.querySelectorAll('label')).some(
+                        childLabel => childLabel.textContent.toLowerCase().includes(searchTerm)
+                    );
+
+                    if (childMatches) {
+                        item.style.display = '';
+                        // Expand this item to show matching children
+                        const childUl = item.querySelector('ul');
+                        if (childUl) {
+                            childUl.classList.add('expanded');
+                        }
+                    } else {
+                        item.style.display = 'none';
+                    }
+                }
+            });
+        }
+
+        // Initialize the view when the document is loaded
+        document.addEventListener('DOMContentLoaded', initializeQueryView);
+    </script>
+
+    <style>
+        /* Query Selection Module */
+        .query-selection-container {
+            width: 360px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            padding: 20px;
+            border: 1px solid #ddd;
+            margin: 0 auto;
+            margin-right: 50px;
+            float: left;
+            height: 600px;
+            overflow: auto;
+            margin-left: 5%;
+        }
+
+        .query-selection-header {
+            margin-bottom: 15px;
+        }
+
+        .query-selection-title {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .query-tree-container {
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        /* Category Tree */
+        .category-tree {
+            list-style-type: none;
+            padding-left: 20px;
+            margin: 0;
+            display: none;
+        }
+
+        .category-tree.expanded {
+            display: block;
+        }
+
+        /* First level tree is always visible */
+        .query-tree-container > .category-tree {
+            display: block;
+            padding-left: 0;
+        }
+
+        .category-item {
+            margin: 5px 0;
+        }
+
+        .category-label {
+            display: flex;
+            align-items: center;
+            padding: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .category-label:hover {
+            background-color: #f0f4f8;
+        }
+
+        .toggle-btn {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            line-height: 16px;
+            text-align: center;
+            margin-right: 5px;
+            background-color: #f0f4f8;
+            border-radius: 3px;
+            cursor: pointer;
+            user-select: none;
+            font-size: 12px;
+        }
+
+        /* Ranking Display */
+        .ranking-container {
+            /* margin-left: 340px; */
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 0px 0;
+            /* max-width: calc(85% - 340px); */
+            margin-right: 5%;
+        }
+
+        .placeholder {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 300px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            color: #777;
+            font-style: italic;
+        }
+
+        .ranking-column {
+            min-width: 250px;
+            max-width: 300px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            padding: 15px;
+            border: 1px solid #ddd;
+            position: relative;
+        }
+
+        .ranking-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .ranking-header h3 {
+            margin: 0;
+            font-size: 16px;
+            flex-grow: 1;
+            text-align: center;
+            word-break: break-word;
+        }
+
+        .ranking-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .ranking-table th, .ranking-table td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .ranking-table th {
+            background-color: #f8f9fa;
+            position: sticky;
+            top: 0;
+        }
+
+        .ranking-table tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .top-rank {
+            font-weight: bold;
+        }
+
+        .rank-1 {
+            background-color: rgba(255, 215, 0, 0.1);
+        }
+
+        .rank-2 {
+            background-color: rgba(192, 192, 192, 0.1);
+        }
+
+        .rank-3 {
+            background-color: rgba(205, 127, 50, 0.1);
+        }
+
+        /* Remove button */
+        .remove-btn {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: #f8f9fa;
+            border: 1px solid #dfe1e5;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s ease;
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 10;
+            font-size: 14px;
+            padding: 0;
+        }
+
+        .remove-btn:hover {
+            background-color: #f44336;
+            color: white;
+            border-color: #d32f2f;
+        }
+
+        .error {
+            background-color: #ffebee;
+            color: #c62828;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        .loading {
+            text-align: center;
+            color: #777;
+            padding: 20px;
+            font-style: italic;
+        }
+    </style>
+</body>
+</html>

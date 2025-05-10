@@ -1,0 +1,802 @@
+{
+    "writing": {
+        "Creative Stages": {
+            "Conceptualization Stage": {
+                "Research": {},
+                "Brainstorming": {},
+                "Outline Construction": {},
+                "Character Development": {},
+                "World Building": {},
+                "Literature Review": {},
+                "Scenario Analysis": {},
+                "Material Collection": {},
+                "Creative Exploration": {},
+                "Content Conceptualization": {},
+                "Terminology Analysis": {},
+                "Problem Solving": {}
+            },
+            "Writing Stage": {
+                "Dialogue-related": {},
+                "Concept Analysis": {},
+                "Data Processing": {},
+                "Draft Writing": {},
+                "Case Study": {},
+                "Citation Integration": {},
+                "Example Generation": {},
+                "Prompt Development": {},
+                "Analogical Creation": {},
+                "Title Design": {},
+                "Tag Design": {},
+                "Argument Construction": {},
+                "Rhetorical Use": {
+                    "Pun": {},
+                    "Metaphor": {},
+                    "Simile": {},
+                    "Parallelism": {}
+                }
+            },
+            "Optimization Stage": {
+                "Unit Conversion": {},
+                "Content Rewriting": {},
+                "Multilingual and Translation": {},
+                "Fact-checking": {},
+                "Proofreading": {},
+                "Localization": {},
+                "Vocabulary Optimization": {},
+                "Grammar Check": {},
+                "Text Optimization": {}
+            },
+            "Post-processing Stage": {
+                "Text Summarization": {},
+                "Text Analysis": {},
+                "Bias Analysis": {},
+                "Text Interpretation": {},
+                "Entity Extraction": {},
+                "Content Classification": {},
+                "Evaluation and Feedback": {}
+            }
+        },
+        "Writing Domains": {
+            "Professional Writing": {
+                "Linguistics": {},
+                "Academic": {},
+                "History": {},
+                "Music": {
+                    "Songwriting": {},
+                    "Music-related Analysis": {},
+                    "Music-related Reviews": {}
+                },
+                "Art": {},
+                "Technology": {},
+                "Medicine": {},
+                "Psychology": {},
+                "Education": {},
+                "Business": {},
+                "Reports": {},
+                "Culture": {},
+                "Law": {},
+                "Finance": {},
+                "Natural Sciences": {},
+                "Sports": {},
+                "Politics": {},
+                "Design Writing": {}
+            },
+            "Everyday Writing": {
+                "Entertainment": {
+                    "Horoscopes": {},
+                    "Tongue Twisters": {},
+                    "Jokes": {},
+                    "Travel": {}
+                },
+                "Gaming": {
+                    "Video Games": {},
+                    "Puzzle Solving": {},
+                    "Game Design": {},
+                    "Game Localization": {}
+                },
+                "Society": {},
+                "Shopping": {},
+                "Food": {},
+                "Sports": {},
+                "Health": {},
+                "Family": {},
+                "Pets": {},
+                "Teaching": {},
+                "Interpersonal Communication": {},
+                "Emotions": {},
+                "Exams": {},
+                "Idiomatic Expressions": {},
+                "Personal Leisure Writing": {},
+                "Personal Reflection": {}
+            },
+            "Literary Writing": {
+                "Philosophy": {},
+                "Literature": {},
+                "Inspirational": {},
+                "Descriptive Writing": {},
+                "Literary Studies": {},
+                "Scriptwriting": {},
+                "Drama": {},
+                "Prose": {},
+                "Poetry": {},
+                "Fiction": {
+                    "Erotic Fiction": {},
+                    "Synopsis Creation": {},
+                    "Story Creation": {},
+                    "Fantasy": {},
+                    "Mystery": {},
+                    "Fan Fiction": {},
+                    "Adventure Writing": {},
+                    "Historical Fiction": {}
+                },
+                "Proverbial Expressions": {},
+                "Parody Creation": {},
+                "Biography Writing": {},
+                "Quotation Creation": {},
+                "Literary Analysis": {},
+                "Narrative Writing": {}
+            },
+            "Functional Writing": {
+                "Teaching": {
+                    "Vocabulary Practice": {},
+                    "Lesson Planning": {},
+                    "Grammar": {},
+                    "Language Learning": {},
+                    "Tutorial Creation": {}
+                },
+                "Official Document Writing": {
+                    "Professional Application Writing": {
+                        "Scholarship": {},
+                        "Immigration Application": {},
+                        "Proposal Writing": {}
+                    },
+                    "Financial Documents": {},
+                    "Email": {},
+                    "Complaint Letter Writing": {},
+                    "Contract/Agreement Drafting": {}
+                },
+                "Speech Writing": {},
+                "User Manuals": {},
+                "Project Planning": {},
+                "Resume Writing": {},
+                "Meeting Minutes": {},
+                "Argumentative Writing": {},
+                "Recommendation Letters": {},
+                "Formal Communication": {},
+                "Instructional Descriptive Writing": {},
+                "Email Writing": {},
+                "Greeting Card Writing": {},
+                "Structured Response Writing": {},
+                "Project Documentation": {},
+                "Report Writing": {},
+                "Informative Writing": {},
+                "Naming or Branding": {},
+                "Note Writing": {},
+                "Professional Planning": {},
+                "Workplace Writing": {}
+            },
+            "Media Writing": {
+                "Review Writing": {},
+                "Blog Posts": {},
+                "Advertising and Marketing": {},
+                "Web Content": {},
+                "Copywriting": {},
+                "News Reporting": {},
+                "Social Media": {},
+                "Video Scripts": {}
+            },
+            "Creative Writing": {
+                "Humorous Writing": {},
+                "Scenario Writing": {},
+                "Symbolic Story Creation": {},
+                "Creative Fragment Writing": {},
+                "Experimental Writing": {},
+                "Visual Arts": {},
+                "Fan Creation": {}
+            }
+        },
+        "Styles": {
+            "Classicism": {},
+            "Romanticism": {},
+            "Realism": {},
+            "Modernism": {},
+            "Postmodernism": {},
+            "Humorous": {},
+            "Satirical": {},
+            "Tragic": {},
+            "Comedic": {},
+            "Concise": {},
+            "Rigorous": {},
+            "Formal": {},
+            "Serious": {},
+            "Light-hearted": {},
+            "Natural": {},
+            "Exaggerated": {},
+            "Plain": {},
+            "Melancholic": {},
+            "Detailed Descriptive": {},
+            "Reddit Style": {},
+            "Steampunk": {}
+        }
+    },
+    "roleplay": {
+        "Theme Types": {
+            "Cultural": {},
+            "Fantasy": {
+                "Medieval": {},
+                "Fantasy": {},
+                "Cosmic": {},
+                "Horror": {},
+                "Gothic": {},
+                "Isekai": {},
+                "Time Travel": {},
+                "Animals": {},
+                "Mythology": {},
+                "Magic": {},
+                "Supernatural": {}
+            },
+            "Realistic": {
+                "Urban": {},
+                "Life": {},
+                "School": {},
+                "History": {},
+                "Business": {},
+                "Military": {},
+                "Legal": {},
+                "Family": {},
+                "Relationships": {},
+                "Work": {},
+                "Sports": {},
+                "Cooking": {},
+                "Maritime": {},
+                "Technology": {},
+                "Art": {},
+                "Music": {},
+                "Nature": {},
+                "Modern": {},
+                "Real World": {}
+            },
+            "Emotional": {
+                "Emotional Support": {},
+                "Sensitive": {},
+                "Romantic": {},
+                "Erotic": {}
+            },
+            "Action-Adventure": {
+                "Spy": {},
+                "War": {},
+                "Crime": {},
+                "Military": {},
+                "Travel": {},
+                "Survival": {},
+                "Exploration": {}
+            },
+            "Comedy": {
+                "Light Comedy": {},
+                "Absurd Comedy": {},
+                "Dark Comedy": {},
+                "Surreal Comedy": {},
+                "Humorous Comedy": {}
+            },
+            "Horror": {
+                "Psychological Thriller": {},
+                "Crime": {},
+                "Supernatural Horror": {}
+            },
+            "Thought": {
+                "Philosophy": {},
+                "Religion": {},
+                "Politics": {}
+            },
+            "Safety": {},
+            "Fictional Script": {},
+            "Sensory Simulation": {}
+        },
+        "Task Types": {
+            "Creative": {
+                "Scriptwriting": {},
+                "Description": {},
+                "Worldbuilding": {},
+                "Character Design": {}
+            },
+            "Simulation": {
+                "Military Simulation": {},
+                "Life Scenario": {},
+                "Gameplay": {},
+                "Creative Simulation": {},
+                "Social Simulation": {},
+                "Business Decision": {},
+                "Realistic Adventure": {},
+                "Behavioral Simulation": {},
+                "Task Simulation": {},
+                "Functional Simulation": {},
+                "Emotional Simulation": {},
+                "Psychological Simulation": {}
+            },
+            "Educational": {
+                "Language Learning": {},
+                "Skill Training": {},
+                "Concept Explanation": {},
+                "Ethical Discussion": {},
+                "Academic Guidance": {},
+                "General Advice": {},
+                "Trivia": {}
+            },
+            "Interactive": {
+                "Character Interaction": {},
+                "Scenario Interaction": {},
+                "Dialogue Type": {},
+                "Emotional Interaction": {},
+                "Realistic Interaction": {},
+                "Interactive Text Game": {},
+                "Q&A": {},
+                "Multiplayer": {},
+                "Social Interaction": {}
+            },
+            "Analytical": {
+                "Character Analysis": {},
+                "Analytical Methods": {},
+                "Culture": {},
+                "Social and Political Issues": {},
+                "Political Conspiracy": {},
+                "Historical Events": {},
+                "Social Issues": {},
+                "Evaluation and Feedback": {},
+                "Interpretation and Symbolic Analysis": {},
+                "Scenario Analysis": {},
+                "Decision Support": {},
+                "Cross-Analysis": {},
+                "Comparative Analysis": {},
+                "Character Development": {}
+            },
+            "Character-Centered": {}
+        },
+        "Style Types": {
+            "Humorous Style": {
+                "Vulgar": {},
+                "Satirical": {},
+                "Sitcom": {},
+                "Light Humor": {}
+            },
+            "Serious Style": {
+                "Thriller": {},
+                "Realism": {},
+                "Historical Drama": {},
+                "Professional Guidance": {}
+            },
+            "Dark Style": {
+                "Psychological Oppression": {},
+                "Apocalyptic": {},
+                "Gothic": {}
+            },
+            "Experimental Style": {
+                "Freeform": {},
+                "Formal": {},
+                "Glitch Art": {},
+                "Abstract Concepts": {},
+                "Cross-Media": {},
+                "Eccentric": {}
+            },
+            "Healing Style": {},
+            "Narrative": {},
+            "Relaxed": {}
+        }
+    },
+    "knowledge": {
+        "Disciplinary Fields": {
+            "Natural Sciences": {
+                "Physics": {
+                    "Thermodynamics": {},
+                    "Astrophysics": {},
+                    "Nuclear Physics": {},
+                    "Aerodynamics": {},
+                    "Ballistics": {}
+                },
+                "Biology": {
+                    "Ecology": {},
+                    "Zoology": {},
+                    "Botany": {},
+                    "Microbiology": {},
+                    "Physiology": {}
+                },
+                "Chemistry": {},
+                "Mathematics": {},
+                "Earth Sciences": {},
+                "Astronomy": {},
+                "Environmental Science": {}
+            },
+            "Technical Engineering": {
+                "Bioengineering": {},
+                "Energy": {},
+                "Computer Science": {
+                    "Cybersecurity": {},
+                    "Robotics": {},
+                    "Computer Systems": {},
+                    "Cloud Computing": {},
+                    "Computer Software": {},
+                    "Artificial Intelligence": {},
+                    "Data Science": {},
+                    "Human-Computer Interaction": {}
+                },
+                "Electrical Engineering": {
+                    "Audio Technology": {},
+                    "Telecommunications": {},
+                    "Computer Hardware": {},
+                    "Communications": {},
+                    "Electronics": {}
+                },
+                "Mechanical Engineering": {},
+                "Aerospace Engineering": {}
+            },
+            "Humanities and Social Sciences": {
+                "Social Sciences": {},
+                "Philosophy": {},
+                "History": {},
+                "Linguistics": {},
+                "Religious Studies": {},
+                "Military": {},
+                "Current Affairs": {},
+                "Politics": {},
+                "Culture": {}
+            },
+            "Applied Sciences": {
+                "Business Technology": {},
+                "Social Services": {},
+                "Architecture": {},
+                "Education": {},
+                "Transportation and Travel": {},
+                "Medicine": {},
+                "Food Science": {},
+                "Health Sciences": {},
+                "Sports": {},
+                "Real Estate": {}
+            },
+            "Arts and Culture": {
+                "Culinary Arts": {},
+                "Entertainment": {},
+                "Media": {},
+                "Design": {},
+                "Music": {},
+                "Fine Arts": {},
+                "Literature": {
+                    "Novels": {},
+                    "Essays": {},
+                    "Poetry": {}
+                },
+                "Performing Arts": {},
+                "Crafts": {}
+            }
+        },
+        "Cognitive Levels": {
+            "Basic Cognition": {
+                "Fact Recall": {},
+                "Conceptual Understanding": {}
+            },
+            "Applied Analysis": {},
+            "Synthesis and Evaluation": {
+                "Ethical Reasoning": {},
+                "Argumentation": {},
+                "Hypotheses": {},
+                "Social Awareness Expression": {},
+                "Risk Assessment": {}
+            }
+        },
+        "Task Types": {
+            "Information Processing": {
+                "Chart Interpretation": {},
+                "Data Visualization": {},
+                "Text Processing": {},
+                "Data Analysis": {}
+            },
+            "Content Production": {
+                "Content Generation": {},
+                "Proof Writing": {},
+                "Example Demonstration": {},
+                "Advice Provision": {}
+            },
+            "Practical Application": {
+                "Scenario Analysis": {},
+                "Practice Exercises": {},
+                "Real-world": {},
+                "Applied Skills Training": {}
+            },
+            "Auxiliary Support": {
+                "Citation Support": {},
+                "Simplified Explanation": {},
+                "Operational Guidance": {}
+            }
+        }
+    },
+    "coding": {
+        "Task Types": {
+            "Development and Maintenance": {
+                "Code Editing": {},
+                "Code Conversion": {},
+                "Code Analysis": {},
+                "Code Generation": {},
+                "Code Explanation": {},
+                "Comment Generation": {},
+                "Code Execution": {}
+            },
+            "Debugging and Optimization": {
+                "Performance": {},
+                "Error Handling": {},
+                "Bug Fixing": {},
+                "Logic Verification": {},
+                "Testing": {},
+                "Optimization": {}
+            },
+            "Data Processing": {
+                "Database": {},
+                "Data Manipulation": {},
+                "Data Analysis": {},
+                "Data Visualization": {},
+                "File Processing": {},
+                "Image Processing": {}
+            },
+            "Tool Usage": {
+                "Platform Comparison": {},
+                "Terminal Interaction": {},
+                "Environment Configuration": {},
+                "IDE Configuration": {},
+                "Automated Workflow": {},
+                "Version Control": {},
+                "Test Development": {},
+                "Automation": {}
+            },
+            "Auxiliary Functions": {
+                "Regular Expression Parsing": {},
+                "String Manipulation": {},
+                "Fact Recall": {},
+                "Learning Resources": {},
+                "Conceptual Q&A": {},
+                "Document Recommendation": {},
+                "Self-Assessment": {}
+            }
+        },
+        "Technical Domains": {
+            "Data Structures and Algorithms": {},
+            "Web Development": {},
+            "Front-end Development": {
+                "DOM Manipulation": {},
+                "Animation": {},
+                "UI/UX Design": {},
+                "Webpage Development": {},
+                "Responsive Design": {}
+            },
+            "Back-end Development": {
+                "API Development": {},
+                "Microservices": {},
+                "Database Integration": {},
+                "Concurrent Programming": {}
+            },
+            "Data Science": {
+                "Big Data": {},
+                "Data Analysis Methods": {},
+                "Model Creation": {},
+                "Data Visualization Tools": {}
+            },
+            "Systems Programming": {
+                "Cryptographic Programming": {},
+                "Thread Concurrency": {},
+                "Hardware Development": {},
+                "Memory Management": {}
+            },
+            "Game Development": {
+                "Game Logic": {},
+                "Player Mechanics": {},
+                "Physics Engine": {},
+                "Graphics Rendering": {},
+                "Sound Processing": {}
+            },
+            "Artificial Intelligence": {
+                "Natural Language Processing": {},
+                "Computer Vision": {},
+                "Reinforcement Learning": {}
+            },
+            "Embedded Development": {
+                "Sensors": {},
+                "Hardware Interaction": {},
+                "Firmware Development": {},
+                "Hardware Technology": {},
+                "Real-time Systems": {}
+            }
+        },
+        "Programming Languages": {
+            "General-purpose Languages": {
+                "C": {},
+                "Python": {},
+                "C#": {},
+                "Java": {},
+                "Rust": {},
+                "Go": {},
+                "Javascript": {},
+                "TypeScript": {},
+                "Swift": {}
+            },
+            "Data Languages": {
+                "SQL": {},
+                "R": {},
+                "MATLAB": {},
+                "PySpark": {}
+            },
+            "Assembly Language": {},
+            "Markup Languages": {
+                "HTML": {},
+                "CSS": {},
+                "XML": {},
+                "LaTeX": {},
+                "Markdown": {},
+                "SVG": {},
+                "JSON": {},
+                "YAML": {}
+            },
+            "Domain-specific Languages": {
+                "Solidity (Blockchain)": {},
+                "GLSL (Graphics)": {},
+                "CUDA (Parallel Computing)": {},
+                "MQL (Finance)": {},
+                "GDScript (Games)": {},
+                "Excel (Spreadsheets)": {}
+            },
+            "Scripting Languages": {
+                "VB": {},
+                "Script": {},
+                "Batch": {},
+                "Shell": {},
+                "Lua": {},
+                "Ruby": {},
+                "Perl": {},
+                "PHP": {}
+            }
+        }
+    },
+    "mathematics": {
+        "Mathematical Subfields": {
+            "Mathematical Foundations": {
+                "Logic": {},
+                "Arithmetic": {},
+                "Set Theory": {},
+                "Number Systems": {},
+                "Category Theory": {},
+                "History of Mathematics": {}
+            },
+            "Discrete Mathematics": {
+                "Graph Theory": {},
+                "Combinatorics": {},
+                "Game Theory": {},
+                "Automata Theory": {}
+            },
+            "Applied Mathematics": {
+                "Physics": {},
+                "Signals": {},
+                "Games": {},
+                "Operations Research": {},
+                "Economics": {}
+            },
+            "Algebra": {
+                "Linear Algebra": {},
+                "Abstract Algebra": {},
+                "Boolean Algebra": {},
+                "Algebraic Geometry": {},
+                "Group Theory": {}
+            },
+            "Geometry": {
+                "Differential Geometry": {},
+                "Coordinate Geometry": {},
+                "Topology": {},
+                "Crystallography": {}
+            },
+            "Analysis": {
+                "Algebra": {},
+                "Mathematical Analysis": {},
+                "Real Analysis": {},
+                "Complex Analysis": {},
+                "Functional Analysis": {},
+                "Fourier Analysis": {},
+                "Limits": {},
+                "Calculus": {}
+            },
+            "Probability and Statistics": {},
+            "Number Theory": {},
+            "Information Theory": {},
+            "Computational Mathematics": {}
+        },
+        "Task Types": {
+            "Fact Recall": {},
+            "Conceptual Understanding": {},
+            "Computation": {},
+            "Problem Solving": {
+                "Modeling": {},
+                "Creative Problem Solving": {},
+                "Practical Application": {},
+                "Word Problems": {},
+                "Scenario Analysis": {}
+            },
+            "Logical Reasoning": {
+                "Logical Deduction": {},
+                "Puzzle Solving": {},
+                "Theoretical Derivation": {},
+                "Critical Review": {}
+            },
+            "Visualization": {
+                "Geometric Drawing": {},
+                "Function Graphing": {},
+                "Data Visualization": {}
+            }
+        }
+    },
+    "reasoning": {
+        "Reasoning Methods": {
+            "Logical Reasoning": {
+                "Deductive Reasoning": {},
+                "Inductive Reasoning": {},
+                "Symbolic Reasoning": {},
+                "Basic Counting Reasoning": {}
+            },
+            "Causal Reasoning": {
+                "Multi-factor Attribution": {},
+                "Direct Causal Chain": {},
+                "Bayesian Reasoning": {}
+            },
+            "Analogical Reasoning": {},
+            "Spatial Reasoning": {
+                "Geometric Relationships": {},
+                "Topological Relationships": {}
+            },
+            "Speculative Reasoning": {},
+            "Classification Reasoning": {},
+            "Critical Reasoning": {},
+            "Explanatory Reasoning": {},
+            "Comparative Reasoning": {},
+            "Analytical Reasoning": {},
+            "Emotional Reasoning": {}
+        },
+        "Application Domains": {
+            "Legal Reasoning": {},
+            "Ethical Reasoning": {},
+            "Mathematical Reasoning": {},
+            "Philosophical Reasoning": {},
+            "Biological Reasoning": {},
+            "Psychological Reasoning": {},
+            "Social Reasoning": {},
+            "Negotiation": {},
+            "Organization": {},
+            "Strategic Planning": {},
+            "Personal Development Guidance": {}
+        },
+        "Thinking Modes": {
+            "Analytical": {
+                "System Deconstruction": {},
+                "Pattern Recognition": {},
+                "Text Analysis": {}
+            },
+            "Creative": {
+                "Divergent Association": {},
+                "Concept Reorganization": {},
+                "Abstract Reasoning": {},
+                "Creative Exploration": {},
+                "Conceptual Thinking": {}
+            },
+            "Critical": {},
+            "Strategic": {},
+            "Hypothetical Thinking": {}
+        },
+        "Task Types": {
+            "Argumentation": {},
+            "Evaluation": {},
+            "Design": {},
+            "Theory": {},
+            "Reasoning": {},
+            "Puzzle Solving": {},
+            "Decision Making": {},
+            "Conceptual Understanding": {},
+            "Situational Analysis": {},
+            "Evaluation and Feedback": {},
+            "Problem Solving": {
+                "Creative": {},
+                "Experimental": {}
+            }
+        }
+    }
+}

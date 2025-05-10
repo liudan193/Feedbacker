@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualization and Analysis Tools of Feedbacker</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f5f5f5; }
+        .container { max-width: 100%; margin: 0 auto; text-align: center; }
+        h1 { color: #333; text-align: center; margin-bottom: 15px; }
+        .error { color: red; text-align: center; padding: 20px; }
+        .loading { text-align: center; padding: 20px; font-style: italic; }
+        
+        /* Tab Navigation */
+        .tab-navigation {
+            display: flex;
+            width: 90%;
+            margin: 0 auto 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        .tab-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #ddd;
+        }
+        .tab-group:last-child {
+            border-right: none;
+        }
+        .tab-group-header {
+            background-color: #f0f4f8;
+            padding: 15px;
+            font-weight: bold;
+            color: #333;
+            border-bottom: 1px solid #ddd;
+        }
+        .tab-options {
+            display: flex;
+        }
+        .tab-option {
+            flex: 1;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+            border-right: 1px solid #ddd;
+        }
+        .tab-option:last-child {
+            border-right: none;
+        }
+        .tab-option:hover {
+            background-color: #f8f9fa;
+        }
+        .tab-option.active {
+            background-color: #4285f4;
+            color: white;
+        }
+        
+        /* Content Sections */
+        .content-section {
+            display: none;
+            padding: 20px 0;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .placeholder {
+            text-align: center;
+            padding: 100px 0;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            width: 90%;
+            margin: 0 auto;
+            color: #777;
+            font-style: italic;
+        }
+        
+        /* Report Navigation */
+        .report-navigation {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        .report-button {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            padding: 30px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .report-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+            background-color: #f0f4f8;
+        }
+
+        .report-button h3 {
+            margin: 15px 0 5px;
+            color: #4285f4;
+        }
+
+        .report-button p {
+            margin: 0;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .report-icon {
+            font-size: 36px;
+            color: #4285f4;
+            margin-bottom: 10px;
+        }
+
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Visualization and Analysis Tools of Feedbacker</h1>
+
+        <!-- Tab Navigation -->
+        <div class="tab-navigation">
+            <div class="tab-group">
+                <div class="tab-group-header">Visualization</div>
+                <div class="tab-options">
+                    <div class="tab-option active" data-target="by-model">By Model</div>
+                    <div class="tab-option" data-target="by-query">By Query</div>
+                </div>
+            </div>
+            <div class="tab-group">
+                <div class="tab-group-header">Analysis Report</div>
+                <div class="tab-options">
+                    <div class="tab-option" data-target="analysis-report">View Reports</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Sections -->
+        <div id="by-model" class="content-section active">
+            <!-- Content will be loaded from by-model.html -->
+        </div>
+
+        <div id="by-query" class="content-section">
+            <!-- Content will be loaded from by-query.html -->
+        </div>
+
+        <div id="analysis-report" class="content-section">
+            <div class="report-navigation">
+                <a href="analysis_results/automated_weakness_reporter.html" class="report-button">
+                    <div class="report-icon">📊</div>
+                    <h3>Automated Weakness Reporter</h3>
+                    <p>Identify and analyze model weaknesses automatically</p>
+                </a>
+                <a href="analysis_results/automated_weakness_analyzer.html" class="report-button">
+                    <div class="report-icon">🔍</div>
+                    <h3>Automated Weakness Analyzer</h3>
+                    <p>Detailed analysis of identified weaknesses</p>
+                </a>
+                <a href="analysis_results/failure_mode_explorer.html" class="report-button">
+                    <div class="report-icon">⚠️</div>
+                    <h3>Failure Mode Explorer</h3>
+                    <p>Explore common patterns in model failures</p>
+                </a>
+                <a href="analysis_results/automated_difference_reporter.html" class="report-button">
+                    <div class="report-icon">↔️</div>
+                    <h3>Automated Difference Reporter</h3>
+                    <p>Compare performance differences between models</p>
+                </a>
+                <a href="analysis_results/model_clustering_runner.html" class="report-button">
+                    <div class="report-icon">🔄</div>
+                    <h3>Model Clustering Runner</h3>
+                    <p>Visualize relationships between different models</p>
+                </a>
+                <a href="analysis_results/query_trade_off_explorer.html" class="report-button">
+                    <div class="report-icon">⚖️</div>
+                    <h3>Query Trade-off Explorer</h3>
+                    <p>Analyze performance trade-offs across query types</p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="shared.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set up tab navigation
+            document.querySelectorAll('.tab-option').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Deactivate all tabs
+                    document.querySelectorAll('.tab-option').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+
+                    // Activate selected tab
+                    tab.classList.add('active');
+                    const targetId = tab.getAttribute('data-target');
+                    document.getElementById(targetId).classList.add('active');
+
+                    // Load content for the active tab if needed
+                    if (targetId === 'by-model') {
+                        loadContent('by-model', 'by-model.html');
+                    } else if (targetId === 'by-query') {
+                        loadContent('by-query', 'by-query.html');
+                    }
+                    // No need to load anything for analysis-report, as we're using direct links
+                });
+            });
+
+            // Load the default content
+            loadContent('by-model', 'by-model.html');
+        });
+
+        function loadContent(containerId, htmlFile) {
+            const container = document.getElementById(containerId);
+
+            // Only load if not already loaded
+            if (container.getAttribute('data-loaded') !== 'true') {
+                fetch(htmlFile)
+                    .then(response => response.text())
+                    .then(html => {
+                        container.innerHTML = html;
+                        container.setAttribute('data-loaded', 'true');
+
+                        // Execute all scripts in the loaded content
+                        const scripts = container.getElementsByTagName('script');
+                        for (let script of scripts) {
+                            const newScript = document.createElement('script');
+                            if (script.src) {
+                                newScript.src = script.src;
+                            } else {
+                                newScript.textContent = script.textContent;
+                            }
+                            document.body.appendChild(newScript).parentNode.removeChild(newScript);
+                        }
+
+                        // Call specific initialization functions
+                        if (containerId === 'by-model' && typeof initializeModelView === 'function') {
+                            initializeModelView();
+                        } else if (containerId === 'by-query' && typeof initializeQueryView === 'function') {
+                            initializeQueryView();
+                        }
+                    })
+                    .catch(error => {
+                        container.innerHTML = `<div class="error">Error loading content: ${error.message}</div>`;
+                    });
+            }
+        }
+    </script>
+</body>
+</html>
