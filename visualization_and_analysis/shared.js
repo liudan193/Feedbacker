@@ -85,29 +85,9 @@ async function loadAllJSON() {
       const repo = 'Feedbacker';
       const path = 'visualization_and_analysis/processed_data';
 
-      // Try to get token from localStorage if available
-      const token = localStorage.getItem('github_token');
-
-      // Prepare headers for GitHub API
-      const headers = {};
-      if (token) {
-        headers.Authorization = `token ${token}`;
-      }
-
       // Fetch directory listing via GitHub API
       const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
-      const response = await fetch(apiUrl, { headers });
-
-      // Handle rate limit error
-      if (response.status === 403) {
-        const rateLimitMessage = await response.json();
-        if (rateLimitMessage.message && rateLimitMessage.message.includes('rate limit')) {
-          // Show token input dialog
-          showTokenDialog();
-          throw new Error('GitHub API rate limit exceeded. Please provide a personal access token and try again.');
-        }
-      }
-
+      const response = await fetch(apiUrl);
       if (!response.ok) throw new Error(`GitHub API error: ${response.status}`);
       const files = await response.json();
 
@@ -115,8 +95,7 @@ async function loadAllJSON() {
       const jsonFiles = files.filter(file => file.name.endsWith('.json'));
       filesData = await Promise.all(
         jsonFiles.map(async file => {
-          // Use the same token for downloading files
-          const resp = await fetch(file.download_url, { headers });
+          const resp = await fetch(file.download_url);
           if (!resp.ok) throw new Error(`Failed to load ${file.name}`);
           const data = await resp.json();
           return { name: file.name.replace(/\.json$/i, ''), data };
@@ -192,29 +171,9 @@ async function loadAllQueryModelData() {
             const repo = 'Feedbacker';
             const path = 'visualization_and_analysis/processed_data';
 
-            // Try to get token from localStorage if available
-            const token = localStorage.getItem('github_token');
-
-            // Prepare headers for GitHub API
-            const headers = {};
-            if (token) {
-              headers.Authorization = `token ${token}`;
-            }
-
             // Fetch directory listing via GitHub API
             const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
-            const response = await fetch(apiUrl, { headers });
-
-            // Handle rate limit error
-            if (response.status === 403) {
-              const rateLimitMessage = await response.json();
-              if (rateLimitMessage.message && rateLimitMessage.message.includes('rate limit')) {
-                // Show token input dialog
-                showTokenDialog();
-                throw new Error('GitHub API rate limit exceeded. Please provide a personal access token and try again.');
-              }
-            }
-
+            const response = await fetch(apiUrl);
             if (!response.ok) throw new Error(`GitHub API error: ${response.status}`);
             const files = await response.json();
 
@@ -224,8 +183,7 @@ async function loadAllQueryModelData() {
             // Load each JSON file
             filesData = await Promise.all(jsonFiles.map(async file => {
                 try {
-                    // Use the same token for downloading files
-                    const resp = await fetch(file.download_url, { headers });
+                    const resp = await fetch(file.download_url);
                     if (!resp.ok) throw new Error(`Failed to load ${file.name}`);
                     const data = await resp.json();
                     return { name: file.name.replace(/\.json$/i, ''), data };
@@ -273,287 +231,6 @@ async function loadAllQueryModelData() {
         throw error;
     }
 }
-
-// Function to show token input dialog
-function showTokenDialog() {
-    // If dialog already exists, just show it
-    let tokenDialog = document.getElementById('token-dialog');
-
-    if (!tokenDialog) {
-        // Create dialog elements
-        tokenDialog = document.createElement('div');
-        tokenDialog.id = 'token-dialog';
-        tokenDialog.className = 'token-dialog';
-
-        const dialogContent = document.createElement('div');
-        dialogContent.className = 'token-dialog-content';
-
-        // Add title
-        const title = document.createElement('h2');
-        title.textContent = 'GitHub API Rate Limit Exceeded';
-        dialogContent.appendChild(title);
-
-        // Add explanation
-        const explanation = document.createElement('p');
-        explanation.textContent = 'You have exceeded the GitHub API rate limit. Please provide a personal access token to continue.';
-        dialogContent.appendChild(explanation);
-
-        // Add link to GitHub token creation
-        const tokenLink = document.createElement('p');
-        tokenLink.innerHTML = 'You can create a token at <a href="https://github.com/settings/tokens" target="_blank">https://github.com/settings/tokens</a> (no special permissions needed).';
-        dialogContent.appendChild(tokenLink);
-
-        // Add input field
-        const tokenInput = document.createElement('input');
-        tokenInput.type = 'text';
-        tokenInput.id = 'github-token';
-        tokenInput.placeholder = 'Paste your GitHub token here';
-        dialogContent.appendChild(tokenInput);
-
-        // Add button container
-        const buttonContainer = document.createElement('div');
-        buttonContainer.className = 'button-container';
-
-        // Add submit button
-        const submitButton = document.createElement('button');
-        submitButton.textContent = 'Save and Reload';
-        submitButton.onclick = () => {
-            const token = document.getElementById('github-token').value.trim();
-            if (token) {
-                localStorage.setItem('github_token', token);
-                tokenDialog.style.display = 'none';
-                window.location.reload(); // Refresh the page
-            }
-        };
-        buttonContainer.appendChild(submitButton);
-
-        // Add cancel button
-        const cancelButton = document.createElement('button');
-        cancelButton.textContent = 'Cancel';
-        cancelButton.onclick = () => {
-            tokenDialog.style.display = 'none';
-        };
-        buttonContainer.appendChild(cancelButton);
-
-        dialogContent.appendChild(buttonContainer);
-
-        tokenDialog.appendChild(dialogContent);
-        document.body.appendChild(tokenDialog);
-
-        // Add dialog styling
-        const style = document.createElement('style');
-        style.textContent = `
-            .token-dialog {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.5);
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                z-index: 1000;
-            }
-            
-            .token-dialog-content {
-                background-color: white;
-                padding: 20px;
-                border-radius: 5px;
-                max-width: 500px;
-                width: 80%;
-            }
-            
-            .token-dialog h2 {
-                margin-top: 0;
-            }
-            
-            .token-dialog input {
-                width: 100%;
-                padding: 8px;
-                margin: 10px 0;
-                box-sizing: border-box;
-            }
-            
-            .button-container {
-                display: flex;
-                justify-content: flex-end;
-                gap: 10px;
-                margin-top: 15px;
-            }
-            
-            .button-container button {
-                padding: 8px 12px;
-                cursor: pointer;
-            }
-        `;
-        document.head.appendChild(style);
-    }
-
-    // Show the dialog
-    tokenDialog.style.display = 'flex';
-}
-
-// async function loadAllJSON() {
-//   try {
-//     // Check if we're running on GitHub Pages or locally
-//     const isGitHubPages = window.location.hostname.includes('github.io') ||
-//                          window.location.hostname.includes('liudan193.github.io');
-//
-//     let filesData;
-//
-//     if (isGitHubPages) {
-//       // GitHub Pages implementation
-//       const owner = 'liudan193';
-//       const repo = 'Feedbacker';
-//       const path = 'visualization_and_analysis/processed_data';
-//
-//       // Fetch directory listing via GitHub API
-//       const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
-//       const response = await fetch(apiUrl);
-//       if (!response.ok) throw new Error(`GitHub API error: ${response.status}`);
-//       const files = await response.json();
-//
-//       // Filter JSON files and fetch their contents
-//       const jsonFiles = files.filter(file => file.name.endsWith('.json'));
-//       filesData = await Promise.all(
-//         jsonFiles.map(async file => {
-//           const resp = await fetch(file.download_url);
-//           if (!resp.ok) throw new Error(`Failed to load ${file.name}`);
-//           const data = await resp.json();
-//           return { name: file.name.replace(/\.json$/i, ''), data };
-//         })
-//       );
-//     } else {
-//       // Local implementation
-//       const listResponse = await fetch('processed_data/');
-//       const listText = await listResponse.text();
-//       const parser = new DOMParser();
-//       const doc = parser.parseFromString(listText, 'text/html');
-//       const links = Array.from(doc.querySelectorAll('a'))
-//           .map(a => a.getAttribute('href'))
-//           .filter(href => href && href.endsWith('.json'));
-//
-//       filesData = await Promise.all(links.map(async file => {
-//           const resp = await fetch(`processed_data/${file}`);
-//           const data = await resp.json();
-//           return { name: file.replace(/\.json$/i, ''), data };
-//       }));
-//     }
-//
-//     // Populate global data structures (same for both implementations)
-//     filesData.forEach(({ name, data }) => {
-//       allData[name] = data;
-//     });
-//     allModels = Object.keys(allData);
-//
-//     // Hide loading indicator, show viewer
-//     document.getElementById('loading').classList.add('hidden');
-//     document.getElementById('viewer').classList.remove('hidden');
-//
-//     // Initial render of model grid
-//     renderModelGrid();
-//
-//     // Default-select top 4 models by score
-//     const sorted = [...allModels].sort((a, b) => {
-//       const sa = allData[a]?.score || 0;
-//       const sb = allData[b]?.score || 0;
-//       return sb - sa;
-//     });
-//     const topModels = sorted.slice(0, 4);
-//     topModels.forEach(model => {
-//       selectedModels.add(model);
-//       if (!selectedCategories.includes(model)) {
-//         selectedCategories.push(model);
-//       }
-//     });
-//
-//     // Re-render with selections
-//     renderModelGrid();
-//     renderSelectedTrees();
-//
-//   } catch (error) {
-//     document.getElementById('loading').classList.add('hidden');
-//     const errEl = document.getElementById('error');
-//     errEl.classList.remove('hidden');
-//     errEl.textContent = `Error: ${error.message}`;
-//   }
-// }
-//
-// async function loadAllQueryModelData() {
-//     try {
-//         // Check if we're running on GitHub Pages or locally
-//         const isGitHubPages = window.location.hostname.includes('github.io') ||
-//                              window.location.hostname.includes('liudan193.github.io');
-//
-//         let filesData;
-//
-//         if (isGitHubPages) {
-//             // GitHub Pages implementation
-//             const owner = 'liudan193';
-//             const repo = 'Feedbacker';
-//             const path = 'visualization_and_analysis/processed_data';
-//
-//             // Fetch directory listing via GitHub API
-//             const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
-//             const response = await fetch(apiUrl);
-//             if (!response.ok) throw new Error(`GitHub API error: ${response.status}`);
-//             const files = await response.json();
-//
-//             // Filter JSON files
-//             const jsonFiles = files.filter(file => file.name.endsWith('.json'));
-//
-//             // Load each JSON file
-//             filesData = await Promise.all(jsonFiles.map(async file => {
-//                 try {
-//                     const resp = await fetch(file.download_url);
-//                     if (!resp.ok) throw new Error(`Failed to load ${file.name}`);
-//                     const data = await resp.json();
-//                     return { name: file.name.replace(/\.json$/i, ''), data };
-//                 } catch (err) {
-//                     console.error(`Error loading ${file.name}:`, err);
-//                     return null;
-//                 }
-//             }));
-//         } else {
-//             // Local implementation
-//             const listResponse = await fetch('processed_data/');
-//             const listText = await listResponse.text();
-//             const parser = new DOMParser();
-//             const doc = parser.parseFromString(listText, 'text/html');
-//
-//             // Get all links that might be JSON files
-//             const links = Array.from(doc.querySelectorAll('a'))
-//                 .map(a => a.getAttribute('href'))
-//                 .filter(href => href && typeof href === 'string' && href.toLowerCase().endsWith('.json'));
-//
-//             // Load each JSON file
-//             filesData = await Promise.all(links.map(async file => {
-//                 try {
-//                     const resp = await fetch(`processed_data/${file}`);
-//                     const data = await resp.json();
-//                     return { name: file.replace(/\.json$/i, ''), data };
-//                 } catch (err) {
-//                     console.error(`Error loading ${file}:`, err);
-//                     return null;
-//                 }
-//             }));
-//         }
-//
-//         // Add valid data to queryModelData (same for both implementations)
-//         filesData.forEach(item => {
-//             if (item) {
-//                 queryModelData[item.name] = item.data;
-//             }
-//         });
-//
-//         console.log(`Loaded ${Object.keys(queryModelData).length} model files`);
-//         return queryModelData;
-//     } catch (error) {
-//         console.error("Failed to load model data:", error);
-//         throw error;
-//     }
-// }
 
 function renderSelectedTrees() {
     const container = document.getElementById('treesContainer');
