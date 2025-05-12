@@ -3,11 +3,10 @@ let allModels = [];
 const selectedCategories = [];
 let selectedModels = new Set();
 let queryModelData = {};
-let githubToken = ''; // Variable to store GitHub token
 
 function initializeModelView() {
     setupModelSelector();
-    loadAllData();
+    loadAllJSON();
 }
 
 function setupModelSelector() {
@@ -72,56 +71,38 @@ function renderModelGrid(searchTerm = '') {
     });
 }
 
-async function loadAllData() {
+async function loadAllJSON() {
   try {
-    // 检查是否在 GitHub Pages 或本地运行
+    // Check if we're running on GitHub Pages or locally
     const isGitHubPages = window.location.hostname.includes('github.io') ||
                          window.location.hostname.includes('liudan193.github.io');
 
     let filesData;
 
     if (isGitHubPages) {
-      // GitHub Pages 实现
+      // GitHub Pages implementation
       const owner = 'liudan193';
       const repo = 'Feedbacker';
       const path = 'visualization_and_analysis/processed_data';
 
-      // 使用CORS代理服务
-      const corsProxy = 'https://corsproxy.io/?';
-      let apiUrl = `${corsProxy}https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
-
-      // 添加token（如可用）
-      const headers = {};
-      if (githubToken) {
-        headers.Authorization = `token ${githubToken}`;
-      }
-
-      const response = await fetch(apiUrl, { headers });
-
-      // 处理403错误（超出速率限制）
-      if (response.status === 403) {
-        showTokenInputDialog();
-        throw new Error('GitHub API 速率限制已超出。请提供令牌。');
-      }
-
-      if (!response.ok) throw new Error(`GitHub API 错误: ${response.status}`);
-
+      // Fetch directory listing via GitHub API
+      const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+      const response = await fetch(apiUrl);
+      if (!response.ok) throw new Error(`GitHub API error: ${response.status}`);
       const files = await response.json();
 
-      // 过滤JSON文件并获取其内容
+      // Filter JSON files and fetch their contents
       const jsonFiles = files.filter(file => file.name.endsWith('.json'));
       filesData = await Promise.all(
         jsonFiles.map(async file => {
-          // 同样使用CORS代理获取文件内容
-          const fileUrl = `${corsProxy}${file.download_url}`;
-          const resp = await fetch(fileUrl, { headers });
-          if (!resp.ok) throw new Error(`加载 ${file.name} 失败`);
+          const resp = await fetch(file.download_url);
+          if (!resp.ok) throw new Error(`Failed to load ${file.name}`);
           const data = await resp.json();
           return { name: file.name.replace(/\.json$/i, ''), data };
         })
       );
     } else {
-      // 本地实现
+      // Local implementation
       const listResponse = await fetch('processed_data/');
       const listText = await listResponse.text();
       const parser = new DOMParser();
@@ -137,23 +118,20 @@ async function loadAllData() {
       }));
     }
 
-    // 处理数据（两种用例）
+    // Populate global data structures (same for both implementations)
     filesData.forEach(({ name, data }) => {
       allData[name] = data;
-      queryModelData[name] = data; // 同时填充 queryModelData
     });
     allModels = Object.keys(allData);
 
-    console.log(`已加载 ${Object.keys(allData).length} 个模型文件`);
-
-    // 隐藏加载指示器，显示查看器
+    // Hide loading indicator, show viewer
     document.getElementById('loading').classList.add('hidden');
     document.getElementById('viewer').classList.remove('hidden');
 
-    // 初始渲染模型网格
+    // Initial render of model grid
     renderModelGrid();
 
-    // 默认选择按得分排名前4的模型
+    // Default-select top 4 models by score
     const sorted = [...allModels].sort((a, b) => {
       const sa = allData[a]?.score || 0;
       const sb = allData[b]?.score || 0;
@@ -167,58 +145,91 @@ async function loadAllData() {
       }
     });
 
-    // 使用选择重新渲染
+    // Re-render with selections
     renderModelGrid();
     renderSelectedTrees();
-
-    return { allData, queryModelData };
 
   } catch (error) {
     document.getElementById('loading').classList.add('hidden');
     const errEl = document.getElementById('error');
     errEl.classList.remove('hidden');
-    errEl.textContent = `错误: ${error.message}`;
-    throw error;
+    errEl.textContent = `Error: ${error.message}`;
   }
 }
 
-// Function to show GitHub token input dialog
-function showTokenInputDialog() {
-  // Create modal if it doesn't exist
-  let modal = document.getElementById('tokenModal');
+async function loadAllQueryModelData() {
+    try {
+        // Check if we're running on GitHub Pages or locally
+        const isGitHubPages = window.location.hostname.includes('github.io') ||
+                             window.location.hostname.includes('liudan193.github.io');
 
-  if (!modal) {
-    modal = document.createElement('div');
-    modal.id = 'tokenModal';
-    modal.className = 'modal';
-    modal.innerHTML = `
-      <div class="modal-content">
-        <h2>GitHub API Rate Limit Exceeded</h2>
-        <p>To continue accessing data from GitHub, please provide a GitHub personal access token:</p>
-        <input type="text" id="githubTokenInput" placeholder="Paste your GitHub token here">
-        <div class="modal-buttons">
-          <button id="submitToken">Submit</button>
-          <button id="cancelToken">Cancel</button>
-        </div>
-        <p class="modal-info">You can create a token at <a href="https://github.com/settings/tokens" target="_blank">GitHub Token Settings</a></p>
-      </div>
-    `;
+        let filesData;
 
-    document.body.appendChild(modal);
+        if (isGitHubPages) {
+            // GitHub Pages implementation
+            const owner = 'liudan193';
+            const repo = 'Feedbacker';
+            const path = 'visualization_and_analysis/processed_data';
 
-    // Add event listeners
-    document.getElementById('submitToken').addEventListener('click', () => {
-      githubToken = document.getElementById('githubTokenInput').value.trim();
-      modal.style.display = 'none';
-      loadAllData(); // Retry loading with the token
-    });
+            // Fetch directory listing via GitHub API
+            const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+            const response = await fetch(apiUrl);
+            if (!response.ok) throw new Error(`GitHub API error: ${response.status}`);
+            const files = await response.json();
 
-    document.getElementById('cancelToken').addEventListener('click', () => {
-      modal.style.display = 'none';
-    });
-  }
+            // Filter JSON files
+            const jsonFiles = files.filter(file => file.name.endsWith('.json'));
 
-  modal.style.display = 'block';
+            // Load each JSON file
+            filesData = await Promise.all(jsonFiles.map(async file => {
+                try {
+                    const resp = await fetch(file.download_url);
+                    if (!resp.ok) throw new Error(`Failed to load ${file.name}`);
+                    const data = await resp.json();
+                    return { name: file.name.replace(/\.json$/i, ''), data };
+                } catch (err) {
+                    console.error(`Error loading ${file.name}:`, err);
+                    return null;
+                }
+            }));
+        } else {
+            // Local implementation
+            const listResponse = await fetch('processed_data/');
+            const listText = await listResponse.text();
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(listText, 'text/html');
+
+            // Get all links that might be JSON files
+            const links = Array.from(doc.querySelectorAll('a'))
+                .map(a => a.getAttribute('href'))
+                .filter(href => href && typeof href === 'string' && href.toLowerCase().endsWith('.json'));
+
+            // Load each JSON file
+            filesData = await Promise.all(links.map(async file => {
+                try {
+                    const resp = await fetch(`processed_data/${file}`);
+                    const data = await resp.json();
+                    return { name: file.replace(/\.json$/i, ''), data };
+                } catch (err) {
+                    console.error(`Error loading ${file}:`, err);
+                    return null;
+                }
+            }));
+        }
+
+        // Add valid data to queryModelData (same for both implementations)
+        filesData.forEach(item => {
+            if (item) {
+                queryModelData[item.name] = item.data;
+            }
+        });
+
+        console.log(`Loaded ${Object.keys(queryModelData).length} model files`);
+        return queryModelData;
+    } catch (error) {
+        console.error("Failed to load model data:", error);
+        throw error;
+    }
 }
 
 function renderSelectedTrees() {
@@ -353,7 +364,8 @@ function createBlockNode(name, data, depth, isRoot = false) {
     return nodeDiv;
 }
 
-// shared.js code
+
+// shared.js 新增代码
 let selectedNodes = new Set();
 
 function initializeQueryView() {
@@ -379,15 +391,15 @@ function createTreeNode(nodeData, currentPath, parentElement) {
     const node = document.createElement('div');
     node.className = 'tree-node';
 
-    // Node header
+    // 节点头部
     const nodeHeader = document.createElement('div');
     nodeHeader.className = 'tree-node-header';
     nodeHeader.textContent = nodeData.name;
 
-    // Path handling
+    // 路径处理
     const path = [...currentPath, nodeData.key].join('.');
 
-    // Click event
+    // 点击事件
     nodeHeader.addEventListener('click', (e) => {
         e.stopPropagation();
         nodeHeader.classList.toggle('selected');
@@ -397,7 +409,7 @@ function createTreeNode(nodeData, currentPath, parentElement) {
 
     node.appendChild(nodeHeader);
 
-    // Recursive child nodes
+    // 递归子节点
     if (nodeData.children) {
         const childrenContainer = document.createElement('div');
         childrenContainer.className = 'tree-node-children';
@@ -419,23 +431,23 @@ function renderRankings() {
     container.innerHTML = '';
 
     Array.from(selectedNodes).forEach(path => {
-        // Create column container
+        // 创建列容器
         const column = document.createElement('div');
         column.className = 'ranking-column';
 
-        // Column header
+        // 列标题
         const header = document.createElement('div');
         header.className = 'ranking-header';
         header.textContent = path.split('.').pop();
         column.appendChild(header);
 
-        // Get and sort data
+        // 获取并排序数据
         const rankings = allModels.map(model => ({
             model,
             ranking: getNestedValue(allData[model], path)?.ranking || Infinity
         })).sort((a, b) => a.ranking - b.ranking);
 
-        // Fill ranking data
+        // 填充排名数据
         const list = document.createElement('div');
         list.className = 'ranking-list';
         rankings.forEach((item, index) => {
@@ -462,45 +474,3 @@ function handleTreeError(error) {
     const container = document.getElementById('rankingsTable');
     container.innerHTML = `<div class="error">Error loading category tree: ${error.message}</div>`;
 }
-
-// Add CSS for the modal
-const modalStyle = document.createElement('style');
-modalStyle.textContent = `
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.5);
-}
-
-.modal-content {
-  background-color: #fff;
-  margin: 15% auto;
-  padding: 20px;
-  border-radius: 5px;
-  width: 80%;
-  max-width: 500px;
-}
-
-.modal-buttons {
-  margin-top: 20px;
-  text-align: right;
-}
-
-.modal-buttons button {
-  margin-left: 10px;
-  padding: 8px 16px;
-  cursor: pointer;
-}
-
-.modal-info {
-  margin-top: 15px;
-  font-size: 0.9em;
-  color: #666;
-}
-`;
-document.head.appendChild(modalStyle);
