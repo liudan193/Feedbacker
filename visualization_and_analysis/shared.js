@@ -74,22 +74,23 @@ function renderModelGrid(searchTerm = '') {
 
 async function loadAllData() {
   try {
-    // Check if we're running on GitHub Pages or locally
+    // 检查是否在 GitHub Pages 或本地运行
     const isGitHubPages = window.location.hostname.includes('github.io') ||
                          window.location.hostname.includes('liudan193.github.io');
 
     let filesData;
 
     if (isGitHubPages) {
-      // GitHub Pages implementation
+      // GitHub Pages 实现
       const owner = 'liudan193';
       const repo = 'Feedbacker';
       const path = 'visualization_and_analysis/processed_data';
 
-      // Fetch directory listing via GitHub API
-      let apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+      // 使用CORS代理服务
+      const corsProxy = 'https://corsproxy.io/?';
+      let apiUrl = `${corsProxy}https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
 
-      // Add token if available
+      // 添加token（如可用）
       const headers = {};
       if (githubToken) {
         headers.Authorization = `token ${githubToken}`;
@@ -97,28 +98,30 @@ async function loadAllData() {
 
       const response = await fetch(apiUrl, { headers });
 
-      // Handle 403 error (rate limit exceeded)
+      // 处理403错误（超出速率限制）
       if (response.status === 403) {
         showTokenInputDialog();
-        throw new Error('GitHub API rate limit exceeded. Please provide a token.');
+        throw new Error('GitHub API 速率限制已超出。请提供令牌。');
       }
 
-      if (!response.ok) throw new Error(`GitHub API error: ${response.status}`);
+      if (!response.ok) throw new Error(`GitHub API 错误: ${response.status}`);
 
       const files = await response.json();
 
-      // Filter JSON files and fetch their contents
+      // 过滤JSON文件并获取其内容
       const jsonFiles = files.filter(file => file.name.endsWith('.json'));
       filesData = await Promise.all(
         jsonFiles.map(async file => {
-          const resp = await fetch(file.download_url, { headers });
-          if (!resp.ok) throw new Error(`Failed to load ${file.name}`);
+          // 同样使用CORS代理获取文件内容
+          const fileUrl = `${corsProxy}${file.download_url}`;
+          const resp = await fetch(fileUrl, { headers });
+          if (!resp.ok) throw new Error(`加载 ${file.name} 失败`);
           const data = await resp.json();
           return { name: file.name.replace(/\.json$/i, ''), data };
         })
       );
     } else {
-      // Local implementation
+      // 本地实现
       const listResponse = await fetch('processed_data/');
       const listText = await listResponse.text();
       const parser = new DOMParser();
@@ -134,23 +137,23 @@ async function loadAllData() {
       }));
     }
 
-    // Process data for both use cases
+    // 处理数据（两种用例）
     filesData.forEach(({ name, data }) => {
       allData[name] = data;
-      queryModelData[name] = data; // Also populate queryModelData
+      queryModelData[name] = data; // 同时填充 queryModelData
     });
     allModels = Object.keys(allData);
 
-    console.log(`Loaded ${Object.keys(allData).length} model files`);
+    console.log(`已加载 ${Object.keys(allData).length} 个模型文件`);
 
-    // Hide loading indicator, show viewer
+    // 隐藏加载指示器，显示查看器
     document.getElementById('loading').classList.add('hidden');
     document.getElementById('viewer').classList.remove('hidden');
 
-    // Initial render of model grid
+    // 初始渲染模型网格
     renderModelGrid();
 
-    // Default-select top 4 models by score
+    // 默认选择按得分排名前4的模型
     const sorted = [...allModels].sort((a, b) => {
       const sa = allData[a]?.score || 0;
       const sb = allData[b]?.score || 0;
@@ -164,7 +167,7 @@ async function loadAllData() {
       }
     });
 
-    // Re-render with selections
+    // 使用选择重新渲染
     renderModelGrid();
     renderSelectedTrees();
 
@@ -174,7 +177,7 @@ async function loadAllData() {
     document.getElementById('loading').classList.add('hidden');
     const errEl = document.getElementById('error');
     errEl.classList.remove('hidden');
-    errEl.textContent = `Error: ${error.message}`;
+    errEl.textContent = `错误: ${error.message}`;
     throw error;
   }
 }
