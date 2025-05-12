@@ -4,6 +4,9 @@ const selectedCategories = [];
 let selectedModels = new Set();
 let queryModelData = {};
 
+// GitHub token management
+let githubToken = '';
+
 function initializeModelView() {
     setupModelSelector();
     loadAllJSON();
@@ -71,7 +74,29 @@ function renderModelGrid(searchTerm = '') {
     });
 }
 
-async function loadAllJSON() {
+// Global variables
+const allData = {};
+const queryModelData = {};
+let allModels = [];
+const selectedModels = new Set();
+const selectedCategories = [];
+
+// GitHub token management
+let githubToken = '';
+
+/**
+ * Load JSON data from either GitHub Pages or local directory
+ * @param {string} options.dataPath - The path to the data files
+ * @param {object} options.targetObject - The object to populate with data
+ * @param {function} options.onSuccess - Callback after successful loading
+ * @param {function} options.onError - Callback for error handling
+ */
+async function loadJSONData({
+  dataPath = 'processed_data',
+  targetObject = {},
+  onSuccess = () => {},
+  onError = (error) => { console.error("Data loading error:", error); }
+}) {
   try {
     // Check if we're running on GitHub Pages or locally
     const isGitHubPages = window.location.hostname.includes('github.io') ||
@@ -83,19 +108,31 @@ async function loadAllJSON() {
       // GitHub Pages implementation
       const owner = 'liudan193';
       const repo = 'Feedbacker';
-      const path = 'visualization_and_analysis/processed_data';
+      const path = dataPath;
 
       // Fetch directory listing via GitHub API
       const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
-      const response = await fetch(apiUrl);
-      if (!response.ok) throw new Error(`GitHub API error: ${response.status}`);
+
+      // Set up headers (include token if available)
+      const headers = {};
+      if (githubToken) {
+        headers['Authorization'] = `token ${githubToken}`;
+      }
+
+      const response = await fetch(apiUrl, { headers });
+
+      if (!response.ok) {
+        throw new Error(`GitHub API error: ${response.status}`);
+      }
+
       const files = await response.json();
 
       // Filter JSON files and fetch their contents
       const jsonFiles = files.filter(file => file.name.endsWith('.json'));
       filesData = await Promise.all(
         jsonFiles.map(async file => {
-          const resp = await fetch(file.download_url);
+          // Use same headers for file content requests
+          const resp = await fetch(file.download_url, { headers });
           if (!resp.ok) throw new Error(`Failed to load ${file.name}`);
           const data = await resp.json();
           return { name: file.name.replace(/\.json$/i, ''), data };
@@ -103,7 +140,7 @@ async function loadAllJSON() {
       );
     } else {
       // Local implementation
-      const listResponse = await fetch('processed_data/');
+      const listResponse = await fetch(dataPath + '/');
       const listText = await listResponse.text();
       const parser = new DOMParser();
       const doc = parser.parseFromString(listText, 'text/html');
@@ -112,125 +149,162 @@ async function loadAllJSON() {
           .filter(href => href && href.endsWith('.json'));
 
       filesData = await Promise.all(links.map(async file => {
-          const resp = await fetch(`processed_data/${file}`);
+          const resp = await fetch(`${dataPath}/${file}`);
+          if (!resp.ok) throw new Error(`Failed to load ${file}`);
           const data = await resp.json();
           return { name: file.replace(/\.json$/i, ''), data };
       }));
     }
 
-    // Populate global data structures (same for both implementations)
-    filesData.forEach(({ name, data }) => {
-      allData[name] = data;
-    });
-    allModels = Object.keys(allData);
-
-    // Hide loading indicator, show viewer
-    document.getElementById('loading').classList.add('hidden');
-    document.getElementById('viewer').classList.remove('hidden');
-
-    // Initial render of model grid
-    renderModelGrid();
-
-    // Default-select top 4 models by score
-    const sorted = [...allModels].sort((a, b) => {
-      const sa = allData[a]?.score || 0;
-      const sb = allData[b]?.score || 0;
-      return sb - sa;
-    });
-    const topModels = sorted.slice(0, 4);
-    topModels.forEach(model => {
-      selectedModels.add(model);
-      if (!selectedCategories.includes(model)) {
-        selectedCategories.push(model);
-      }
+    // Populate target object
+    filesData.filter(item => item).forEach(({ name, data }) => {
+      targetObject[name] = data;
     });
 
-    // Re-render with selections
-    renderModelGrid();
-    renderSelectedTrees();
+    console.log(`Loaded ${Object.keys(targetObject).length} model files`);
 
+    // Execute success callback
+    onSuccess(targetObject);
+
+    return targetObject;
   } catch (error) {
-    document.getElementById('loading').classList.add('hidden');
-    const errEl = document.getElementById('error');
-    errEl.classList.remove('hidden');
-    errEl.textContent = `Error: ${error.message}`;
+    onError(error);
+    throw error;
   }
 }
 
-async function loadAllQueryModelData() {
-    try {
-        // Check if we're running on GitHub Pages or locally
-        const isGitHubPages = window.location.hostname.includes('github.io') ||
-                             window.location.hostname.includes('liudan193.github.io');
+/**
+ * Load all JSON for the main application
+ */
+async function loadAllJSON() {
+  try {
+    // Show loading indicator
+    document.getElementById('loading').classList.remove('hidden');
+    document.getElementById('viewer').classList.add('hidden');
+    document.getElementById('error').classList.add('hidden');
 
-        let filesData;
+    // Load data
+    await loadJSONData({
+      targetObject: allData,
+      onSuccess: (data) => {
+        // Update global data
+        allModels = Object.keys(data);
 
-        if (isGitHubPages) {
-            // GitHub Pages implementation
-            const owner = 'liudan193';
-            const repo = 'Feedbacker';
-            const path = 'visualization_and_analysis/processed_data';
+        // Hide loading indicator, show viewer
+        document.getElementById('loading').classList.add('hidden');
+        document.getElementById('viewer').classList.remove('hidden');
 
-            // Fetch directory listing via GitHub API
-            const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
-            const response = await fetch(apiUrl);
-            if (!response.ok) throw new Error(`GitHub API error: ${response.status}`);
-            const files = await response.json();
+        // Initial render of model grid
+        renderModelGrid();
 
-            // Filter JSON files
-            const jsonFiles = files.filter(file => file.name.endsWith('.json'));
-
-            // Load each JSON file
-            filesData = await Promise.all(jsonFiles.map(async file => {
-                try {
-                    const resp = await fetch(file.download_url);
-                    if (!resp.ok) throw new Error(`Failed to load ${file.name}`);
-                    const data = await resp.json();
-                    return { name: file.name.replace(/\.json$/i, ''), data };
-                } catch (err) {
-                    console.error(`Error loading ${file.name}:`, err);
-                    return null;
-                }
-            }));
-        } else {
-            // Local implementation
-            const listResponse = await fetch('processed_data/');
-            const listText = await listResponse.text();
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(listText, 'text/html');
-
-            // Get all links that might be JSON files
-            const links = Array.from(doc.querySelectorAll('a'))
-                .map(a => a.getAttribute('href'))
-                .filter(href => href && typeof href === 'string' && href.toLowerCase().endsWith('.json'));
-
-            // Load each JSON file
-            filesData = await Promise.all(links.map(async file => {
-                try {
-                    const resp = await fetch(`processed_data/${file}`);
-                    const data = await resp.json();
-                    return { name: file.replace(/\.json$/i, ''), data };
-                } catch (err) {
-                    console.error(`Error loading ${file}:`, err);
-                    return null;
-                }
-            }));
-        }
-
-        // Add valid data to queryModelData (same for both implementations)
-        filesData.forEach(item => {
-            if (item) {
-                queryModelData[item.name] = item.data;
-            }
+        // Default-select top 4 models by score
+        const sorted = [...allModels].sort((a, b) => {
+          const sa = data[a]?.score || 0;
+          const sb = data[b]?.score || 0;
+          return sb - sa;
+        });
+        const topModels = sorted.slice(0, 4);
+        topModels.forEach(model => {
+          selectedModels.add(model);
+          if (!selectedCategories.includes(model)) {
+            selectedCategories.push(model);
+          }
         });
 
-        console.log(`Loaded ${Object.keys(queryModelData).length} model files`);
-        return queryModelData;
-    } catch (error) {
-        console.error("Failed to load model data:", error);
-        throw error;
-    }
+        // Re-render with selections
+        renderModelGrid();
+        renderSelectedTrees();
+      },
+      onError: (error) => {
+        document.getElementById('loading').classList.add('hidden');
+        const errEl = document.getElementById('error');
+        errEl.classList.remove('hidden');
+        errEl.textContent = `Error: ${error.message}`;
+      }
+    });
+  } catch (error) {
+    // Error already handled in onError callback
+    console.error("Failed to load data:", error);
+  }
 }
+
+/**
+ * Load all query model data
+ */
+async function loadAllQueryModelData() {
+  try {
+    return await loadJSONData({
+      targetObject: queryModelData,
+      onError: (error) => {
+        console.error("Failed to load model data:", error);
+      }
+    });
+  } catch (error) {
+    console.error("Failed to load query model data:", error);
+    throw error;
+  }
+}
+
+/**
+ * Set GitHub token for API access
+ * @param {string} token - The GitHub token
+ */
+function setGitHubToken(token) {
+  githubToken = token;
+  // After setting the token, you might want to retry loading if previous attempts failed
+  if (Object.keys(allData).length === 0) {
+    loadAllJSON();
+  }
+}
+
+/**
+ * Create token input UI and add it to the page
+ */
+function createTokenInputUI() {
+  const tokenContainer = document.createElement('div');
+  tokenContainer.className = 'token-container';
+  tokenContainer.style.margin = '10px 0';
+
+  const tokenInput = document.createElement('input');
+  tokenInput.type = 'password';
+  tokenInput.placeholder = 'GitHub Token (optional)';
+  tokenInput.className = 'token-input';
+  tokenInput.style.padding = '8px';
+  tokenInput.style.marginRight = '10px';
+
+  const tokenButton = document.createElement('button');
+  tokenButton.textContent = 'Set Token';
+  tokenButton.className = 'token-button';
+  tokenButton.style.padding = '8px 16px';
+
+  tokenButton.addEventListener('click', () => {
+    setGitHubToken(tokenInput.value);
+    if (tokenInput.value) {
+      tokenButton.textContent = 'Token Set ✓';
+      setTimeout(() => {
+        tokenButton.textContent = 'Set Token';
+      }, 3000);
+    }
+  });
+
+  tokenContainer.appendChild(tokenInput);
+  tokenContainer.appendChild(tokenButton);
+
+  // Add to page - insert before the loading element
+  const loadingEl = document.getElementById('loading');
+  if (loadingEl && loadingEl.parentNode) {
+    loadingEl.parentNode.insertBefore(tokenContainer, loadingEl);
+  } else {
+    // Fallback if loading element isn't found
+    document.body.insertBefore(tokenContainer, document.body.firstChild);
+  }
+}
+
+// Initialize the token input UI when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+  createTokenInputUI();
+  loadAllJSON(); // Start loading data
+});
 
 function renderSelectedTrees() {
     const container = document.getElementById('treesContainer');
