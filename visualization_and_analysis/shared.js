@@ -3,14 +3,11 @@ let allModels = [];
 const selectedCategories = [];
 let selectedModels = new Set();
 let queryModelData = {};
-
-// 添加全局变量用于数据缓存
-let dataLoaded = false;
 let githubToken = '';
 
 function initializeModelView() {
     setupModelSelector();
-    setupGithubToken();
+    setupGithubTokenInput();
     loadAllData();
 }
 
@@ -23,24 +20,32 @@ function setupModelSelector() {
     });
 }
 
-function setupGithubToken() {
-    // 创建GitHub token输入区域
-    const tokenContainer = document.createElement('div');
-    tokenContainer.className = 'github-token-container';
-    tokenContainer.innerHTML = `
-        <label for="githubToken">GitHub Token (optional):</label>
-        <input type="password" id="githubToken" placeholder="Enter GitHub token for higher API rate limits">
-        <small>Token is used only for this session to avoid API rate limits</small>
-    `;
+function setupGithubTokenInput() {
+    // Create token input UI if it doesn't exist
+    if (!document.getElementById('githubTokenContainer')) {
+        const container = document.createElement('div');
+        container.id = 'githubTokenContainer';
+        container.className = 'github-token-container';
 
-    // 插入到页面顶部
-    const firstElement = document.body.firstElementChild;
-    document.body.insertBefore(tokenContainer, firstElement);
+        const input = document.createElement('input');
+        input.type = 'password';
+        input.id = 'githubTokenInput';
+        input.placeholder = 'GitHub token (optional)';
 
-    // 监听token输入
-    document.getElementById('githubToken').addEventListener('input', (e) => {
-        githubToken = e.target.value;
-    });
+        const button = document.createElement('button');
+        button.textContent = 'Set Token';
+        button.addEventListener('click', () => {
+            githubToken = document.getElementById('githubTokenInput').value.trim();
+            loadAllData(); // Reload data with the token
+        });
+
+        container.appendChild(input);
+        container.appendChild(button);
+
+        // Add to document - adjust this to add it to the appropriate location
+        const targetElement = document.getElementById('viewer') || document.body;
+        targetElement.insertBefore(container, targetElement.firstChild);
+    }
 }
 
 function renderModelGrid(searchTerm = '') {
@@ -96,90 +101,33 @@ function renderModelGrid(searchTerm = '') {
     });
 }
 
-// 统一的数据加载函数
+// Integrated function that handles loading all data
 async function loadAllData() {
-    if (dataLoaded) {
-        // 如果数据已经加载，直接使用缓存
-        return { allData, queryModelData };
-    }
-
     try {
+        document.getElementById('loading').classList.remove('hidden');
+        document.getElementById('viewer')?.classList.add('hidden');
+
         // Check if we're running on GitHub Pages or locally
         const isGitHubPages = window.location.hostname.includes('github.io') ||
                              window.location.hostname.includes('liudan193.github.io');
 
-        let filesData;
+        let filesData = await fetchJSONFiles(isGitHubPages);
 
-        if (isGitHubPages) {
-            // GitHub Pages implementation
-            const owner = 'liudan193';
-            const repo = 'Feedbacker';
-            const path = 'visualization_and_analysis/processed_data';
-
-            // Fetch directory listing via GitHub API with optional token
-            const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
-            const headers = {};
-
-            if (githubToken) {
-                headers['Authorization'] = `token ${githubToken}`;
-            }
-
-            const response = await fetch(apiUrl, { headers });
-            if (!response.ok) {
-                if (response.status === 403) {
-                    throw new Error(`GitHub API rate limit exceeded (403). Please enter a GitHub token or try again later.`);
-                }
-                throw new Error(`GitHub API error: ${response.status}`);
-            }
-            const files = await response.json();
-
-            // Filter JSON files and fetch their contents
-            const jsonFiles = files.filter(file => file.name.endsWith('.json'));
-
-            // Load each JSON file with token if available
-            filesData = await Promise.all(
-                jsonFiles.map(async file => {
-                    const fetchHeaders = {};
-                    if (githubToken) {
-                        fetchHeaders['Authorization'] = `token ${githubToken}`;
-                    }
-
-                    const resp = await fetch(file.download_url, { headers: fetchHeaders });
-                    if (!resp.ok) throw new Error(`Failed to load ${file.name}`);
-                    const data = await resp.json();
-                    return { name: file.name.replace(/\.json$/i, ''), data };
-                })
-            );
-        } else {
-            // Local implementation
-            const listResponse = await fetch('processed_data/');
-            const listText = await listResponse.text();
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(listText, 'text/html');
-            const links = Array.from(doc.querySelectorAll('a'))
-                .map(a => a.getAttribute('href'))
-                .filter(href => href && href.endsWith('.json'));
-
-            filesData = await Promise.all(links.map(async file => {
-                const resp = await fetch(`processed_data/${file}`);
-                const data = await resp.json();
-                return { name: file.replace(/\.json$/i, ''), data };
-            }));
-        }
-
-        // Populate global data structures (same for both implementations)
+        // Process data for both allData and queryModelData
         filesData.forEach(({ name, data }) => {
-            allData[name] = data;
-            queryModelData[name] = data; // 同时填充 queryModelData
+            if (name && data) {
+                allData[name] = data;
+                queryModelData[name] = data;
+            }
         });
+
         allModels = Object.keys(allData);
 
-        // 标记数据已加载
-        dataLoaded = true;
+        console.log(`Loaded ${allModels.length} model files`);
 
         // Hide loading indicator, show viewer
         document.getElementById('loading').classList.add('hidden');
-        document.getElementById('viewer').classList.remove('hidden');
+        document.getElementById('viewer')?.classList.remove('hidden');
 
         // Initial render of model grid
         renderModelGrid();
@@ -202,27 +150,101 @@ async function loadAllData() {
         renderModelGrid();
         renderSelectedTrees();
 
-        console.log(`Loaded ${Object.keys(allData).length} model files`);
         return { allData, queryModelData };
-
     } catch (error) {
         document.getElementById('loading').classList.add('hidden');
         const errEl = document.getElementById('error');
         errEl.classList.remove('hidden');
         errEl.textContent = `Error: ${error.message}`;
+
+        if (error.message.includes('403')) {
+            errEl.textContent += ' - GitHub API rate limit exceeded. Try adding a GitHub token.';
+        }
+
+        console.error("Failed to load data:", error);
         throw error;
     }
 }
 
-// 保持原有函数签名，但使用缓存的数据
+// Helper function to fetch JSON files
+async function fetchJSONFiles(isGitHubPages) {
+    let filesData = [];
+
+    if (isGitHubPages) {
+        // GitHub Pages implementation
+        const owner = 'liudan193';
+        const repo = 'Feedbacker';
+        const path = 'visualization_and_analysis/processed_data';
+
+        // Fetch directory listing via GitHub API
+        let apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+        const headers = {};
+
+        // Add token if provided
+        if (githubToken) {
+            headers['Authorization'] = `token ${githubToken}`;
+        }
+
+        const response = await fetch(apiUrl, { headers });
+        if (!response.ok) {
+            throw new Error(`GitHub API error: ${response.status}`);
+        }
+
+        const files = await response.json();
+
+        // Filter JSON files and fetch their contents
+        const jsonFiles = files.filter(file => file.name.endsWith('.json'));
+
+        filesData = await Promise.all(
+            jsonFiles.map(async file => {
+                try {
+                    const fetchOptions = githubToken ?
+                        { headers: { 'Authorization': `token ${githubToken}` } } :
+                        {};
+
+                    const resp = await fetch(file.download_url, fetchOptions);
+                    if (!resp.ok) throw new Error(`Failed to load ${file.name}`);
+                    const data = await resp.json();
+                    return { name: file.name.replace(/\.json$/i, ''), data };
+                } catch (err) {
+                    console.error(`Error loading ${file.name}:`, err);
+                    return null;
+                }
+            })
+        );
+    } else {
+        // Local implementation
+        const listResponse = await fetch('processed_data/');
+        const listText = await listResponse.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(listText, 'text/html');
+        const links = Array.from(doc.querySelectorAll('a'))
+            .map(a => a.getAttribute('href'))
+            .filter(href => href && href.endsWith('.json'));
+
+        filesData = await Promise.all(links.map(async file => {
+            try {
+                const resp = await fetch(`processed_data/${file}`);
+                const data = await resp.json();
+                return { name: file.replace(/\.json$/i, ''), data };
+            } catch (err) {
+                console.error(`Error loading ${file}:`, err);
+                return null;
+            }
+        }));
+    }
+
+    // Filter out null values
+    return filesData.filter(item => item !== null);
+}
+
+// Keep these functions for backward compatibility, but make them use the integrated approach
 async function loadAllJSON() {
     return loadAllData();
 }
 
-// 保持原有函数签名，但使用缓存的数据
 async function loadAllQueryModelData() {
-    const data = await loadAllData();
-    return data.queryModelData;
+    return loadAllData();
 }
 
 function renderSelectedTrees() {
@@ -358,7 +380,7 @@ function createBlockNode(name, data, depth, isRoot = false) {
 }
 
 
-// shared.js 新增代码
+// shared.js code
 let selectedNodes = new Set();
 
 function initializeQueryView() {
@@ -384,15 +406,15 @@ function createTreeNode(nodeData, currentPath, parentElement) {
     const node = document.createElement('div');
     node.className = 'tree-node';
 
-    // 节点头部
+    // Node header
     const nodeHeader = document.createElement('div');
     nodeHeader.className = 'tree-node-header';
     nodeHeader.textContent = nodeData.name;
 
-    // 路径处理
+    // Path processing
     const path = [...currentPath, nodeData.key].join('.');
 
-    // 点击事件
+    // Click event
     nodeHeader.addEventListener('click', (e) => {
         e.stopPropagation();
         nodeHeader.classList.toggle('selected');
@@ -402,7 +424,7 @@ function createTreeNode(nodeData, currentPath, parentElement) {
 
     node.appendChild(nodeHeader);
 
-    // 递归子节点
+    // Recursive children
     if (nodeData.children) {
         const childrenContainer = document.createElement('div');
         childrenContainer.className = 'tree-node-children';
@@ -424,23 +446,23 @@ function renderRankings() {
     container.innerHTML = '';
 
     Array.from(selectedNodes).forEach(path => {
-        // 创建列容器
+        // Create column container
         const column = document.createElement('div');
         column.className = 'ranking-column';
 
-        // 列标题
+        // Column header
         const header = document.createElement('div');
         header.className = 'ranking-header';
         header.textContent = path.split('.').pop();
         column.appendChild(header);
 
-        // 获取并排序数据
+        // Get and sort data
         const rankings = allModels.map(model => ({
             model,
             ranking: getNestedValue(allData[model], path)?.ranking || Infinity
         })).sort((a, b) => a.ranking - b.ranking);
 
-        // 填充排名数据
+        // Fill ranking data
         const list = document.createElement('div');
         list.className = 'ranking-list';
         rankings.forEach((item, index) => {
@@ -467,3 +489,38 @@ function handleTreeError(error) {
     const container = document.getElementById('rankingsTable');
     container.innerHTML = `<div class="error">Error loading category tree: ${error.message}</div>`;
 }
+
+// Add some CSS for the GitHub token input
+document.head.insertAdjacentHTML('beforeend', `
+<style>
+.github-token-container {
+    margin: 10px 0;
+    padding: 10px;
+    background: #f5f5f5;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.github-token-container input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.github-token-container button {
+    padding: 8px 12px;
+    background: #0366d6;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.github-token-container button:hover {
+    background: #0056b3;
+}
+</style>
+`);
