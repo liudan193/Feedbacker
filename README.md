@@ -105,7 +105,7 @@ python auto_analysing.py
 ```
 5. Then, you can run the visualization and analysis tools locally.
 ```bash
-python -m http.server 8001
+python -m http.server 8103
 ```
 
 For more details, refer to: [Visualization and Analysis](visualization_and_analysis).
