@@ -3,62 +3,50 @@ let allModels = [];
 const selectedCategories = [];
 let selectedModels = new Set();
 let queryModelData = {};
-let selectedNodes = new Set();
+
+// 添加全局变量用于数据缓存
+let dataLoaded = false;
+let githubToken = '';
 
 function initializeModelView() {
     setupModelSelector();
-    setupGitHubTokenInput();
-    loadAllJSONData();
-}
-
-function initializeQueryView() {
-    selectedNodes.clear();
-    loadCategoryTree();
+    setupGithubToken();
+    loadAllData();
 }
 
 function setupModelSelector() {
     const searchBox = document.getElementById('modelSearch');
-    
+
     searchBox.addEventListener('input', () => {
         const searchTerm = searchBox.value.toLowerCase();
         renderModelGrid(searchTerm);
     });
 }
 
-function setupGitHubTokenInput() {
-    // Create token input if it doesn't exist
-    if (!document.getElementById('githubTokenContainer')) {
-        const container = document.createElement('div');
-        container.id = 'githubTokenContainer';
-        container.style.marginBottom = '15px';
-        
-        const input = document.createElement('input');
-        input.id = 'githubToken';
-        input.type = 'password';
-        input.placeholder = 'GitHub token (optional)';
-        input.style.marginRight = '10px';
-        
-        const button = document.createElement('button');
-        button.textContent = 'Apply Token';
-        button.onclick = () => {
-            loadAllJSONData();
-        };
-        
-        container.appendChild(input);
-        container.appendChild(button);
-        
-        // Insert before the model grid
-        const modelGrid = document.getElementById('modelGrid');
-        if (modelGrid && modelGrid.parentNode) {
-            modelGrid.parentNode.insertBefore(container, modelGrid);
-        }
-    }
+function setupGithubToken() {
+    // 创建GitHub token输入区域
+    const tokenContainer = document.createElement('div');
+    tokenContainer.className = 'github-token-container';
+    tokenContainer.innerHTML = `
+        <label for="githubToken">GitHub Token (optional):</label>
+        <input type="password" id="githubToken" placeholder="Enter GitHub token for higher API rate limits">
+        <small>Token is used only for this session to avoid API rate limits</small>
+    `;
+
+    // 插入到页面顶部
+    const firstElement = document.body.firstElementChild;
+    document.body.insertBefore(tokenContainer, firstElement);
+
+    // 监听token输入
+    document.getElementById('githubToken').addEventListener('input', (e) => {
+        githubToken = e.target.value;
+    });
 }
 
 function renderModelGrid(searchTerm = '') {
     const modelGrid = document.getElementById('modelGrid');
     modelGrid.innerHTML = '';
-    
+
     // Sort by Score
     const sortedModels = [...allModels].sort((a, b) => {
         // Get score values for each model
@@ -67,11 +55,11 @@ function renderModelGrid(searchTerm = '') {
         // Sort by score in descending order
         return scoreB - scoreA;
     });
-    
-    const modelsToShow = searchTerm 
+
+    const modelsToShow = searchTerm
         ? sortedModels.filter(model => model.toLowerCase().includes(searchTerm.toLowerCase()))
         : sortedModels;
-    
+
     modelsToShow.forEach(model => {
         const modelItem = document.createElement('div');
         modelItem.className = 'model-item';
@@ -80,12 +68,12 @@ function renderModelGrid(searchTerm = '') {
         }
         modelItem.textContent = model;
         modelItem.title = model;
-        
+
         modelItem.addEventListener('click', () => {
             if (selectedModels.has(model)) {
                 selectedModels.delete(model);
                 modelItem.classList.remove('selected');
-                
+
                 // Remove from selected categories
                 const idx = selectedCategories.indexOf(model);
                 if (idx > -1) {
@@ -94,26 +82,28 @@ function renderModelGrid(searchTerm = '') {
             } else {
                 selectedModels.add(model);
                 modelItem.classList.add('selected');
-                
+
                 // Add to selected categories
                 if (!selectedCategories.includes(model)) {
                     selectedCategories.push(model);
                 }
             }
-            
+
             renderSelectedTrees();
         });
-        
+
         modelGrid.appendChild(modelItem);
     });
 }
 
-async function loadAllJSONData() {
+// 统一的数据加载函数
+async function loadAllData() {
+    if (dataLoaded) {
+        // 如果数据已经加载，直接使用缓存
+        return { allData, queryModelData };
+    }
+
     try {
-        // Show loading indicator
-        document.getElementById('loading').classList.remove('hidden');
-        document.getElementById('viewer').classList.add('hidden');
-        
         // Check if we're running on GitHub Pages or locally
         const isGitHubPages = window.location.hostname.includes('github.io') ||
                              window.location.hostname.includes('liudan193.github.io');
@@ -126,31 +116,38 @@ async function loadAllJSONData() {
             const repo = 'Feedbacker';
             const path = 'visualization_and_analysis/processed_data';
 
-            // Check if GitHub token is available
-            const tokenInput = document.getElementById('githubToken');
-            const token = tokenInput ? tokenInput.value.trim() : '';
-            
-            // Fetch directory listing via GitHub API
+            // Fetch directory listing via GitHub API with optional token
             const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
-            const headers = token ? { Authorization: `token ${token}` } : {};
-            
+            const headers = {};
+
+            if (githubToken) {
+                headers['Authorization'] = `token ${githubToken}`;
+            }
+
             const response = await fetch(apiUrl, { headers });
-            if (!response.ok) throw new Error(`GitHub API error: ${response.status}`);
+            if (!response.ok) {
+                if (response.status === 403) {
+                    throw new Error(`GitHub API rate limit exceeded (403). Please enter a GitHub token or try again later.`);
+                }
+                throw new Error(`GitHub API error: ${response.status}`);
+            }
             const files = await response.json();
 
             // Filter JSON files and fetch their contents
             const jsonFiles = files.filter(file => file.name.endsWith('.json'));
+
+            // Load each JSON file with token if available
             filesData = await Promise.all(
                 jsonFiles.map(async file => {
-                    try {
-                        const resp = await fetch(file.download_url, { headers });
-                        if (!resp.ok) throw new Error(`Failed to load ${file.name}`);
-                        const data = await resp.json();
-                        return { name: file.name.replace(/\.json$/i, ''), data };
-                    } catch (err) {
-                        console.error(`Error loading ${file.name}:`, err);
-                        return null;
+                    const fetchHeaders = {};
+                    if (githubToken) {
+                        fetchHeaders['Authorization'] = `token ${githubToken}`;
                     }
+
+                    const resp = await fetch(file.download_url, { headers: fetchHeaders });
+                    if (!resp.ok) throw new Error(`Failed to load ${file.name}`);
+                    const data = await resp.json();
+                    return { name: file.name.replace(/\.json$/i, ''), data };
                 })
             );
         } else {
@@ -164,31 +161,21 @@ async function loadAllJSONData() {
                 .filter(href => href && href.endsWith('.json'));
 
             filesData = await Promise.all(links.map(async file => {
-                try {
-                    const resp = await fetch(`processed_data/${file}`);
-                    const data = await resp.json();
-                    return { name: file.replace(/\.json$/i, ''), data };
-                } catch (err) {
-                    console.error(`Error loading ${file}:`, err);
-                    return null;
-                }
+                const resp = await fetch(`processed_data/${file}`);
+                const data = await resp.json();
+                return { name: file.replace(/\.json$/i, ''), data };
             }));
         }
 
-        // Populate both data structures from the same loading operation
-        allData = {};
-        queryModelData = {};
-        
-        filesData.forEach(item => {
-            if (item) {
-                allData[item.name] = item.data;
-                queryModelData[item.name] = item.data;
-            }
+        // Populate global data structures (same for both implementations)
+        filesData.forEach(({ name, data }) => {
+            allData[name] = data;
+            queryModelData[name] = data; // 同时填充 queryModelData
         });
-        
         allModels = Object.keys(allData);
-        
-        console.log(`Loaded ${allModels.length} model files`);
+
+        // 标记数据已加载
+        dataLoaded = true;
 
         // Hide loading indicator, show viewer
         document.getElementById('loading').classList.add('hidden');
@@ -215,115 +202,27 @@ async function loadAllJSONData() {
         renderModelGrid();
         renderSelectedTrees();
 
+        console.log(`Loaded ${Object.keys(allData).length} model files`);
+        return { allData, queryModelData };
+
     } catch (error) {
         document.getElementById('loading').classList.add('hidden');
         const errEl = document.getElementById('error');
         errEl.classList.remove('hidden');
         errEl.textContent = `Error: ${error.message}`;
-        console.error("Failed to load model data:", error);
+        throw error;
     }
 }
 
-function loadCategoryTree() {
-    fetch('cata_tree.json')
-        .then(response => response.json())
-        .then(data => buildCategoryTree(data))
-        .catch(handleTreeError);
+// 保持原有函数签名，但使用缓存的数据
+async function loadAllJSON() {
+    return loadAllData();
 }
 
-function buildCategoryTree(treeData) {
-    const container = document.getElementById('categoryTree');
-    container.innerHTML = '';
-    const rootNode = createTreeNode(treeData, [], container);
-    container.appendChild(rootNode);
-}
-
-function createTreeNode(nodeData, currentPath, parentElement) {
-    const node = document.createElement('div');
-    node.className = 'tree-node';
-    
-    // 节点头部
-    const nodeHeader = document.createElement('div');
-    nodeHeader.className = 'tree-node-header';
-    nodeHeader.textContent = nodeData.name;
-    
-    // 路径处理
-    const path = [...currentPath, nodeData.key].join('.');
-    
-    // 点击事件
-    nodeHeader.addEventListener('click', (e) => {
-        e.stopPropagation();
-        nodeHeader.classList.toggle('selected');
-        updateSelection(path, nodeHeader.classList.contains('selected'));
-        renderRankings();
-    });
-
-    node.appendChild(nodeHeader);
-
-    // 递归子节点
-    if (nodeData.children) {
-        const childrenContainer = document.createElement('div');
-        childrenContainer.className = 'tree-node-children';
-        nodeData.children.forEach(child => {
-            childrenContainer.appendChild(createTreeNode(child, [...currentPath, nodeData.key], node));
-        });
-        node.appendChild(childrenContainer);
-    }
-
-    return node;
-}
-
-function updateSelection(path, isSelected) {
-    isSelected ? selectedNodes.add(path) : selectedNodes.delete(path);
-}
-
-function renderRankings() {
-    const container = document.getElementById('rankingsTable');
-    container.innerHTML = '';
-    
-    Array.from(selectedNodes).forEach(path => {
-        // 创建列容器
-        const column = document.createElement('div');
-        column.className = 'ranking-column';
-        
-        // 列标题
-        const header = document.createElement('div');
-        header.className = 'ranking-header';
-        header.textContent = path.split('.').pop();
-        column.appendChild(header);
-
-        // 获取并排序数据
-        const rankings = allModels.map(model => ({
-            model,
-            ranking: getNestedValue(allData[model], path)?.ranking || Infinity
-        })).sort((a, b) => a.ranking - b.ranking);
-
-        // 填充排名数据
-        const list = document.createElement('div');
-        list.className = 'ranking-list';
-        rankings.forEach((item, index) => {
-            const entry = document.createElement('div');
-            entry.className = 'ranking-entry';
-            entry.innerHTML = `
-                <div class="rank">${index + 1}.</div>
-                <div class="model-name">${item.model}</div>
-                <div class="ranking-value">${Number.isFinite(item.ranking) ? item.ranking : 'N/A'}</div>
-            `;
-            list.appendChild(entry);
-        });
-        
-        column.appendChild(list);
-        container.appendChild(column);
-    });
-}
-
-function getNestedValue(obj, path) {
-    return path.split('.').reduce((acc, key) => acc?.[key], obj);
-}
-
-function handleTreeError(error) {
-    const container = document.getElementById('rankingsTable');
-    container.innerHTML = `<div class="error">Error loading category tree: ${error.message}</div>`;
+// 保持原有函数签名，但使用缓存的数据
+async function loadAllQueryModelData() {
+    const data = await loadAllData();
+    return data.queryModelData;
 }
 
 function renderSelectedTrees() {
@@ -456,4 +355,115 @@ function createBlockNode(name, data, depth, isRoot = false) {
         if (isRoot) blockDiv.classList.add('expanded');
     }
     return nodeDiv;
+}
+
+
+// shared.js 新增代码
+let selectedNodes = new Set();
+
+function initializeQueryView() {
+    selectedNodes.clear();
+    loadCategoryTree();
+}
+
+function loadCategoryTree() {
+    fetch('cata_tree.json')
+        .then(response => response.json())
+        .then(data => buildCategoryTree(data))
+        .catch(handleTreeError);
+}
+
+function buildCategoryTree(treeData) {
+    const container = document.getElementById('categoryTree');
+    container.innerHTML = '';
+    const rootNode = createTreeNode(treeData, [], container);
+    container.appendChild(rootNode);
+}
+
+function createTreeNode(nodeData, currentPath, parentElement) {
+    const node = document.createElement('div');
+    node.className = 'tree-node';
+
+    // 节点头部
+    const nodeHeader = document.createElement('div');
+    nodeHeader.className = 'tree-node-header';
+    nodeHeader.textContent = nodeData.name;
+
+    // 路径处理
+    const path = [...currentPath, nodeData.key].join('.');
+
+    // 点击事件
+    nodeHeader.addEventListener('click', (e) => {
+        e.stopPropagation();
+        nodeHeader.classList.toggle('selected');
+        updateSelection(path, nodeHeader.classList.contains('selected'));
+        renderRankings();
+    });
+
+    node.appendChild(nodeHeader);
+
+    // 递归子节点
+    if (nodeData.children) {
+        const childrenContainer = document.createElement('div');
+        childrenContainer.className = 'tree-node-children';
+        nodeData.children.forEach(child => {
+            childrenContainer.appendChild(createTreeNode(child, [...currentPath, nodeData.key], node));
+        });
+        node.appendChild(childrenContainer);
+    }
+
+    return node;
+}
+
+function updateSelection(path, isSelected) {
+    isSelected ? selectedNodes.add(path) : selectedNodes.delete(path);
+}
+
+function renderRankings() {
+    const container = document.getElementById('rankingsTable');
+    container.innerHTML = '';
+
+    Array.from(selectedNodes).forEach(path => {
+        // 创建列容器
+        const column = document.createElement('div');
+        column.className = 'ranking-column';
+
+        // 列标题
+        const header = document.createElement('div');
+        header.className = 'ranking-header';
+        header.textContent = path.split('.').pop();
+        column.appendChild(header);
+
+        // 获取并排序数据
+        const rankings = allModels.map(model => ({
+            model,
+            ranking: getNestedValue(allData[model], path)?.ranking || Infinity
+        })).sort((a, b) => a.ranking - b.ranking);
+
+        // 填充排名数据
+        const list = document.createElement('div');
+        list.className = 'ranking-list';
+        rankings.forEach((item, index) => {
+            const entry = document.createElement('div');
+            entry.className = 'ranking-entry';
+            entry.innerHTML = `
+                <div class="rank">${index + 1}.</div>
+                <div class="model-name">${item.model}</div>
+                <div class="ranking-value">${Number.isFinite(item.ranking) ? item.ranking : 'N/A'}</div>
+            `;
+            list.appendChild(entry);
+        });
+
+        column.appendChild(list);
+        container.appendChild(column);
+    });
+}
+
+function getNestedValue(obj, path) {
+    return path.split('.').reduce((acc, key) => acc?.[key], obj);
+}
+
+function handleTreeError(error) {
+    const container = document.getElementById('rankingsTable');
+    container.innerHTML = `<div class="error">Error loading category tree: ${error.message}</div>`;
 }
