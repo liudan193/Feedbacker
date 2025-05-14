@@ -1,6 +1,6 @@
 # Feedbacker
 
-[![Paper](https://img.shields.io/badge/arXiv-2407.14367-blue)]()
+[![Paper](https://img.shields.io/badge/arXiv-2505.06698-blue)](https://arxiv.org/abs/2505.06698)
 
 ![](./static/images/main.png)
 
