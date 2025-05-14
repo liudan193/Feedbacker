@@ -34,13 +34,22 @@ pip install -r requirements.txt
 
 ### Dataset Download
 
-You can download the dataset from [evaluation.zip](https://huggingface.co/datasets/DanliuDanliu/Feedbacker/resolve/main/evaluation.zip?download=true) and place it in the corresponding directory. If the download link is unavailable, please visit our [Hugging Face Page](https://huggingface.co/datasets/DanliuDanliu/Feedbacker/settings) and download the `evaluation.zip` folder. 
+You can download the dataset feedbacker_data.zip using the following command and extract it to the corresponding directory. 
+
+```bash
+huggingface-cli download DanliuDanliu/Feedbacker --local-dir ./download/ --repo-type dataset
+```
+
+If the download link is unavailable, please visit our [Hugging Face Page](https://huggingface.co/datasets/DanliuDanliu/Feedbacker) and download `feedbacker_data.zip`. 
+
+After downloading, organize the file into the corresponding directory:
 
 ```bash
 Feedbacker/
 ├── evaluation/
 │   ├── data/
-│   │   └── evaluation_dataset_v0.1.jsonl                # The evaluation dataset
+│   │   ├── evaluation_dataset_v0.1.jsonl                # The evaluation dataset without criteria and baseline answer (Feedbacker-D-V0 in our paper)
+│   │   └── human_preference_dataset.jsonl               # The human preference data (Feedbacker-HPD in our paper)
 │   └── outputs/
 │       ├── evaluation/                                  # Model evaluation results
 │       │   ├── deepseek-v3-250324.jsonl
@@ -50,12 +59,12 @@ Feedbacker/
 │       │   ├── deepseek-v3-250324.jsonl
 │       │   ├── deepseek-r1-250120.jsonl
 │       │   └── ...
-│       ├── data_for_ours_eval_baseline.jsonl            # Baseline input for our evaluation
+│       ├── data_for_ours_eval_baseline.jsonl            # The evaluation dataset with criteria and baseline answer (**We recommend using this dataset as evaluation data.**)
 │       ├── ours_get_criteria.jsonl                      # Criteria used for our evaluation
 │       └── ours_ques2ans_3.jsonl                        # Final answer generation results
-├── query_synthesis/
-│   ├── dataset/
-│       └── seed_data.jsonl   
+└── query_synthesis/
+    └── dataset/
+        └── seed_data.jsonl   
 ```
 
 ## 🌲 1 Taxonomy Preparation
