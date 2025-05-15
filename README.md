@@ -124,10 +124,10 @@ For more details, refer to: [Visualization and Analysis](visualization_and_analy
 If Feedbacker is useful for your research, please consider citing the following paper: 
 
 ```bibtex
-@article{wang2025fromrankings,
-    title={From Rankings to Insights: Evaluation Should Shift Focus from Leaderboard to Feedback},
-    author={Wang, Zongqi and Gu, Tianle and Gong, Chen and Tian, Xin and Bao, Siqi and Yang, Yujiu},
-    journal={arXiv preprint arXiv:2505.06698},
-    year={2025}
+@article{wang2025rankings,
+  title={From Rankings to Insights: Evaluation Should Shift Focus from Leaderboard to Feedback},
+  author={Wang, Zongqi and Gu, Tianle and Gong, Chen and Tian, Xin and Bao, Siqi and Yang, Yujiu},
+  journal={arXiv preprint arXiv:2505.06698},
+  year={2025}
 }
 ```
